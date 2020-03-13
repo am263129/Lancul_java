@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape android:shape="rectangle">
+        <!-- draw a 4 dp width border around the rectangle shape -->
+        <stroke android:color="#B1757575" android:width="3dp"/>
+        <corners android:bottomRightRadius="0dp"
+            android:bottomLeftRadius="28dp"
+            android:topLeftRadius="0dp"
+            android:topRightRadius="0dp" />
+    </shape>
+</item>
+<!--
+    hide left, top and right side border using white color
+    by padding 4 dp bottom side
+-->
+<item android:bottom="1dp">
+    <shape android:shape="rectangle">
+        <solid android:color="@android:color/white"/>
+        <corners android:bottomRightRadius="0dp"
+            android:bottomLeftRadius="30dp"
+            android:topLeftRadius="0dp"
+            android:topRightRadius="0dp" />
+
+    </shape>
+</item>
+
+</layer-list>

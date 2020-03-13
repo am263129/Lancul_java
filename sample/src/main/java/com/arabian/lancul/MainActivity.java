@@ -1,12 +1,13 @@
-package com.etebarian.meowbottomnavigaion;
+package com.arabian.lancul;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 
 
 /**

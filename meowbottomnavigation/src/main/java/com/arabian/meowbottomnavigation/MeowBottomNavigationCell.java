@@ -1,4 +1,4 @@
-package com.etebarian.meowbottomnavigation;
+package com.arabian.meowbottomnavigation;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -8,14 +8,15 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import java.util.HashMap;
 

@@ -17,7 +17,7 @@
         android:padding="8dp"
         tools:targetApi="lollipop">
 
-        <com.etebarian.meowbottomnavigation.CellImageView
+        <com.arabian.meowbottomnavigation.CellImageView
             android:id="@+id/iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

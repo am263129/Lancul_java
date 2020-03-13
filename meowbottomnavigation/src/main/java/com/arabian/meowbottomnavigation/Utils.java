@@ -1,10 +1,11 @@
-package com.etebarian.meowbottomnavigation;
+package com.arabian.meowbottomnavigation;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 /**
  * Created by 1HE on 2020-02-01.

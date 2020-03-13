@@ -1,4 +1,4 @@
-package com.etebarian.meowbottomnavigation;
+package com.arabian.meowbottomnavigation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
