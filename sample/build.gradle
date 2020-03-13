@@ -37,12 +37,13 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
     implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.google.protobuf:protobuf-java:2.5.0'
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.henryblue.mxvideoplayer:xvideoplayer:1.2.1'
-
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.7.6'
     implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.7.6'
     implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.6'
     implementation 'com.linsea:universalvideoview:1.1.0@aar'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+
 }

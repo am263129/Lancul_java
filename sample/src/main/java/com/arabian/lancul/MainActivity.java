@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.arabian.lancul.UI.Fragment.HomeFragment;
+import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case ID_ACCOUNT:
                         label_toolbar.setText("My Profile");
+                        loadFragment(new ProfileFragment());
                         name = "ACCOUNT";
                         break;
                     default:

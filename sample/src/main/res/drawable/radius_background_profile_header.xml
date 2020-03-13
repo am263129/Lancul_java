@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+        <shape>
+            <gradient
+                android:angle="135"
+                android:startColor="@color/pink"
+                android:endColor="@color/orange"
+                android:type="linear" />
+            <corners android:bottomRightRadius="50dp"
+                android:bottomLeftRadius="10dp"
+                android:topLeftRadius="50dp"
+                android:topRightRadius="10dp" />
+        </shape>
+</item>
+<!--
+    hide left, top and right side border using white color
+    by padding 4 dp bottom side
+-->
+
+
+</layer-list>
