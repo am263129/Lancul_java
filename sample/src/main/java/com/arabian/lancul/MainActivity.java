@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     case ID_HOME:
                         name = "HOME";
                         label_toolbar.setText("Saudi Arabia");
-                        loadFragment(new RetaurantFragment());
+                        loadFragment(new HomeFragment());
                         break;
                     case ID_EXPLORE:
                         label_toolbar.setText("Experiences");
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     case ID_NOTIFICATION:
                         label_toolbar.setText("Restaurants");
                         name = "NOTIFICATION";
+                        loadFragment(new RetaurantFragment());
                         break;
                     case ID_ACCOUNT:
                         label_toolbar.setText("My Profile");
