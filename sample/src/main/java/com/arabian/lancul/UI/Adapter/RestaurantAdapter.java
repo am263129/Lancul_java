@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Object.Restaurant;
 import com.squareup.picasso.Picasso;
@@ -20,13 +21,13 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements Filte
 
 
     ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-    Context context;
+    Context mcontext;
     ImageView heart;
     boolean like = false;
     public RestaurantAdapter(Context context, int textViewResourceId, ArrayList<Restaurant> objects) {
         super(context, textViewResourceId, objects);
         restaurants = objects;
-        context = context;
+        mcontext = context;
     }
     @Override
     public int getCount() {
@@ -50,7 +51,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements Filte
         name.setText(restaurant.getName());
         location.setText(restaurant.getLocation());
         ratingBar.setRating(restaurant.getRating());
-        Picasso.with(context).load(restaurant.getPhoto()).placeholder(R.drawable.placeholder_restaurant).error(R.drawable.error_connection).resize(200,200).centerCrop().into(restaurant_photo);
+        Picasso.with(MainActivity.getInstance()).load(restaurant.getPhoto()).placeholder(R.drawable.placeholder_restaurant).error(R.drawable.error_connection).resize(200,200).centerCrop().into(restaurant_photo);
 
 
         heart.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +59,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements Filte
             public void onClick(View v) {
                 like = !like;
                 if (like)
-                    heart.setImageResource(R.drawable.full_heart);
+                    heart.setBackgroundResource(R.drawable.full_heart);
                 else
-                    heart.setImageResource(R.drawable.empty_heart);
+                    heart.setBackgroundResource(R.drawable.empty_heart);
             }
         });
         return v;

@@ -7,6 +7,8 @@ import android.widget.TextSwitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.arabian.lancul.R;
@@ -22,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     TextSwitcher switcher;
 
     private ViewPager viewPager;
-//    private ViewPagerAdapter adapter;
+    private ViewPagerAdapter adapter;
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
 

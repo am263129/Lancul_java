@@ -22,5 +22,88 @@
             android:textColor="@color/default_inactive_color"
             android:textSize="24sp"
             android:textStyle="bold" />
+
+        <HorizontalScrollView
+            android:id="@+id/flags"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="70">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_america" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_japan" />
+
+                    <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_saudi_arabia" />
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_brazil" />
+
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_france" />
+
+                    <ImageView
+                        android:id="@+id/imageView16"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_spain" />
+
+                    <ImageView
+                        android:id="@+id/imageView17"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/flag_germany" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
     </LinearLayout>
 </androidx.appcompat.widget.Toolbar>
