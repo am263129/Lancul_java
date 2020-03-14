@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
+import com.arabian.lancul.UI.Activity.EditProfileActivity;
 import com.arabian.lancul.UI.Activity.InviteActivity;
 
 
@@ -49,14 +50,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent =  new Intent(MainActivity.getInstance(), InviteActivity.class);
-        startActivity(intent);
 
+        Intent intent;
         switch (view.getId()){
             case R.id.btn_setting:
-                
+                intent = new Intent(MainActivity.getInstance(), EditProfileActivity.class);
+
+                break;
+            default:
+                intent =  new Intent(MainActivity.getInstance(), InviteActivity.class);
                 break;
 
+
         }
+        startActivity(intent);
     }
 }

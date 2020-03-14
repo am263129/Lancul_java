@@ -20,7 +20,15 @@ import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
+import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
+
+import java.io.IOException;
 
 
 /**
@@ -41,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
     public  static  MainActivity self;
     TextView label_toolbar;
     Button button_logout;
+    MeowBottomNavigation bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         self = this;
+
+        init_data();
         main_frame = findViewById(R.id.main_frame);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -59,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         flags = findViewById(R.id.flags);
 
-        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_tab1));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPERIENCE, R.drawable.ic_tab2));
@@ -142,6 +153,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void init_data() {
+        GoogleCredentials credentials = null;
+        try {
+            credentials = GoogleCredentials.getApplicationDefault();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .build();
+        FirebaseApp.initializeApp(options);
+
+        Firestore db = FirestoreClient.getFirestore();
+    }
+
     private void loadFragment(Fragment fragment) {
 // create a FragmentManager
         FragmentManager fm = getSupportFragmentManager();
@@ -154,5 +180,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity getInstance(){
         return self;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(Global.go_profile){
+            Global.go_profile = false;
+            bottomNavigation.show(ID_ACCOUNT,true);
+        }
     }
 }

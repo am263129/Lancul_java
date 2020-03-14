@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.Activity.EditProfileActivity"></activity>
+        <activity android:name=".UI.Activity.EditProfileActivity"
+            android:theme="@style/edit_profile"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity android:name=".UI.Activity.InviteActivity" />
         <activity android:name=".UI.Activity.LoginActivity" />
         <activity
