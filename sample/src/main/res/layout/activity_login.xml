@@ -42,10 +42,12 @@
                 android:layout_height="wrap_content"
                 app:bt_colorActive="@color/pink"
                 app:bt_colorInactive="@color/orange"
-                app:bt_icon="@drawable/register"
+                app:bt_icon="@drawable/signin"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
-                app:bt_title="   Existing   " />
+                app:bt_title="   Existing   "
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="5dp" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/l_item_search"
@@ -53,7 +55,7 @@
                 android:layout_height="wrap_content"
                 app:bt_colorActive="@color/pink"
                 app:bt_colorInactive="@color/orange"
-                app:bt_icon="@drawable/signin"
+                app:bt_icon="@drawable/register"
                 app:bt_iconHeight="20dp"
                 app:bt_iconWidth="20dp"
                 app:bt_title="     New     "

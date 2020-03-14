@@ -2,11 +2,14 @@ package com.arabian.lancul;
 
 
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.arabian.lancul.UI.Fragment.HomeFragment;
+import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  static  MainActivity self;
     TextView label_toolbar;
+    Button button_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         label_toolbar = findViewById(R.id.label_tab);
+
+        button_logout = findViewById(R.id.button_logout);
+
         flags = findViewById(R.id.flags);
 
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
@@ -81,24 +89,30 @@ public class MainActivity extends AppCompatActivity {
                     case ID_HOME:
                         name = "HOME";
                         label_toolbar.setText("Saudi Arabia");
+                        button_logout.setVisibility(View.GONE);
                         loadFragment(new HomeFragment());
                         break;
                     case ID_EXPLORE:
                         label_toolbar.setText("Experiences");
+                        button_logout.setVisibility(View.GONE);
                         name = "EXPLORE";
                         break;
                     case ID_MESSAGE:
                         label_toolbar.setText("Friends");
                         flags.setVisibility(View.VISIBLE);
+                        button_logout.setVisibility(View.GONE);
+                        loadFragment(new LivechatFragment());
                         name = "MESSAGE";
                         break;
                     case ID_NOTIFICATION:
                         label_toolbar.setText("Restaurants");
+                        button_logout.setVisibility(View.GONE);
                         name = "NOTIFICATION";
                         loadFragment(new RetaurantFragment());
                         break;
                     case ID_ACCOUNT:
                         label_toolbar.setText("My Profile");
+                        button_logout.setVisibility(View.VISIBLE);
                         loadFragment(new ProfileFragment());
                         name = "ACCOUNT";
                         break;
@@ -119,6 +133,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         bottomNavigation.show(ID_HOME,true);
+
+
+        button_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+
+        });
     }
 
     private void loadFragment(Fragment fragment) {

@@ -10,7 +10,11 @@
     <ImageView
         android:id="@+id/item_photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:nestedScrollingEnabled="false"
+        android:scaleType="fitXY"
+        app:layout_collapseMode="parallax"
+        app:layout_scrollFlags="scroll|enterAlways" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -46,13 +46,13 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-        Uri vidUri = Uri.parse(vidAddress);
+//        String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+//        Uri vidUri = Uri.parse(vidAddress);
         mVideoView = (VideoView) view.findViewById(R.id.myVideo);
 //        mMediaController = (MediaController) view.findViewById(R.id.media_controller);
 //        mVideoView.setMediaController(mMediaController);
-        mVideoView.setVideoURI(vidUri);
-        mVideoView.start();
+//        mVideoView.setVideoURI(vidUri);
+//        mVideoView.start();
         return view;
     }
 

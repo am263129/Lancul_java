@@ -13,7 +13,8 @@ import android.widget.TextView;
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Object.Restaurant;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -51,8 +52,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> implements Filte
         name.setText(restaurant.getName());
         location.setText(restaurant.getLocation());
         ratingBar.setRating(restaurant.getRating());
-        Picasso.with(MainActivity.getInstance()).load(restaurant.getPhoto()).placeholder(R.drawable.placeholder_restaurant).error(R.drawable.error_connection).resize(200,200).centerCrop().into(restaurant_photo);
 
+        Glide.with(MainActivity.getInstance()).load(restaurant.getPhoto()).apply(new RequestOptions().override(200, 400)).into(restaurant_photo);
 
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
