@@ -2,6 +2,7 @@ package com.arabian.lancul;
 
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -22,11 +24,6 @@ import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.IOException;
 
@@ -146,6 +143,23 @@ public class MainActivity extends AppCompatActivity {
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle("Do you want to logout?");
+                // alert.setMessage("Message");
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Your action here
+                    }
+                });
+
+                alert.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        });
+
+                alert.show();
 
 
             }
@@ -154,18 +168,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init_data() {
-        GoogleCredentials credentials = null;
-        try {
-            credentials = GoogleCredentials.getApplicationDefault();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-
-        Firestore db = FirestoreClient.getFirestore();
+//        GoogleCredentials credentials = null;
+//        try {
+//            credentials = GoogleCredentials.getApplicationDefault();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(credentials)
+//                .build();
+//        FirebaseApp.initializeApp(options);
+//
+//        Firestore db = FirestoreClient.getFirestore();
     }
 
     private void loadFragment(Fragment fragment) {
