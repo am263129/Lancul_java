@@ -147,10 +147,9 @@
                             </LinearLayout>
 
                             <ImageView
-                                android:id="@+id/imageView6"
-                                android:layout_width="0dp"
+                                android:id="@+id/btn_setting"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_weight="2"
                                 app:srcCompat="@drawable/icon_setting" />
 
                         </LinearLayout>
@@ -178,6 +177,7 @@
                     android:paddingBottom="40dp">
 
                     <LinearLayout
+                        android:id="@+id/btn_favorite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -201,6 +201,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -224,6 +225,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_feedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -247,6 +249,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_invitefriend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -270,6 +273,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_rate_app"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -293,6 +297,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_about_us"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -316,6 +321,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_privacy_policy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
