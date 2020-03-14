@@ -8,7 +8,10 @@ import android.widget.ListView;
 
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Adapter.RestaurantAdapter;
 import com.arabian.lancul.UI.Object.Restaurant;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 public class RetaurantFragment extends Fragment {
 
     View view;
-    ListView list;
+    RecyclerView list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,8 +35,8 @@ public class RetaurantFragment extends Fragment {
         restaurants.add(new Restaurant("Launch of Region Commander | إطلاق قائد المنطقة","Dubai","https://firebasestorage.googleapis.com/v0/b/elsa-project-12a47.appspot.com/o/restaurant_3.jpg?alt=media&token=42f827bc-3008-4167-86c1-33842b723e5a",(float)4));
         restaurants.add(new Restaurant("Huge Tiny |  ضخمة صغيرة","Dubai","https://firebasestorage.googleapis.com/v0/b/elsa-project-12a47.appspot.com/o/restaurant_4.jpg?alt=media&token=bad33dbf-3f56-4696-ab00-e6f6e8396c6b",(float)4.5));
 
-        RestaurantAdapter adapter  = new RestaurantAdapter(getContext(),R.layout.item_restaurant, restaurants);
-
+        RestaurantAdapter adapter  = new RestaurantAdapter(getContext(), restaurants);
+        list.setLayoutManager(new LinearLayoutManager(MainActivity.getInstance()));
         list.setAdapter(adapter);
         return view;
     }
