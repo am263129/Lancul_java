@@ -1,12 +1,12 @@
 package com.arabian.lancul.UI.Object;
 
-public class Restaurant {
+public class Res_Exp {
     String name;
     String location;
     Float rating;
     String photo;
 
-    public Restaurant(String name, String location, String photo, Float rating){
+    public Res_Exp(String name, String location, String photo, Float rating){
         this.name = name;
         this.location = location;
         this.photo = photo;

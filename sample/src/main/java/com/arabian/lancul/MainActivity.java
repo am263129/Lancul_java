@@ -2,17 +2,12 @@ package com.arabian.lancul;
 
 
 
-import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.arabian.lancul.UI.Fragment.ExperienceFragment;
 import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
@@ -34,9 +30,9 @@ import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 public class MainActivity extends AppCompatActivity {
 
     private final static int ID_HOME = 1;
-    private final static int ID_EXPLORE = 2;
+    private final static int ID_EXPERIENCE = 2;
     private final static int ID_MESSAGE = 3;
-    private final static int ID_NOTIFICATION = 4;
+    private final static int ID_RESTAURANT = 4;
     private final static int ID_ACCOUNT = 5;
 
     FrameLayout main_frame;
@@ -66,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_tab1));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_tab2));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPERIENCE, R.drawable.ic_tab2));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_tab3));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_tab4));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_RESTAURANT, R.drawable.ic_tab4));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_tab5));
 
 
@@ -92,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new HomeFragment());
                         break;
-                    case ID_EXPLORE:
+                    case ID_EXPERIENCE:
                         label_toolbar.setText("Experiences");
                         button_logout.setVisibility(View.GONE);
+                        loadFragment(new ExperienceFragment());
                         name = "EXPLORE";
                         break;
                     case ID_MESSAGE:
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new LivechatFragment());
                         name = "MESSAGE";
                         break;
-                    case ID_NOTIFICATION:
+                    case ID_RESTAURANT:
                         label_toolbar.setText("Restaurants");
                         button_logout.setVisibility(View.GONE);
                         name = "NOTIFICATION";

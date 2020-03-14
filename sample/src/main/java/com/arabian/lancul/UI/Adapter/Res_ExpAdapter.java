@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -18,22 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
-import com.arabian.lancul.UI.Object.Restaurant;
+import com.arabian.lancul.UI.Object.Res_Exp;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.PlanetHolder> implements Filterable {
+public class Res_ExpAdapter extends RecyclerView.Adapter<Res_ExpAdapter.PlanetHolder> implements Filterable {
 
     private Context context;
-    private ArrayList<Restaurant> restaurants;
+    private ArrayList<Res_Exp> resExps;
     boolean like = false;
 
-    public RestaurantAdapter(Context context, ArrayList<Restaurant> restaurants) {
+    public Res_ExpAdapter(Context context, ArrayList<Res_Exp> resExps) {
         this.context = context;
-        this.restaurants = restaurants;
+        this.resExps = resExps;
     }
 
     @NonNull
@@ -45,13 +43,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Pl
 
     @Override
     public void onBindViewHolder(@NonNull PlanetHolder holder, int position) {
-        Restaurant restaurant = restaurants.get(position);
-        holder.setDetails(restaurant);
+        Res_Exp resExp = resExps.get(position);
+        holder.setDetails(resExp);
     }
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return resExps.size();
     }
 
     @Override
@@ -77,12 +75,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Pl
             card = itemView.findViewById(R.id.card_view);
         }
 
-        void setDetails(Restaurant restaurant) {
-            name.setText(restaurant.getName());
-            location.setText(restaurant.getLocation());
-            ratingBar.setRating(restaurant.getRating());
+        void setDetails(Res_Exp resExp) {
+            name.setText(resExp.getName());
+            location.setText(resExp.getLocation());
+            ratingBar.setRating(resExp.getRating());
 
-            Glide.with(MainActivity.getInstance()).load(restaurant.getPhoto()).apply(new RequestOptions().override(200, 400)).into(restaurant_photo);
+            Glide.with(MainActivity.getInstance()).load(resExp.getPhoto()).into(restaurant_photo);
 
             card.setCardBackgroundColor(Color.parseColor("#E6E6E6"));
             card.setMaxCardElevation((float) 0.0);
@@ -103,13 +101,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Pl
 
 
 
-//    ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+//    ArrayList<Res_Exp> resExps = new ArrayList<Res_Exp>();
 //    Context mcontext;
 //    ImageView heart;
 //    boolean like = false;
-//    public RestaurantAdapter(Context context, int textViewResourceId, ArrayList<Restaurant> objects) {
+//    public Res_ExpAdapter(Context context, int textViewResourceId, ArrayList<Res_Exp> objects) {
 //        super(context, textViewResourceId, objects);
-//        restaurants = objects;
+//        resExps = objects;
 //        mcontext = context;
 //    }
 //    @Override
@@ -125,7 +123,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Pl
 //        v = inflater.inflate(R.layout.item_restaurant, null);
 //
 //        ImageView restaurant_photo;
-//        Restaurant restaurant = restaurants.get(position);
+//        Res_Exp restaurant = resExps.get(position);
 //        TextView name = v.findViewById(R.id.label_restaurant);
 //        TextView location = v.findViewById(R.id.location);
 //        RatingBar ratingBar = v.findViewById(R.id.ratingBar);
