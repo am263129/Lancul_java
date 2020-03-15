@@ -6,12 +6,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,8 +28,14 @@ import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.lancul.UI.Fragment.signinFragment;
+import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 
@@ -51,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     TextView label_toolbar;
     Button button_logout;
     MeowBottomNavigation bottomNavigation;
-
+    String TAG =  "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,17 +191,57 @@ public class MainActivity extends AppCompatActivity {
     }
     private void init_data() {
 
-//        DocumentReference docRef = db.collection("cities").document("SF");
-//// asynchronously retrieve the document
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//// ...
-//// future.get() blocks on response
-//        DocumentSnapshot document = future.get();
-//        if (document.exists()) {
-//            System.out.println("Document data: " + document.getData());
-//        } else {
-//            System.out.println("No such document!");
-//        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("experiences")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Global.array_experience.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String name = document.get("name").toString();
+                                String location = document.get("location").toString();
+                                String photo = document.get("imageUrl").toString();
+                                Float rating = Float.parseFloat(document.get("rating").toString());
+
+                                Res_Exp experience = new Res_Exp(name,location,photo,rating);
+                                Global.array_experience.add(experience);
+
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+        //get Restaurant data
+        db.collection("restaurants")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Global.array_restaurant.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String name = document.get("name").toString();
+                                String location = document.get("location").toString();
+                                String photo = document.get("imageUrl").toString();
+                                Float rating = Float.parseFloat(document.get("rating").toString());
+
+                                Res_Exp restaurant = new Res_Exp(name,location,photo,rating);
+                                Global.array_restaurant.add(restaurant);
+
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
     private void loadFragment(Fragment fragment) {
