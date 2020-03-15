@@ -2,7 +2,9 @@ package com.arabian.lancul;
 
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +19,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.arabian.lancul.UI.Activity.LoginActivity;
 import com.arabian.lancul.UI.Fragment.ExperienceFragment;
 import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
+import com.arabian.lancul.UI.Fragment.signinFragment;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -53,22 +57,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         self = this;
-
         init_data();
-        main_frame = findViewById(R.id.main_frame);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        init_view();
+        init_action();
 
+
+
+    }
+
+    private void init_view(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(null);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        main_frame = findViewById(R.id.main_frame);
         label_toolbar = findViewById(R.id.label_tab);
-
         button_logout = findViewById(R.id.button_logout);
-
         flags = findViewById(R.id.flags);
-
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
+    }
+
+    private void init_action(){
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_tab1));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_EXPERIENCE, R.drawable.ic_tab2));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_tab3));
@@ -143,43 +153,47 @@ public class MainActivity extends AppCompatActivity {
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle("Do you want to logout?");
-                // alert.setMessage("Message");
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.modal);
 
-                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Your action here
+                Button okButton = (Button) dialog.findViewById(R.id.btn_ok);
+                Button cancelButton = (Button) dialog.findViewById(R.id.btn_cancel);
+
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent;
+                        intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
+                        startActivity(intent);
+                        dialog.dismiss();
                     }
                 });
-
-                alert.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        });
-
-                alert.show();
-
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
 
             }
 
         });
-    }
 
+    }
     private void init_data() {
-//        GoogleCredentials credentials = null;
-//        try {
-//            credentials = GoogleCredentials.getApplicationDefault();
-//        } catch (IOException e) {
-//            e.printStackTrace();
+
+//        DocumentReference docRef = db.collection("cities").document("SF");
+//// asynchronously retrieve the document
+//        ApiFuture<DocumentSnapshot> future = docRef.get();
+//// ...
+//// future.get() blocks on response
+//        DocumentSnapshot document = future.get();
+//        if (document.exists()) {
+//            System.out.println("Document data: " + document.getData());
+//        } else {
+//            System.out.println("No such document!");
 //        }
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(credentials)
-//                .build();
-//        FirebaseApp.initializeApp(options);
-//
-//        Firestore db = FirestoreClient.getFirestore();
     }
 
     private void loadFragment(Fragment fragment) {
