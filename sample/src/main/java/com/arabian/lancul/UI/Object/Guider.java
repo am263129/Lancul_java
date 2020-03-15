@@ -1,15 +1,17 @@
 package com.arabian.lancul.UI.Object;
 
+import java.util.List;
+
 public class Guider {
     public String bio;
     public String imageURL;
     public String name;
-    public String rate;
-    public String available;
-    public String verified;
-    public String[] languages;
+    public Float rate;
+    public boolean available;
+    public boolean verified;
+    public List<String> languages;
 
-    public Guider(String bio, String imageURL, String name, String rate, String available, String verified, String[] languages){
+    public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages){
         this.bio = bio;
         this.imageURL = imageURL;
         this.name = name;
@@ -23,7 +25,7 @@ public class Guider {
         return name;
     }
 
-    public String getAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 
@@ -35,15 +37,15 @@ public class Guider {
         return imageURL;
     }
 
-    public String getRate() {
+    public Float getRate() {
         return rate;
     }
 
-    public String getVerified() {
+    public boolean getVerified() {
         return verified;
     }
 
-    public String[] getLanguages() {
+    public List<String> getLanguages() {
         return languages;
     }
 
@@ -51,7 +53,7 @@ public class Guider {
         this.name = name;
     }
 
-    public void setAvailable(String available) {
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
@@ -63,15 +65,15 @@ public class Guider {
         this.imageURL = imageURL;
     }
 
-    public void setRate(String rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 
-    public void setVerified(String verified) {
+    public void setVerified(boolean verified) {
         this.verified = verified;
     }
 
-    public void setLanguages(String[] languages) {
+    public void setLanguages(List<String> languages) {
         this.languages = languages;
     }
 

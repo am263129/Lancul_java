@@ -11,4 +11,6 @@
     <color name="transparent">#62000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="guider_text">#42a6f4</color>
 </resources>

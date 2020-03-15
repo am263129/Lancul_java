@@ -28,6 +28,7 @@ import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.lancul.UI.Fragment.signinFragment;
+import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
@@ -38,6 +39,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -235,6 +239,37 @@ public class MainActivity extends AppCompatActivity {
 
                                 Res_Exp restaurant = new Res_Exp(name,location,photo,rating);
                                 Global.array_restaurant.add(restaurant);
+
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
+        //get Guider data
+        db.collection("guiders")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Global.array_guider.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String bio = document.get("bio").toString();
+                                String imageUrl = document.get("imageUrl").toString();
+                                boolean is_available = Boolean.parseBoolean(document.get("isAvailable").toString());
+                                String name =  document.get("name").toString();
+                                Float rating =  Float.parseFloat(document.get("rating").toString());
+                                boolean verified = Boolean.parseBoolean(document.get("verified").toString());
+
+                                List<String> languages = (List<String>) document.get("languages");
+
+                                Guider guider =  new Guider(bio,imageUrl,name,rating,is_available,verified,languages);
+                                Global.array_guider.add(guider);
 
                             }
                         } else {
