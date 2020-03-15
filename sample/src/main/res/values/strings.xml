@@ -5,4 +5,5 @@
     <string name="right">Lancul</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="Error_Login">Please input Valid info</string>
+
 </resources>
