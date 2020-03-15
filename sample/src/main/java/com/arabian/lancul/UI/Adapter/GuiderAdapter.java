@@ -1,6 +1,7 @@
 package com.arabian.lancul.UI.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
+import com.arabian.lancul.UI.Activity.ChatActivity;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.bumptech.glide.Glide;
@@ -45,12 +47,15 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlanetHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlanetHolder holder, final int position) {
         final Guider guider = guiders.get(position);
         holder.setDetails(guider);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.getInstance(), ChatActivity.class);
+                intent.putExtra("guider_index",position);
+                MainActivity.getInstance().startActivity(intent);
                 Toast.makeText(MainActivity.getInstance(),guider.getName().toString(),Toast.LENGTH_SHORT).show();
             }
         });
