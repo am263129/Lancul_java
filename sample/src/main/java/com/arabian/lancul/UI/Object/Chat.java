@@ -1,6 +1,6 @@
 package com.arabian.lancul.UI.Object;
 
-public class chat {
+public class Chat {
     public String chat_id;
     public String chat_sender;
     public String chat_content;
@@ -8,11 +8,11 @@ public class chat {
     public String chat_created_date;
     public String chat_status;
 
-    public chat(){
+    public Chat(){
 
     }
 
-    public chat(String chat_id, String chat_sender, String chat_content, String chat_type, String chat_created_date, String chat_status){
+    public Chat(String chat_id, String chat_sender, String chat_content, String chat_type, String chat_created_date, String chat_status){
         this.chat_id = chat_id;
         this.chat_sender = chat_sender;
         this.chat_content = chat_content;

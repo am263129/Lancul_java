@@ -23,7 +23,7 @@
         app:cardElevation="6dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chat"
+            android:id="@+id/chat_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/chat_area" />
@@ -58,7 +58,7 @@
                 android:inputType="textPersonName" />
 
             <ImageButton
-                android:id="@+id/imageView6"
+                android:id="@+id/btn_send"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

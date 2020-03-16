@@ -58,5 +58,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
     implementation 'com.google.firebase:firebase-core:17.2.3'
-    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
 }

@@ -104,6 +104,7 @@ public class signinFragment extends Fragment {
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Global.current_user_email = user.getEmail();
+                                Global.my_name = user.getDisplayName();
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 startActivity(intent);
                                 LoginActivity.getInstance().finish();

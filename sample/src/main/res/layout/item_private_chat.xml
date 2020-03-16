@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="left"
+    android:padding="3dp">
+
+    <LinearLayout
+        android:id="@+id/item_mychat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <me.himanshusoni.chatmessageview.ChatMessageView
+            android:id="@+id/chatMessageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            app:cmv_arrowGravity="start"
+            app:cmv_arrowMargin="3dp"
+            app:cmv_arrowPosition="right"
+            app:cmv_backgroundColor="#8800bcd4"
+            app:cmv_backgroundColorPressed="#ff00bcd4"
+            app:cmv_contentPadding="10dp"
+            app:cmv_cornerRadius="3dp"
+            app:cmv_showArrow="true">
+
+            <TextView
+                android:id="@+id/message_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </me.himanshusoni.chatmessageview.ChatMessageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_guider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/guider_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/placeholder_profile"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="0dp" />
+
+        <me.himanshusoni.chatmessageview.ChatMessageView
+            android:id="@+id/chatMessageView_mine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:cmv_arrowGravity="start"
+            app:cmv_arrowMargin="3dp"
+            app:cmv_arrowPosition="left"
+            app:cmv_backgroundColor="#88BABABA"
+            app:cmv_backgroundColorPressed="#FFBABABA"
+            app:cmv_contentPadding="10dp"
+            app:cmv_cornerRadius="3dp"
+            app:cmv_showArrow="true">
+
+            <TextView
+                android:id="@+id/message_guider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </me.himanshusoni.chatmessageview.ChatMessageView>
+
+    </LinearLayout>
+
+</RelativeLayout>

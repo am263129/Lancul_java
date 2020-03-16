@@ -19,16 +19,19 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/edit_profile"></activity>
         <activity android:name=".UI.Activity.InviteActivity" />
+
         <activity android:name=".UI.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+        </activity>
     </application>
 
 </manifest>
