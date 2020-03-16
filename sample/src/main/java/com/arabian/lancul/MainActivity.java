@@ -5,6 +5,7 @@ package com.arabian.lancul;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         self = this;
-        init_data();
         init_view();
         init_action();
 
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_RESTAURANT, R.drawable.ic_tab4));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_tab5));
 
+//        bottomNavigation.setCount(ID_MESSAGE,"1");
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.modal);
-
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 Button okButton = (Button) dialog.findViewById(R.id.btn_ok);
                 Button cancelButton = (Button) dialog.findViewById(R.id.btn_cancel);
 
@@ -193,91 +194,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void init_data() {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("experiences")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_experience.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("name").toString();
-                                String location = document.get("location").toString();
-                                String photo = document.get("imageUrl").toString();
-                                Float rating = Float.parseFloat(document.get("rating").toString());
-
-                                Res_Exp experience = new Res_Exp(name,location,photo,rating);
-                                Global.array_experience.add(experience);
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-        //get Restaurant data
-        db.collection("restaurants")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_restaurant.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("name").toString();
-                                String location = document.get("location").toString();
-                                String photo = document.get("imageUrl").toString();
-                                Float rating = Float.parseFloat(document.get("rating").toString());
-
-                                Res_Exp restaurant = new Res_Exp(name,location,photo,rating);
-                                Global.array_restaurant.add(restaurant);
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-
-        //get Guider data
-        db.collection("guiders")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_guider.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String bio = document.get("bio").toString();
-                                String imageUrl = document.get("imageUrl").toString();
-                                boolean is_available = Boolean.parseBoolean(document.get("isAvailable").toString());
-                                String name =  document.get("name").toString();
-                                Float rating =  Float.parseFloat(document.get("rating").toString());
-                                boolean verified = Boolean.parseBoolean(document.get("verified").toString());
-
-                                List<String> languages = (List<String>) document.get("languages");
-
-                                Guider guider =  new Guider(bio,imageUrl,name,rating,is_available,verified,languages);
-                                Global.array_guider.add(guider);
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
 
     private void loadFragment(Fragment fragment) {
 // create a FragmentManager

@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">MeowBottomNavigation</string>
+    <string name="app_name">Lancul</string>
     <string name="main_page_selected">%s page is selected</string>
     <string name="left">Lancul</string>
     <string name="right">Lancul</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="Error_Login">Please input Valid info</string>
+    <string name="to_usermode">Switch to User Mode</string>
+    <string name="to_guidemode">Switch to Guider Mode</string>
 
 </resources>

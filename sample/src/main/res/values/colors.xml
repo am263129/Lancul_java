@@ -6,11 +6,12 @@
 
     <color name="orange">#fba867</color>
     <color name="pink">#f7428c</color>
-    <color name="guider_orange">#D4FB67</color>
-    <color name="guider_pink">#3FC3FF</color>
+    <color name="guider_orange">#5b86e5</color>
+    <color name="guider_pink">#36d1dc</color>
     <color name="light_red">#fe6e40</color>
 
     <color name="transparent">#62000000</color>
+    <color name="transparent_white">#A1FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 

@@ -10,8 +10,10 @@ public class Guider {
     public boolean available;
     public boolean verified;
     public List<String> languages;
+    public String phone;
+    public String email;
 
-    public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages){
+    public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email){
         this.bio = bio;
         this.imageURL = imageURL;
         this.name = name;
@@ -19,6 +21,8 @@ public class Guider {
         this.available = available;
         this.verified = verified;
         this.languages = languages;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getName() {
@@ -47,6 +51,14 @@ public class Guider {
 
     public List<String> getLanguages() {
         return languages;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setName(String name) {
@@ -78,4 +90,11 @@ public class Guider {
     }
 
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

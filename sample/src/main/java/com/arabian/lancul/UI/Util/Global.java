@@ -13,6 +13,9 @@ public class Global {
     public static boolean go_profile = false;
     public static String current_user_email = "";
 
+    public static boolean user_mode = true;
+    public static boolean iamguider = false;
+
     public static String my_name = "";
     public static String chat_guider_name = "";
     public static ArrayList<Res_Exp> array_experience = new ArrayList<>();

@@ -62,7 +62,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_weight="1"
-                                app:srcCompat="@drawable/ico_user" />
+                                app:srcCompat="@drawable/ico_usermode" />
 
                             <EditText
                                 android:id="@+id/edt_name"
