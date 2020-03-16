@@ -2,6 +2,7 @@ package com.arabian.lancul.UI.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.ChatActivity;
+import com.arabian.lancul.UI.Activity.GuiderActivity;
 import com.arabian.lancul.UI.Object.Client;
+import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Util.Global;
 import com.bumptech.glide.Glide;
 
@@ -41,7 +44,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
     @NonNull
     @Override
     public PlanetHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_guider, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_client, parent, false);
         return new PlanetHolder(view);
     }
 
@@ -52,10 +55,9 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getInstance(), ChatActivity.class);
-                Global.chat_guider_name = client.getName();
-                MainActivity.getInstance().startActivity(intent);
-                Toast.makeText(MainActivity.getInstance(),client.getName().toString(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(GuiderActivity.getInstance(), ChatActivity.class);
+                GuiderActivity.getInstance().startActivity(intent);
+                Toast.makeText(GuiderActivity.getInstance(),client.getName().toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,21 +78,24 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
         private TextView name, last_message;
         private TextView num_message;
         private CardView new_message;
+        private ImageView photo;
         View mView;
 
 
         PlanetHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.client_name);
             last_message = itemView.findViewById(R.id.last_message);
             num_message = itemView.findViewById(R.id.num_new_message);
             new_message = itemView.findViewById(R.id.new_message);
+            photo = itemView.findViewById(R.id.client_photo);
         }
 
         void setDetails(Client client) {
 
             name.setText(client.getName());
+            Glide.with(GuiderActivity.getInstance()).load(client.getPhoto()).into(photo);
 //            last_message.setText(client.getLastMessage());
 //            if(Integer.parseInt(client.getNumNewMessage()) > 0){
 //                new_message.setVisibility(View.VISIBLE);

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.arabian.lancul.MainActivity;
@@ -23,6 +24,7 @@ import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
+import com.arabian.lancul.UI.Fragment.chatFragment_guider;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -41,6 +43,7 @@ public class GuiderActivity extends AppCompatActivity {
     TextView label_toolbar;
     Button button_logout;
     HorizontalScrollView flags;
+    RelativeLayout search_field;
     MeowBottomNavigation bottomNavigation;
     String TAG =  "GuiderActivity";
 
@@ -62,6 +65,7 @@ public class GuiderActivity extends AppCompatActivity {
         label_toolbar = findViewById(R.id.label_tab);
         button_logout = findViewById(R.id.button_logout);
         flags = findViewById(R.id.flags);
+        search_field = findViewById(R.id.search_field);
         bottomNavigation = findViewById(R.id.bottomNavigation_guider);
 
     }
@@ -88,12 +92,14 @@ public class GuiderActivity extends AppCompatActivity {
 
                 String name;
                 flags.setVisibility(View.GONE);
+                search_field.setVisibility(View.GONE);
                 switch (item.getId()) {
                     case ID_CHAT:
                         name = "HOME";
                         label_toolbar.setText("Users");
                         button_logout.setVisibility(View.GONE);
-                        loadFragment(new HomeFragment());
+                        search_field.setVisibility(View.VISIBLE);
+                        loadFragment(new chatFragment_guider());
                         break;
                     case ID_INVITE:
                         label_toolbar.setText("Invite");
@@ -147,7 +153,7 @@ public class GuiderActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent;
-                        intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
+                        intent = new Intent(GuiderActivity.getInstance(), LoginActivity.class);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -168,11 +174,9 @@ public class GuiderActivity extends AppCompatActivity {
 
 
     private void loadFragment(Fragment fragment) {
-// create a FragmentManager
+
         FragmentManager fm = getSupportFragmentManager();
-// create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-// replace the FrameLayout with new Fragment
         fragmentTransaction.replace(R.id.main_frame_guider, fragment);
         fragmentTransaction.commit(); // save the changes
     }

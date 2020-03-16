@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.ChatActivity;
+import com.arabian.lancul.UI.Activity.GuiderActivity;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;

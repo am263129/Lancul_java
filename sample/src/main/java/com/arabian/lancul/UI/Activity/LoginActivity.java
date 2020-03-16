@@ -28,6 +28,7 @@ import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Fragment.signinFragment;
 import com.arabian.lancul.UI.Fragment.signupFragment;
+import com.arabian.lancul.UI.Object.Client;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_login,btn_register;
     private ProgressDialog loading;
     private EditText guider_email, guider_password;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         init_view();
         init_action();
         init_data();
+        check_mode();
 
     }
 
@@ -212,6 +215,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+
+        //get Client data
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Global.array_client.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String name = document.get("user_name").toString();
+                                String email = document.get("user_email").toString();
+                                String pole = document.get("user_type").toString();
+                                String status = document.get("user_status").toString();
+                                String photo = document.get("user_photo").toString();
+                                if(pole.equals("client")){
+                                    Client client = new Client(name, email, status, photo);
+                                    Global.array_client.add(client);
+                                }
+
+
+
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
     }
 
     private void login() {
@@ -268,6 +302,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
@@ -283,27 +318,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_im_guider:
                 Global.user_mode = !Global.user_mode;
-                if(!Global.user_mode){
-                    main_window.setBackgroundResource(R.drawable.gradient_background_guider);
-                    guider_window.setVisibility(View.VISIBLE);
-                    user_window.setVisibility(View.GONE);
-                    btn_guider_mode.setBackgroundResource(R.drawable.ico_usermode);
-                    label_mode.setText(getString(R.string.to_usermode));
-                    label_mode.setTextColor(getColor(R.color.orange));
-
-
-                }
-                else{
-                    main_window.setBackgroundResource(R.drawable.gradient_background);
-                    guider_window.setVisibility(View.GONE);
-                    user_window.setVisibility(View.VISIBLE);
-                    btn_guider_mode.setBackgroundResource(R.drawable.ico_guider);
-                    label_mode.setText(getString(R.string.to_guidemode));
-                    label_mode.setTextColor(getColor(R.color.guider_orange));
-                }
+                check_mode();
 
 
                 break;
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void check_mode() {
+
+        if(!Global.user_mode){
+            main_window.setBackgroundResource(R.drawable.gradient_background_guider);
+            guider_window.setVisibility(View.VISIBLE);
+            user_window.setVisibility(View.GONE);
+            btn_guider_mode.setBackgroundResource(R.drawable.ico_usermode);
+            label_mode.setText(getString(R.string.to_usermode));
+            label_mode.setTextColor(getColor(R.color.orange));
+
+
+        }
+        else{
+            main_window.setBackgroundResource(R.drawable.gradient_background);
+            guider_window.setVisibility(View.GONE);
+            user_window.setVisibility(View.VISIBLE);
+            btn_guider_mode.setBackgroundResource(R.drawable.ico_guider);
+            label_mode.setText(getString(R.string.to_guidemode));
+            label_mode.setTextColor(getColor(R.color.guider_orange));
         }
     }
 
