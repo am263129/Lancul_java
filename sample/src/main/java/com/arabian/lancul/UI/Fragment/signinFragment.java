@@ -77,7 +77,7 @@ public class signinFragment extends Fragment {
         edt_password = view.findViewById(R.id.edt_password);
         eye = view.findViewById(R.id.btn_show_pass);
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Connecting to server...");
+        loading.setTitle("Signing in...");
 
     }
 

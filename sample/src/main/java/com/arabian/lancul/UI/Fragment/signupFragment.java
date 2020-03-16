@@ -63,7 +63,7 @@ public class signupFragment extends Fragment {
         btn_signup = view.findViewById(R.id.btn_signup);
         btn_showpass = view.findViewById(R.id.btn_show_pass);
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Connecting to server...");
+        loading.setTitle("Signing up...");
     }
     private void init_actions() {
         btn_signup.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +131,7 @@ public class signupFragment extends Fragment {
         }
         else{
             edt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            edt_confirm.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            edt_confirm.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             btn_showpass.setImageResource(R.drawable.hide_pass);
         }
         hide = !hide;

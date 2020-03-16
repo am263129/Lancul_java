@@ -126,7 +126,7 @@
                                 android:background="@android:color/white"
                                 android:ems="10"
                                 android:hint="Password"
-                                android:inputType="textPersonName"
+                                android:inputType="textPassword"
                                 android:padding="2dp" />
 
                             <ImageView
@@ -157,7 +157,7 @@
                                 android:background="@android:color/white"
                                 android:ems="10"
                                 android:hint="Confirmation"
-                                android:inputType="textPersonName"
+                                android:inputType="textPassword"
                                 android:padding="2dp" />
 
                             <ImageView

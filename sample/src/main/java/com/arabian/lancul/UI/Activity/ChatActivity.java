@@ -33,9 +33,6 @@ public class ChatActivity extends AppCompatActivity {
 
         init_view();
         init_action();
-
-
-
     }
 
     private void init_view() {

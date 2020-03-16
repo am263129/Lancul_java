@@ -1,5 +1,6 @@
 package com.arabian.lancul.UI.Util;
 
+import com.arabian.lancul.UI.Object.Client;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 
@@ -21,6 +22,7 @@ public class Global {
     public static ArrayList<Res_Exp> array_experience = new ArrayList<>();
     public static ArrayList<Res_Exp> array_restaurant = new ArrayList<>();
     public static ArrayList<Guider> array_guider = new ArrayList<>();
+    public static ArrayList<Client> array_client = new ArrayList<>();
 
 
     public static String getToday() {

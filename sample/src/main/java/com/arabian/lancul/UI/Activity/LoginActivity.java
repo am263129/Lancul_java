@@ -71,13 +71,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         init_action();
         init_data();
 
-
-
-
-
-
-
-
     }
 
     private void init_view() {
@@ -98,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_guider_mode = findViewById(R.id.btn_im_guider);
 
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Connecting to server...");
+        loading.setTitle("Signing in...");
     }
     private void init_action() {
         btn_guider_mode.setOnClickListener(this);
