@@ -115,6 +115,7 @@ public class signinFragment extends Fragment {
                                 for(int i = 0; i < Global.array_client.size(); i++){
                                     if(Global.array_client.get(i).getEmail().equals(Global.current_user_email)){
                                         Global.my_name = Global.array_client.get(i).getName();
+                                        Global.my_user_data = Global.array_client.get(i);
                                     }
                                 }
 

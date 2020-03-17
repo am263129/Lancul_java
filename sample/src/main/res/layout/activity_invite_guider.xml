@@ -4,50 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context="com.arabian.lancul.UI.Activity.InviteActivity">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        app:srcCompat="@drawable/inviteimage" />
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="4">
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/guider_area"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Invite Your Friends"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:gravity="center|center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/invite_guider_photo"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/placeholder_profile"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/guider_bio_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <TextView
+                    android:id="@+id/invite_guider_bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/invoice_area"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView10"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Are you one of those who makes everything \n at the last moment?"
-            android:textSize="18sp" />
+            android:layout_below="@id/guider_area"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="something to guider" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <Button
+            android:id="@+id/btn_send_invite"
             android:layout_width="120dp"
             android:layout_height="40dp"
+            android:layout_below="@id/invoice_area"
             android:layout_centerInParent="true"
             android:background="@drawable/background_btn_share"
-            android:drawableLeft="@drawable/ico_share"
-            android:gravity="left|center_vertical"
-            android:text="    Share"
+            android:text="Send"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
             android:textSize="18sp" />

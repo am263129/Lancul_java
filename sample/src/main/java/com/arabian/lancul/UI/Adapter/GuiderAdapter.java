@@ -22,6 +22,8 @@ import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.ChatActivity;
 import com.arabian.lancul.UI.Activity.GuiderActivity;
+import com.arabian.lancul.UI.Activity.InviteActivity;
+import com.arabian.lancul.UI.Activity.InviteGuiderActivity;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
@@ -57,8 +59,9 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getInstance(), ChatActivity.class);
+                Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
                 Global.chat_guider_name = guider.getName();
+                intent.putExtra("Index",String.valueOf(position));
                 MainActivity.getInstance().startActivity(intent);
                 Toast.makeText(MainActivity.getInstance(),guider.getName().toString(),Toast.LENGTH_SHORT).show();
             }

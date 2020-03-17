@@ -20,6 +20,7 @@ public class Global {
 
     public static String my_name = "";
     public static String chat_guider_name = "";
+    public static Client my_user_data;
     public static ArrayList<Res_Exp> array_experience = new ArrayList<>();
     public static ArrayList<Res_Exp> array_restaurant = new ArrayList<>();
     public static ArrayList<Guider> array_guider = new ArrayList<>();

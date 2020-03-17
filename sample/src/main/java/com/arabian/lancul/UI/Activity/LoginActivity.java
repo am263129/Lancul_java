@@ -232,8 +232,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 String pole = document.get("user_type").toString();
                                 String status = document.get("user_status").toString();
                                 String photo = document.get("user_photo").toString();
+                                List<String> linked_guiders = (List<String>) document.get("user_linked_guiders");
                                 if(pole.equals("client")){
-                                    Client client = new Client(name, email, status, photo);
+                                    Client client = new Client(name, email, status, photo, linked_guiders);
                                     Global.array_client.add(client);
                                 }
 
