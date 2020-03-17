@@ -266,10 +266,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Global.current_user_email = user.getEmail();
-                            Global.my_name = user.getDisplayName();
+
                             for (int i = 0; i < Global.array_guider.size(); i ++){
                                 if (Global.array_guider.get(i).getEmail().toString().equals(Global.current_user_email)){
                                     Global.iamguider = true;
+                                    Global.my_name = Global.array_guider.get(i).getName();
                                 }
                             }
                             if (!Global.iamguider){

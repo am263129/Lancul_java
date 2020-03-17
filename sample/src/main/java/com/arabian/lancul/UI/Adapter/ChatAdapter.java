@@ -70,6 +70,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.PlanetHolder> 
         return null;
     }
 
+    public void notifyData(ArrayList<Chat> chat_history) {
+        Log.d("notifyData ", chat_history.size() + "");
+        this.chat_history = chat_history;
+        notifyDataSetChanged();
+    }
+
     class PlanetHolder extends RecyclerView.ViewHolder {
 
         private ImageView guider_photo;

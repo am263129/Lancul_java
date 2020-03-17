@@ -1,20 +1,35 @@
 package com.arabian.lancul.UI.Fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.EditProfileActivity;
 import com.arabian.lancul.UI.Activity.InviteActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
@@ -22,6 +37,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     View view;
     LinearLayout btn_favorite, btn_help, btn_feedback, btn_invite_friend, btn_rate_app, btn_about_us, btn_privacy_policy;
     ImageView btn_setting;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,4 +83,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
         startActivity(intent);
     }
+
+
 }

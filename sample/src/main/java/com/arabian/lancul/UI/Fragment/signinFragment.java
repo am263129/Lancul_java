@@ -47,7 +47,15 @@ public class signinFragment extends Fragment {
 
         init_view();
         init_actions();
+
+//        test_function();
         return view;
+    }
+
+    private void test_function() {
+        edt_email.setText("messi@gmail.com");
+        edt_password.setText("mufasa");
+        login();
     }
 
     private void init_actions() {
@@ -104,7 +112,19 @@ public class signinFragment extends Fragment {
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Global.current_user_email = user.getEmail();
-                                Global.my_name = user.getDisplayName();
+                                for(int i = 0; i < Global.array_client.size(); i++){
+                                    if(Global.array_client.get(i).getEmail().equals(Global.current_user_email)){
+                                        Global.my_name = Global.array_client.get(i).getName();
+                                    }
+                                }
+
+                                if(Global.my_name.equals("")) {
+                                    for (int i = 0; i < Global.array_guider.size(); i++) {
+                                        if (Global.array_guider.get(i).getEmail().equals(Global.current_user_email)) {
+                                            Global.my_name = Global.array_guider.get(i).getName();
+                                        }
+                                    }
+                                }
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 startActivity(intent);
                                 LoginActivity.getInstance().finish();

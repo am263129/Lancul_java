@@ -24,11 +24,16 @@ import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.LoginActivity;
 import com.arabian.lancul.UI.Util.Global;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 
 public class signupFragment extends Fragment {
@@ -101,6 +106,7 @@ public class signupFragment extends Fragment {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Global.current_user_email = user.getEmail();
+                            upload_data();
                             Intent intent = new Intent(getContext(), MainActivity.class);
                             startActivity(intent);
                             LoginActivity.getInstance().finish();
@@ -115,6 +121,31 @@ public class signupFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void upload_data() {
+        FirebaseApp.initializeApp(LoginActivity.getInstance());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("user_email", edt_email.getText().toString());
+        user.put("user_name", edt_name.getText().toString());
+        user.put("user_photo", "");
+        user.put("user_status", "online");
+        user.put("user_type", "client");
+        db.collection("users").document(edt_email.getText().toString())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "upload user data:success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG,"Failed");
+                    }
+                });
     }
 
     public boolean isValidEmail(CharSequence target) {

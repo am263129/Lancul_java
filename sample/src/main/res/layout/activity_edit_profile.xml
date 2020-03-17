@@ -13,7 +13,7 @@
         android:layout_height="180dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circle_image_view_edit_profile"
+            android:id="@+id/user_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -174,7 +174,7 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
