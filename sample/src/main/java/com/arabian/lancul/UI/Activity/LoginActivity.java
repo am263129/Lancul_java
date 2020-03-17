@@ -317,6 +317,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     login();
                 break;
             case R.id.btn_sign_up_guider:
+
                 break;
             case R.id.btn_im_guider:
                 Global.user_mode = !Global.user_mode;
