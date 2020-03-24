@@ -111,12 +111,13 @@ public class signinFragment extends Fragment {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Global.current_user_email = user.getEmail();
+                                Global.my_email = user.getEmail();
                                 for(int i = 0; i < Global.array_client.size(); i++){
-                                    if(Global.array_client.get(i).getEmail().equals(Global.current_user_email)){
+                                    if(Global.array_client.get(i).getEmail().equals(Global.my_email)){
                                         Global.my_name = Global.array_client.get(i).getName();
                                         Global.my_email = Global.array_client.get(i).getEmail();
                                         Global.my_user_data = Global.array_client.get(i);
+                                        break;
                                     }
                                 }
 

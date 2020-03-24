@@ -73,7 +73,7 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
                 }
                 else{
                     Intent intent =  new Intent(MainActivity.getInstance(), ChatActivity.class);
-                    intent.putExtra("Index", String.valueOf(position));
+                    intent.putExtra("partner_index", position);
                     MainActivity.getInstance().startActivity(intent);
                 }
             }

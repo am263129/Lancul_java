@@ -214,11 +214,10 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Global.current_user_email = user.getEmail();
+                            Global.my_email = user.getEmail();
+                            Global.my_name = guider_firstname + " " + guider_lastname;
                             upload_data();
-                            Intent intent = new Intent(GuiderRegisterActivity.this, GuiderActivity.class);
-                            startActivity(intent);
-                            finish();
+
                         } else {
                             loading.dismiss();
                             // If sign in fails, display a message to the user.
@@ -253,6 +252,9 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(GuiderRegisterActivity.this, GuiderActivity.class);
+                        startActivity(intent);
+                        finish();
                         Log.d(TAG, "upload user data:success");
                     }
                 })

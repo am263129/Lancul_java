@@ -35,7 +35,6 @@ public class chatFragment_guider extends Fragment {
     RecyclerView list;
 
     FirebaseFirestore db;
-    ArrayList<Client> my_clients;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class chatFragment_guider extends Fragment {
     }
 
     private void init_clients() {
-        my_clients = new ArrayList<>();
+        Global.my_clients.clear();
         db = FirebaseFirestore.getInstance();
         db.collection("guiders").document(Global.my_email).collection("invite")
                 .get()
@@ -58,11 +57,11 @@ public class chatFragment_guider extends Fragment {
                             for (DocumentSnapshot document : task.getResult()) {
                                 for(int i = 0; i < Global.array_client.size(); i ++){
                                     if(Global.array_client.get(i).getEmail().toString().equals(document.getId())){
-                                        my_clients.add(Global.array_client.get(i));
+                                        Global.my_clients.add(Global.array_client.get(i));
                                     }
                                 }
                             }
-                            ClientAdapter adapter  = new ClientAdapter(getContext(),my_clients);
+                            ClientAdapter adapter  = new ClientAdapter(getContext(),Global.my_clients);
                             list.setLayoutManager(new LinearLayoutManager(GuiderActivity.getInstance()));
                             list.setAdapter(adapter);
                         } else {

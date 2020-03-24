@@ -15,11 +15,9 @@ import java.util.HashSet;
 public class Global {
 
     public static boolean go_profile = false;
-    public static String current_user_email = "";
 
     public static boolean user_mode = true;
     public static boolean iamguider = false;
-
     public static String my_name = "";
     public static String my_email = "";
     public static String chat_guider_name = "";
@@ -29,6 +27,7 @@ public class Global {
     public static ArrayList<Res_Exp> array_restaurant = new ArrayList<>();
     public static ArrayList<Guider> array_guider = new ArrayList<>();
     public static ArrayList<Client> array_client = new ArrayList<>();
+    public static ArrayList<Client> my_clients = new ArrayList<>();
     public static ArrayList<Chat> array_chat_histroy = new ArrayList<>();
     public static ArrayList<String> array_chat_ids = new ArrayList<>();
 

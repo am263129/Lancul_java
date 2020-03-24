@@ -106,7 +106,7 @@ public class signupFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Global.current_user_email = user.getEmail();
+                            Global.my_email = user.getEmail();
                             upload_data();
                             Intent intent = new Intent(getContext(), MainActivity.class);
                             startActivity(intent);

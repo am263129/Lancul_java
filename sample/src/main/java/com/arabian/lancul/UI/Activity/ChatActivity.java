@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Adapter.ChatAdapter;
@@ -50,6 +51,8 @@ public class ChatActivity extends AppCompatActivity {
     Integer partner_index;
     String chat_document = "";
     ProgressDialog loading;
+    RelativeLayout peding, chat;
+    boolean is_pending = false;
     private FirebaseFirestore mDb;
     private ListenerRegistration mChatMessageEventListener, mUserListEventListener;
     private ChatAdapter mChatMessageRecyclerAdapter;
@@ -60,14 +63,21 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
+        try{
+            is_pending = intent.getBooleanExtra("pending",false);
+        }
+        catch (Exception E){
+            Log.e(TAG, "No pending");
+        }
+
         partner_index = intent.getIntExtra("partner_index", 0);
         if(Global.user_mode) {
             chat_document = Global.my_email + ":" + Global.array_guider.get(partner_index).getEmail();
             Global.partner_photo = Global.array_guider.get(partner_index).getImageURL();
         }
         else{
-            chat_document = Global.array_client.get(partner_index).getEmail() + ":" + Global.my_email;
-            Global.partner_photo = Global.array_client.get(partner_index).getPhoto();
+            chat_document = Global.my_clients.get(partner_index).getEmail() + ":" + Global.my_email;
+            Global.partner_photo = Global.my_clients.get(partner_index).getPhoto();
         }
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         db = FirebaseFirestore.getInstance();
@@ -114,7 +124,7 @@ public class ChatActivity extends AppCompatActivity {
                         clearMessage();
                     }else{
                         View parentLayout = findViewById(android.R.id.content);
-                        Snackbar.make(parentLayout, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(parentLayout, "Failed to send message.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -231,6 +241,17 @@ public class ChatActivity extends AppCompatActivity {
         loading = new ProgressDialog(this);
         loading.setCancelable(false);
         loading.setTitle("Please wait...");
+        peding = findViewById(R.id.pending);
+        chat = findViewById(R.id.chat_active);
+        if (is_pending){
+            peding.setVisibility(View.VISIBLE);
+            chat.setVisibility(View.GONE);
+        }
+        else
+        {
+            chat.setVisibility(View.VISIBLE);
+            peding.setVisibility(View.GONE);
+        }
         mDb = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)

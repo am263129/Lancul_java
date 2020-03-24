@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/aguafina_script</item>
         <item>@font/archivo_black</item>
+        <item>@font/condiment</item>
+        <item>@font/la_belle_aurore</item>
     </array>
 </resources>
