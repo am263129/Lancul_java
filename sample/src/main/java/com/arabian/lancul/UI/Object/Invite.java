@@ -5,19 +5,21 @@ package com.arabian.lancul.UI.Object;
 public class Invite {
     public String invite_content;
     public String invite_date;
-    public String invite_sender;
+    public String invite_sender_name;
     public String invite_status;
+    public String invite_sender_email;
 
 
     public Invite(){
 
     }
 
-    public Invite(String invite_content, String invite_date, String invite_sender, String invite_status){
+    public Invite(String invite_content, String invite_date, String invite_sender_name, String invite_sender_email,String invite_status){
         this.invite_content = invite_content;
         this.invite_date = invite_date;
-        this.invite_sender = invite_sender;
+        this.invite_sender_name = invite_sender_name;
         this.invite_status  = invite_status;
+        this.invite_sender_email = invite_sender_email;
 
     }
 
@@ -29,12 +31,16 @@ public class Invite {
         return invite_date;
     }
 
-    public String getInvite_sender() {
-        return invite_sender;
+    public String getInvite_sender_name() {
+        return invite_sender_name;
     }
 
     public String getInvite_status() {
         return invite_status;
+    }
+
+    public String getInvite_sender_email() {
+        return invite_sender_email;
     }
 
     public void setInvite_content(String invite_content) {
@@ -45,12 +51,16 @@ public class Invite {
         this.invite_date = invite_date;
     }
 
-    public void setInvite_sender(String invite_sender) {
-        this.invite_sender = invite_sender;
+    public void setInvite_sender_name(String invite_sender_name) {
+        this.invite_sender_name = invite_sender_name;
     }
 
     public void setInvite_status(String invite_status) {
         this.invite_status = invite_status;
+    }
+
+    public void setInvite_sender_email(String invite_sender_email) {
+        this.invite_sender_email = invite_sender_email;
     }
 }
 

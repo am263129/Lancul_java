@@ -32,7 +32,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                app:srcCompat="@drawable/ico_new_invitatiaon" />
+                android:background="@drawable/ico_new_invitatiaon" />
 
             <LinearLayout
                 android:layout_width="match_parent"

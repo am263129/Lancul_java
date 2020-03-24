@@ -9,14 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Object.Guider;
+import com.arabian.lancul.UI.Object.Invite;
 import com.arabian.lancul.UI.Util.Global;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,13 +37,15 @@ public class InviteGuiderActivity extends AppCompatActivity {
     String TAG = "Invite";
     ProgressDialog wait;
     TextView guider_name, guider_rating, send_date;
+    Integer position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_guider);
         Intent intent = getIntent();
-        guider = Global.array_guider.get(Integer.parseInt(intent.getStringExtra("Index")));
+        position = intent.getIntExtra("Index",0);
+        guider = Global.array_guider.get(position);
         init_view();
     }
 
@@ -80,18 +81,16 @@ public class InviteGuiderActivity extends AppCompatActivity {
         wait.show();
         String message = invite_message.getText().toString();
         String date = Global.getToday();
-
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        HashMap<String, Object> Invite = new HashMap<>();
-        Invite.put("invite_content", message);
-        Invite.put("invite_date", date);
-        Invite.put("invite_sender_name", Global.my_name);
-        Invite.put("invite_sender_email", Global.my_email);
-        Invite.put("invite_status","New");
-//        Invite.put("user_type", "client");
+        Invite invite = new Invite();
+        invite.setInvite_content(message);
+        invite.setInvite_date(date);
+        invite.setInvite_sender_name(Global.my_name);
+        invite.setInvite_sender_email(Global.my_email);
+        invite.setInvite_status("New");
         db.collection("guiders").document(guider.getEmail()).collection("invite").document(Global.my_email)
-                .set(Invite)
+                .set(invite)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -113,7 +112,6 @@ public class InviteGuiderActivity extends AppCompatActivity {
 
     }
 
-
     private void upgrade_my_data(String guider_email) {
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -132,6 +130,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
                         Log.d(TAG, "send invite:success");
                         Intent intent = new Intent(InviteGuiderActivity.this, ChatActivity.class);
                         intent.putExtra("pending", true);
+                        intent.putExtra("partner_index",position);
                         startActivity(intent);
                         finish();
                     }

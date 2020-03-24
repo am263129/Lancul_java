@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Adapter.ChatAdapter;
 import com.arabian.lancul.UI.Object.Chat;
+import com.arabian.lancul.UI.Object.Guider;
+import com.arabian.lancul.UI.Object.Invite;
 import com.arabian.lancul.UI.Util.Global;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -58,6 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatAdapter mChatMessageRecyclerAdapter;
     private Set<String> mMessageIds = new HashSet<>();
     private ArrayList<Chat> mMessages = new ArrayList<>();
+    private ListenerRegistration mAcceptEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +91,56 @@ public class ChatActivity extends AppCompatActivity {
         init_action();
     }
 
+    private void init_chatable() {
+        String document_id = "";
+        String subdocument_id = "";
+        if(Global.user_mode) {
+            document_id = Global.array_guider.get(partner_index).getEmail();
+            subdocument_id = Global.my_email;
+        }
+        else{
+            document_id = Global.my_email;
+            subdocument_id = Global.my_clients.get(partner_index).getEmail();
+        }
+        mDb = FirebaseFirestore.getInstance();
+        DocumentReference messagesRef = mDb
+                .collection("guiders")
+                .document(document_id)
+                .collection("invite").document(subdocument_id);
+
+        mAcceptEventListener = messagesRef.
+        addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, "Current data: " + snapshot.get("invite_status"));
+                    if(snapshot.get("invite_status").equals("Accepted")){
+                        enable_chat();
+                    }
+                    else{
+                        disable_chat();
+                    }
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+    }
+
+    private void enable_chat(){
+        chat.setVisibility(View.VISIBLE);
+        peding.setVisibility(View.GONE);
+    }
+    private void disable_chat(){
+        peding.setVisibility(View.VISIBLE);
+        chat.setVisibility(View.GONE);
+    }
 
     private void joinChatroom(){
 
@@ -243,15 +296,6 @@ public class ChatActivity extends AppCompatActivity {
         loading.setTitle("Please wait...");
         peding = findViewById(R.id.pending);
         chat = findViewById(R.id.chat_active);
-        if (is_pending){
-            peding.setVisibility(View.VISIBLE);
-            chat.setVisibility(View.GONE);
-        }
-        else
-        {
-            chat.setVisibility(View.VISIBLE);
-            peding.setVisibility(View.GONE);
-        }
         mDb = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
@@ -317,6 +361,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getChatMessages();
+        init_chatable();
     }
 
 }

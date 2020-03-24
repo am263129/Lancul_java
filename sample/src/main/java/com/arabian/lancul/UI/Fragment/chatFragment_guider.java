@@ -46,7 +46,7 @@ public class chatFragment_guider extends Fragment {
     }
 
     private void init_clients() {
-        Global.my_clients.clear();
+
         db = FirebaseFirestore.getInstance();
         db.collection("guiders").document(Global.my_email).collection("invite")
                 .get()
@@ -54,6 +54,7 @@ public class chatFragment_guider extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Global.my_clients.clear();
                             for (DocumentSnapshot document : task.getResult()) {
                                 for(int i = 0; i < Global.array_client.size(); i ++){
                                     if(Global.array_client.get(i).getEmail().toString().equals(document.getId())){

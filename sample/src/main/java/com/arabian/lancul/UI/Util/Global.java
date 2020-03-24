@@ -33,7 +33,7 @@ public class Global {
 
     public static String getToday() {
         Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
         return currentTime.toString();
     }
     public static class FishNameComparator implements Comparator<Chat>

@@ -21,6 +21,7 @@ import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Fragment.ExperienceFragment;
 import com.arabian.lancul.UI.Fragment.HomeFragment;
+import com.arabian.lancul.UI.Fragment.InviteFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
@@ -107,6 +108,7 @@ public class GuiderActivity extends AppCompatActivity {
                     case ID_INVITE:
                         label_toolbar.setText("Invite");
                         button_logout.setVisibility(View.GONE);
+                        loadFragment(new InviteFragment());
                         name = "EXPLORE";
                         break;
                     case ID_MY_FEEDBACK:

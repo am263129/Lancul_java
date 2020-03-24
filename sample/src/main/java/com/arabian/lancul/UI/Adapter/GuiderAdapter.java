@@ -37,6 +37,7 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
     private Context context;
     private ArrayList<Guider> guiders;
     boolean like = false;
+    private String TAG = "GuiderAdapter";
 
     public GuiderAdapter(Context context, ArrayList<Guider> guiders) {
         this.context = context;
@@ -60,15 +61,20 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
             @Override
             public void onClick(View view) {
                 boolean already_linked = false;
-                for (int i = 0; i< Global.my_user_data.getLinked_guiders().size(); i++){
-                    if(Global.my_user_data.getLinked_guiders().get(i).equals(guider.getEmail())){
-                        already_linked = true;
+                try {
+                    for (int i = 0; i < Global.my_user_data.getLinked_guiders().size(); i++) {
+                        if (Global.my_user_data.getLinked_guiders().get(i).equals(guider.getEmail())) {
+                            already_linked = true;
+                        }
                     }
+                }
+                catch (Exception E){
+                    Log.e(TAG, E.toString());
                 }
                 if (!already_linked) {
                     Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
                     Global.chat_guider_name = guider.getName();
-                    intent.putExtra("Index", String.valueOf(position));
+                    intent.putExtra("Index", position);
                     MainActivity.getInstance().startActivity(intent);
                 }
                 else{
