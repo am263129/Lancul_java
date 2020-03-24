@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="left"
     android:padding="3dp">
 
@@ -10,11 +10,12 @@
         android:id="@+id/item_mychat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
         android:orientation="vertical">
 
         <me.himanshusoni.chatmessageview.ChatMessageView
             android:id="@+id/chatMessageView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             app:cmv_arrowGravity="start"
@@ -39,10 +40,11 @@
         android:id="@+id/item_guider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/guider_photo"
+            android:id="@+id/partner_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
@@ -66,7 +68,7 @@
             app:cmv_showArrow="true">
 
             <TextView
-                android:id="@+id/message_guider"
+                android:id="@+id/message_partner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello"

@@ -23,13 +23,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -52,12 +52,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp">
 
                         <EditText
                             android:id="@+id/edt_guider_firstname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/white"
                             android:ems="10"
                             android:hint="First Name"
                             android:inputType="textPersonName" />
@@ -78,12 +79,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp">
 
                         <EditText
                             android:id="@+id/edt_guider_lastname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/white"
                             android:ems="10"
                             android:hint="Last Name"
                             android:inputType="textPersonName" />
@@ -104,17 +106,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <EditText
                         android:id="@+id/edt_guider_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:ems="10"
                         android:hint="E-mail"
                         android:inputType="textEmailAddress" />
 
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/edt_guider_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword" />
+
+                    <ImageView
+                        android:id="@+id/btn_switch_password_show"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        app:srcCompat="@drawable/show_pass" />
+
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -129,12 +164,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <EditText
                         android:id="@+id/edt_guider_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:ems="10"
                         android:hint="Phone"
                         android:inputType="phone" />
@@ -154,12 +190,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <EditText
                         android:id="@+id/edt_guider_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:ems="10"
                         android:hint="Address (Optional)"
                         android:inputType="textPersonName" />
@@ -179,12 +216,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <EditText
                         android:id="@+id/edt_guider_birthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:ems="10"
                         android:hint="Birthday (Optional)"
                         android:inputType="textPersonName" />
@@ -193,6 +231,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/area_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -203,11 +242,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_language"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/gradient_background_button_guider"
+                        android:padding="3dp"
+                        android:text="Skill Language"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
 
                     <HorizontalScrollView
-                        android:id="@+id/area_language"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -231,15 +282,6 @@
                                     android:layout_weight="1"
                                     android:visibility="gone"
                                     app:srcCompat="@drawable/flag_america" />
-
-                                <ImageView
-                                    android:id="@+id/flag_international"
-                                    android:layout_width="50dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_weight="1"
-                                    android:visibility="visible"
-                                    app:srcCompat="@drawable/flag_international" />
 
                                 <ImageView
                                     android:id="@+id/flag_brazil"
@@ -316,8 +358,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
+                        android:layout_height="match_parent">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_guider_bio"

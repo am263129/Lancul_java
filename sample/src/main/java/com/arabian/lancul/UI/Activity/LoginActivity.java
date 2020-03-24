@@ -47,6 +47,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.arabian.lancul.UI.Util.Global.array_chat_ids;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     TextSwitcher switcher;
 
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ViewPagerAdapter adapter;
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
-    private String TAG = "Login Activity";
+    private static String TAG = "Login Activity";
     public static LoginActivity self;
     public ImageView btn_guider_mode;
     private LinearLayout main_window,user_window, guider_window;
@@ -72,6 +74,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         init_view();
         init_action();
         init_data();
+        get_chat();
+        get_guider();
+        get_user();
         check_mode();
 
     }
@@ -183,7 +188,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
 
 
-        //get Guider data
+    }
+
+    public static void get_guider(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("guiders")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -194,20 +202,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Global.array_guider.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                String bio = document.get("bio").toString();
-                                String imageUrl = document.get("imageUrl").toString();
-                                String phone = document.get("phone").toString();
-                                String email = document.get("email").toString();
+                                try {
+                                    String bio = document.get("guider_bio").toString();
+                                    String imageUrl = document.get("guider_photo").toString();
+                                    String phone = document.get("guider_phone").toString();
+                                    String email = document.get("guider_email").toString();
+                                    boolean is_available = Boolean.parseBoolean(document.get("guider_available").toString());
+                                    String name = document.get("guider_firstname").toString() + " " + document.get("guider_lastname").toString();
+                                    Float rating = 0f;
+                                    boolean new_guider = false;
+                                    if (document.get("guider_rating").toString().equals("New")) {
+                                        new_guider = true;
+                                    } else {
+                                        rating = Float.parseFloat(document.get("guider_rating").toString());
+                                    }
+                                    boolean verified = Boolean.parseBoolean(document.get("guider_verified").toString());
 
-                                boolean is_available = Boolean.parseBoolean(document.get("isAvailable").toString());
-                                String name =  document.get("name").toString();
-                                Float rating =  Float.parseFloat(document.get("rating").toString());
-                                boolean verified = Boolean.parseBoolean(document.get("verified").toString());
-
-                                List<String> languages = (List<String>) document.get("languages");
-
-                                Guider guider =  new Guider(bio,imageUrl,name,rating,is_available,verified,languages,phone, email);
-                                Global.array_guider.add(guider);
+                                    List<String> languages = (List<String>) document.get("guider_languages");
+                                    String address = document.get("guider_address").toString();
+                                    String birthday = document.get("guider_birthday").toString();
+                                    String status = document.get("guider_status").toString();
+                                    Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider);
+                                    Global.array_guider.add(guider);
+                                }
+                                catch (Exception E){
+                                    Log.e(TAG, E.toString());
+                                }
 
                             }
                         } else {
@@ -215,9 +235,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
 
-        //get Client data
-        db.collection("user")
+    public static void get_user(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -246,7 +268,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
 
+    public static void get_chat(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("chats")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            array_chat_ids.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                array_chat_ids.add(document.getId());
+                            }
+//                            for (int i = 0; i< array_chat_ids.size(); i++){
+//                                if(array_chat_ids.get(i).toLowerCase().contains(Global.my_name)){
+//
+//                                }
+//                            }
+
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
     private void login() {
@@ -272,6 +319,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 if (Global.array_guider.get(i).getEmail().toString().equals(Global.current_user_email)){
                                     Global.iamguider = true;
                                     Global.my_name = Global.array_guider.get(i).getName();
+                                    Global.my_email = Global.array_guider.get(i).getEmail();
                                 }
                             }
                             if (!Global.iamguider){
@@ -317,6 +365,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     login();
                 break;
             case R.id.btn_sign_up_guider:
+
+                Intent intent = new Intent(this,GuiderRegisterActivity.class);
+                startActivity(intent);
 
                 break;
             case R.id.btn_im_guider:

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.EditProfileActivity;
 import com.arabian.lancul.UI.Activity.InviteActivity;
+import com.arabian.lancul.UI.Util.Global;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,6 +39,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     View view;
     LinearLayout btn_favorite, btn_help, btn_feedback, btn_invite_friend, btn_rate_app, btn_about_us, btn_privacy_policy;
     ImageView btn_setting;
+    TextView my_email;
 
 
 
@@ -45,7 +48,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_profile, container, false);
-
+        my_email = view.findViewById(R.id.label_my_email);
         btn_favorite = view.findViewById(R.id.btn_favorite);
         btn_help = view.findViewById(R.id.btn_help);
         btn_feedback = view.findViewById(R.id.btn_feedback);
@@ -55,6 +58,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         btn_privacy_policy = view.findViewById(R.id.btn_privacy_policy);
         btn_setting = view.findViewById(R.id.btn_setting);
 
+        my_email.setText(Global.my_email);
         btn_favorite.setOnClickListener(this);
         btn_help.setOnClickListener(this);
         btn_feedback.setOnClickListener(this);

@@ -56,6 +56,9 @@ public class GuiderActivity extends AppCompatActivity {
         init_view();
         init_action();
     }
+
+
+
     private void init_view(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(null);
@@ -146,7 +149,7 @@ public class GuiderActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(GuiderActivity.this);
                 dialog.setContentView(R.layout.modal);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                Button okButton = (Button) dialog.findViewById(R.id.btn_ok);
+                Button okButton = (Button) dialog.findViewById(R.id.btn_logout);
                 Button cancelButton = (Button) dialog.findViewById(R.id.btn_cancel);
 
                 okButton.setOnClickListener(new View.OnClickListener() {

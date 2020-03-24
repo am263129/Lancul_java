@@ -59,12 +59,25 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
-                Global.chat_guider_name = guider.getName();
-                intent.putExtra("Index",String.valueOf(position));
-                MainActivity.getInstance().startActivity(intent);
-                Toast.makeText(MainActivity.getInstance(),guider.getName().toString(),Toast.LENGTH_SHORT).show();
+                boolean already_linked = false;
+                for (int i = 0; i< Global.my_user_data.getLinked_guiders().size(); i++){
+                    if(Global.my_user_data.getLinked_guiders().get(i).equals(guider.getEmail())){
+                        already_linked = true;
+                    }
+                }
+                if (!already_linked) {
+                    Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
+                    Global.chat_guider_name = guider.getName();
+                    intent.putExtra("Index", String.valueOf(position));
+                    MainActivity.getInstance().startActivity(intent);
+                }
+                else{
+                    Intent intent =  new Intent(MainActivity.getInstance(), ChatActivity.class);
+                    intent.putExtra("Index", String.valueOf(position));
+                    MainActivity.getInstance().startActivity(intent);
+                }
             }
+
         });
 
     }

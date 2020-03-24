@@ -56,7 +56,9 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GuiderActivity.getInstance(), ChatActivity.class);
+                intent.putExtra("partner_index",position);
                 GuiderActivity.getInstance().startActivity(intent);
+
                 Toast.makeText(GuiderActivity.getInstance(),client.getName().toString(),Toast.LENGTH_SHORT).show();
             }
         });

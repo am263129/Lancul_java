@@ -43,7 +43,6 @@
             android:id="@+id/search_field"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_genre"
             android:visibility="gone">
 
             <EditText
@@ -52,18 +51,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toLeftOf="@id/btn_search"
+                android:background="@drawable/bg_genre"
                 android:ems="10"
                 android:hint="Search"
                 android:inputType="textPersonName"
-                android:padding="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/design_default_color_primary_variant" />
 
             <ImageView
                 android:id="@+id/btn_search"
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_genre"
                 app:srcCompat="@android:drawable/ic_search_category_default" />
         </RelativeLayout>
 

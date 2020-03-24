@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -132,6 +133,8 @@ public class signupFragment extends Fragment {
         user.put("user_photo", "");
         user.put("user_status", "online");
         user.put("user_type", "client");
+        ArrayList<String> linked_gudider = new ArrayList<>();
+        user.put("user_linked_guiders", linked_gudider);
         db.collection("users").document(edt_email.getText().toString())
                 .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

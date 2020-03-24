@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.modal);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                Button okButton = (Button) dialog.findViewById(R.id.btn_ok);
+                Button okButton = (Button) dialog.findViewById(R.id.btn_logout);
                 Button cancelButton = (Button) dialog.findViewById(R.id.btn_cancel);
 
                 okButton.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +213,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        LoginActivity.get_user();
+        LoginActivity.get_guider();
+        LoginActivity.get_chat();
         if(Global.go_profile){
             Global.go_profile = false;
             bottomNavigation.show(ID_ACCOUNT,true);

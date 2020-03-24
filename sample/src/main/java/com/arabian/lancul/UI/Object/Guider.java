@@ -12,8 +12,13 @@ public class Guider {
     public List<String> languages;
     public String phone;
     public String email;
+    public String status;
+    public String address;
+    public String birthday;
+    public boolean new_guider;
 
-    public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email){
+    public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email,
+                  String address, String birthday, String status, boolean new_guider){
         this.bio = bio;
         this.imageURL = imageURL;
         this.name = name;
@@ -23,6 +28,10 @@ public class Guider {
         this.languages = languages;
         this.phone = phone;
         this.email = email;
+        this.address = address;
+        this.birthday = birthday;
+        this.status = status;
+        this.new_guider = new_guider;
     }
 
     public String getName() {
@@ -61,6 +70,24 @@ public class Guider {
         return phone;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public Boolean getNew_guider(){
+        return new_guider;
+    }
+
+
+
     public void setName(String name) {
         this.name = name;
     }
@@ -97,4 +124,21 @@ public class Guider {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setNew_guider(boolean new_guider) {
+        this.new_guider = new_guider;
+    }
 }
+

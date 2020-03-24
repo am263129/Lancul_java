@@ -14,6 +14,7 @@ public class Client {
         this.name = name;
         this.email = email;
         this.photo = photo;
+        this.linked_guiders = linked_guiders;
     }
 
     public String getName() {

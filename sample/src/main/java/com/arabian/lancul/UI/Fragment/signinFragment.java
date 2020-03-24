@@ -115,17 +115,12 @@ public class signinFragment extends Fragment {
                                 for(int i = 0; i < Global.array_client.size(); i++){
                                     if(Global.array_client.get(i).getEmail().equals(Global.current_user_email)){
                                         Global.my_name = Global.array_client.get(i).getName();
+                                        Global.my_email = Global.array_client.get(i).getEmail();
                                         Global.my_user_data = Global.array_client.get(i);
                                     }
                                 }
 
-                                if(Global.my_name.equals("")) {
-                                    for (int i = 0; i < Global.array_guider.size(); i++) {
-                                        if (Global.array_guider.get(i).getEmail().equals(Global.current_user_email)) {
-                                            Global.my_name = Global.array_guider.get(i).getName();
-                                        }
-                                    }
-                                }
+
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 startActivity(intent);
                                 LoginActivity.getInstance().finish();

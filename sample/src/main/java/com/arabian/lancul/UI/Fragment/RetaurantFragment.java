@@ -29,6 +29,7 @@ public class RetaurantFragment extends Fragment {
         list = view.findViewById(R.id.list_restaurant);
         Res_ExpAdapter adapter  = new Res_ExpAdapter(getContext(), Global.array_restaurant);
         list.setLayoutManager(new LinearLayoutManager(MainActivity.getInstance()));
+
         list.setAdapter(adapter);
         return view;
     }

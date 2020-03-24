@@ -46,7 +46,10 @@ public class InviteGuiderActivity extends AppCompatActivity {
     private void init_view() {
         guider_photo = findViewById(R.id.invite_guider_photo);
         guider_bio = findViewById(R.id.invite_guider_bio);
-        Glide.with(InviteGuiderActivity.this).load(guider.getImageURL()).into(guider_photo);
+        if(!guider.getImageURL().equals(""))
+        {
+            Glide.with(InviteGuiderActivity.this).load(guider.getImageURL()).into(guider_photo);
+        }
         guider_bio.setText(guider.getBio().toString());
         btn_send = findViewById(R.id.btn_send_invite);
         invite_message = findViewById(R.id.edt_invoice);
@@ -72,7 +75,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
         Invite.put("invite_sender_email", Global.current_user_email);
         Invite.put("invite_status","New");
 //        Invite.put("user_type", "client");
-        db.collection("users").document(guider.getEmail()).collection("invite").document(Global.current_user_email)
+        db.collection("guiders").document(guider.getEmail()).collection("invite").document(Global.current_user_email)
                 .set(Invite)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -90,6 +93,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
 
     }
 
+
     private void upgrade_my_data(String guider_email) {
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -97,12 +101,13 @@ public class InviteGuiderActivity extends AppCompatActivity {
         List<String> linked_guiders = Global.my_user_data.getLinked_guiders();
         linked_guiders.add(guider_email);
         Invite.put("user_linked_guiders",linked_guiders);
-        db.collection("users").document(guider.getEmail()).collection("invite").document(Global.current_user_email)
+        db.collection("users").document(Global.my_email)
                 .update(Invite)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "upload user data:success");
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
