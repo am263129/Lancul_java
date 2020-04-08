@@ -163,6 +163,28 @@
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/invoice_area"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="How Long I need :" />
+
+                        <Spinner
+                            android:id="@+id/needed_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:entries="@array/time"/>
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/send_date_time"
                         android:layout_width="wrap_content"

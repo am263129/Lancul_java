@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,15 +30,16 @@ import java.util.List;
 
 public class InviteGuiderActivity extends AppCompatActivity {
 
-    ImageView guider_photo;
-    TextView guider_bio;
-    Guider guider;
-    Button btn_send;
-    EditText invite_message;
-    String TAG = "Invite";
-    ProgressDialog wait;
-    TextView guider_name, guider_rating, send_date;
-    Integer position;
+    private ImageView guider_photo;
+    private TextView guider_bio;
+    private Guider guider;
+    private Button btn_send;
+    private EditText invite_message;
+    private String TAG = "Invite";
+    private ProgressDialog wait;
+    private TextView guider_name, guider_rating, send_date;
+    private Integer position;
+    private Spinner require_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
         guider_name = findViewById(R.id.guider_name);
         guider_rating =  findViewById(R.id.guider_rating);
         send_date = findViewById(R.id.send_date_time);
-
+        require_time = findViewById(R.id.needed_time);
         guider_name.setText(guider.getName());
         guider_rating.setText(String.valueOf(guider.getRate()));
         send_date.setText(Global.getToday());
@@ -89,6 +91,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
         invite.setInvite_sender_name(Global.my_name);
         invite.setInvite_sender_email(Global.my_email);
         invite.setInvite_status("New");
+        invite.setInvite_require_time(require_time.getSelectedItem().toString());
         db.collection("guiders").document(guider.getEmail()).collection("invite").document(Global.my_email)
                 .set(invite)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

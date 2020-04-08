@@ -134,10 +134,10 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.PlanetHold
         ImageView sender_photo = dialog_view.findViewById(R.id.sender_photo);
         TextView sender_name = dialog_view.findViewById(R.id.sender_name);
         TextView invite_content = dialog_view.findViewById(R.id.invite_content);
-
+        TextView invite_require_time = dialog_view.findViewById(R.id.require_time);
         sender_name.setText(invite.getInvite_sender_name());
         invite_content.setText(invite.getInvite_content());
-
+        invite_require_time.setText(invite.getInvite_require_time());
         for(int i = 0; i < Global.array_client.size(); i++){
             if(Global.array_client.get(i).getName().equals(invites.get(position).getInvite_sender_name())
             && !Global.array_client.get(i).getPhoto().equals(""))

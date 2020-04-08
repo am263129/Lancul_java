@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "93384149859-dpcarb5144ibq7bnoi3k4be98ljbutsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.etebarian.meowbottomnavigaion.sample",
+            "certificate_hash": "d4b8cb1b62ded96fb46c2627b99942b3f1098211"
+          }
+        },
+        {
           "client_id": "93384149859-ehq7bbjktbc8m7gvtqa4tmnavddgo203.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

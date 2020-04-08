@@ -53,17 +53,148 @@
         android:id="@+id/guider_window"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="40dp">
+            android:padding="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/form_signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radius_background"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="30dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/boder_bottom"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ico_email" />
+
+                            <EditText
+                                android:id="@+id/guider_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="9"
+                                android:background="@android:color/white"
+                                android:ems="10"
+                                android:hint="Email Address"
+                                android:inputType="textWebEmailAddress"
+                                android:padding="2dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center|center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ico_lock" />
+
+                            <EditText
+                                android:id="@+id/guider_password"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="9"
+                                android:background="@android:color/white"
+                                android:ems="10"
+                                android:hint="Password"
+                                android:inputType="textPersonName|textPassword"
+                                android:padding="2dp" />
+
+                            <ImageView
+                                android:id="@+id/btn_show_pass"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/show_pass" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_sign_in_guider"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/form_signup"
+                        android:layout_alignParentEnd="false"
+                        android:layout_alignParentBottom="false"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-20dp"
+                        android:background="@drawable/gradient_background_button_guider"
+                        android:fontFamily="@font/archivo_black"
+                        android:text="LOGIN"
+                        android:textColor="@color/default_badge_text_color"
+                        android:textSize="24sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_sign_up_guider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="No account yet, sign up now as Guider"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="40dp"
+            android:visibility="gone">
 
             <EditText
-                android:id="@+id/guider_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -71,7 +202,6 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/guider_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -83,10 +213,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="40dp">
+            android:padding="40dp"
+            android:visibility="gone">
 
             <Button
-                android:id="@+id/btn_sign_in_guider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradient_background_button_guider"
@@ -95,7 +225,6 @@
                 android:textSize="18sp" />
 
             <Button
-                android:id="@+id/btn_sign_up_guider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -114,14 +243,14 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:weightSum="121">
 
 
         <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
             android:id="@+id/top_navigation_constraint"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@drawable/bg_genre"
             android:elevation="0dp"
             android:paddingLeft="10dp"

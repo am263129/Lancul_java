@@ -52,6 +52,27 @@
                 android:layout_marginTop="20dp"
                 android:text="TextView" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Require Time :" />
+
+                <TextView
+                    android:id="@+id/require_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/guider_text"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

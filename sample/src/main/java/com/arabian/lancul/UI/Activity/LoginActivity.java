@@ -61,7 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public ImageView btn_guider_mode;
     private LinearLayout main_window,user_window, guider_window;
     private TextView label_mode;
-    private Button btn_login,btn_register;
+    private Button btn_login;
+    private TextView btn_register;
     private ProgressDialog loading;
     private EditText guider_email, guider_password;
     @RequiresApi(api = Build.VERSION_CODES.M)
