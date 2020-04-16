@@ -53,7 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     Integer partner_index;
     String chat_document = "";
     ProgressDialog loading;
-    RelativeLayout peding, chat;
+    RelativeLayout peding, chat, content;
     boolean is_pending = false;
     private FirebaseFirestore mDb;
     private ListenerRegistration mChatMessageEventListener, mUserListEventListener;
@@ -65,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        init_view();
         Intent intent = getIntent();
         try{
             is_pending = intent.getBooleanExtra("pending",false);
@@ -77,16 +78,18 @@ public class ChatActivity extends AppCompatActivity {
         if(Global.user_mode) {
             chat_document = Global.my_email + ":" + Global.array_guider.get(partner_index).getEmail();
             Global.partner_photo = Global.array_guider.get(partner_index).getImageURL();
+            content.setBackgroundResource(R.drawable.gradient_background);
         }
         else{
             chat_document = Global.my_clients.get(partner_index).getEmail() + ":" + Global.my_email;
             Global.partner_photo = Global.my_clients.get(partner_index).getPhoto();
+            content.setBackgroundResource(R.drawable.gradient_background_guider);
         }
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         db = FirebaseFirestore.getInstance();
 
 //        get_chat_id();
-        init_view();
+
         initChatroomRecyclerView();
         init_action();
     }
@@ -288,6 +291,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void init_view() {
+        content = findViewById(R.id.content_chat);
         chat_list = findViewById(R.id.chat_list);
         message = findViewById(R.id.chat_text);
         send = findViewById(R.id.btn_send);

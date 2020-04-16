@@ -42,7 +42,7 @@
                                 android:id="@+id/circle_image_view_profile_nav_header"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:layout_marginLeft="30dp"
+                                android:layout_marginStart="30dp"
                                 android:layout_marginTop="20dp"
                                 android:src="@drawable/placeholder_profile"
                                 app:civ_border_color="#FF000000"
@@ -85,7 +85,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"
                                 android:orientation="vertical"
-                                android:paddingLeft="10dp">
+                                android:paddingStart="10dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:padding="10dp"
                     android:text="Area of focus"
                     android:textSize="18sp"
@@ -172,8 +172,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
                     android:orientation="vertical"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="40dp"
                     android:paddingBottom="40dp">
 
                     <LinearLayout

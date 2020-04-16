@@ -11,19 +11,24 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Util.Global;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -45,7 +50,9 @@ public class EditProfileActivity extends AppCompatActivity {
     StorageReference storageReference;
 
     ImageView userPhoto;
+    EditText user_name, user_password, confirm_password, user_email;
     Button btn_save;
+    private String TAG = "Editprofile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +74,41 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //validation
-
-                uploadImage();
+                if(validataion()) {
+                    reset_password(user_password.getText().toString());
+                    uploadImage();
+                }
             }
         });
+    }
+
+    public boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    public boolean validataion(){
+        boolean valid = true;
+        if(user_name.getText().toString().length()==0)
+        {
+            user_name.setError("Please input Valid Name");
+            valid = false;
+        }
+        if(user_email.getText().toString().length() == 0 || !isValidEmail(user_email.getText().toString()))
+        {
+            user_email.setError("Please input correct Email Address");
+            valid = false;
+        }
+        if(user_password.getText().toString().length() < 6)
+        {
+            user_password.setError("Please should be at least 6 letters");
+            valid = false;
+        }
+
+        if(!user_password.getText().toString().equals(confirm_password.getText().toString())){
+            confirm_password.setError("Password doesn't match");
+            valid = false;
+        }
+        return valid;
     }
 
     private void init_view() {
@@ -78,6 +116,10 @@ public class EditProfileActivity extends AppCompatActivity {
         storageReference = storage.getReference();
         userPhoto = findViewById(R.id.user_photo);
         btn_save = findViewById(R.id.btn_save);
+        user_name = findViewById(R.id.edt_username);
+        user_password = findViewById(R.id.edt_password);
+        user_email = findViewById(R.id.edt_email);
+        confirm_password = findViewById(R.id.edt_confim_password);
 
     }
 
@@ -178,6 +220,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
                                     // Image uploaded successfully
                                     // Dismiss dialog
+                                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                  @Override
+                                                                                  public void onSuccess(Uri uri) {
+                                                                                      Uri downloadUrl = uri;
+                                                                                      Log.e("KKK", downloadUrl.toString());
+                                                                                  }
+                                                                              });
                                     progressDialog.dismiss();
                                     Toast
                                             .makeText(MainActivity.getInstance(),
@@ -226,6 +275,21 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void reset_password(String newPassword){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.updatePassword(newPassword)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User password updated.");
+
+                        }
+                    }
+                });
     }
 
 }

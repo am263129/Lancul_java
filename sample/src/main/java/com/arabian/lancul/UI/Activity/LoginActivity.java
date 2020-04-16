@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -34,6 +35,15 @@ import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -49,7 +59,7 @@ import java.util.List;
 
 import static com.arabian.lancul.UI.Util.Global.array_chat_ids;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener,  GoogleApiClient.OnConnectionFailedListener {
     TextSwitcher switcher;
 
     private ViewPager viewPager;
@@ -58,13 +68,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private static String TAG = "Login Activity";
     public static LoginActivity self;
-    public ImageView btn_guider_mode;
+    public ImageView btn_guider_mode, btn_signin_google;
     private LinearLayout main_window,user_window, guider_window;
     private TextView label_mode;
     private Button btn_login;
     private TextView btn_register;
     private ProgressDialog loading;
     private EditText guider_email, guider_password;
+    private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
+    private Integer RC_SIGN_IN = 9002;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_register = findViewById(R.id.btn_sign_up_guider);
         guider_email = findViewById(R.id.guider_email);
         guider_password = findViewById(R.id.guider_password);
+        btn_signin_google = findViewById(R.id.btn_signin_google);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new signinFragment());
         adapter.addFragment(new signupFragment());
@@ -101,6 +115,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loading = new ProgressDialog(LoginActivity.getInstance());
         loading.setTitle("Signing in...");
+
+        GoogleSignIn();
     }
     private void init_action() {
         btn_guider_mode.setOnClickListener(this);
@@ -109,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
         final BubbleNavigationConstraintView bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
-
+        bubbleNavigationLinearView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -130,6 +146,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onNavigationChanged(View view, int position) {
                 viewPager.setCurrentItem(position, true);
+            }
+        });
+
+        btn_signin_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login_with_google();
             }
         });
 
@@ -223,6 +246,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     String address = document.get("guider_address").toString();
                                     String birthday = document.get("guider_birthday").toString();
                                     String status = document.get("guider_status").toString();
+
                                     Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider);
                                     Global.array_guider.add(guider);
                                 }
@@ -349,6 +373,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
+    private void login_with_google(){
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+    }
+
+    public void GoogleSignIn(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken("AIzaSyBi4E-nXQAwWh8ewnuV8vIRvBjOi06vlg8")
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
     public boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
@@ -398,7 +440,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user_window.setVisibility(View.VISIBLE);
             btn_guider_mode.setBackgroundResource(R.drawable.ico_guider);
             label_mode.setText(getString(R.string.to_guidemode));
-            label_mode.setTextColor(getColor(R.color.guider_orange));
+            label_mode.setTextColor(ContextCompat.getColor(this,R.color.guider_orange));
         }
     }
 
@@ -427,5 +469,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static LoginActivity getInstance(){
         return self;
+    }
+
+
+
+
+    private void getResultGoogle(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+
+            GoogleSignInAccount acct = result.getSignInAccount();
+            String photo = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg" ;
+            if (acct.getPhotoUrl()!=null){
+                photo =  acct.getPhotoUrl().toString();
+            }
+
+            signupFragment signupFragment = new signupFragment();
+            signupFragment.signup(acct.getId().toString(),acct.getId());
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+        }
+        else {
+
+        }
+    }
+
+
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            getResultGoogle(result);
+        }
     }
 }

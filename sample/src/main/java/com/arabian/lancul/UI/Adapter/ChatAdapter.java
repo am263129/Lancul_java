@@ -99,6 +99,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.PlanetHolder> 
                 {
                     Glide.with(context).load(Global.partner_photo).into(partner_photo);
                 }
+                else{
+                    partner_photo.setImageResource(R.drawable.man_dummy);
+                }
                 my_chat.setVisibility(View.GONE);
                 guider_chat.setVisibility(View.VISIBLE);
                 msg_partner.setText(chat.getChat_content());

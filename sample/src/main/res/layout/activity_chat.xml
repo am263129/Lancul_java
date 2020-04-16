@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content"
+    android:id="@+id/content_chat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_guider"
@@ -37,7 +37,7 @@
         android:id="@+id/chat_active"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -65,10 +65,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
-            app:cardBackgroundColor="@android:color/white"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="5dp"
             app:cardElevation="6dp">
 
@@ -76,8 +77,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:background="@drawable/radius_background_profile_item"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <EditText
                     android:id="@+id/chat_text"
@@ -93,6 +95,7 @@
                     android:id="@+id/btn_send"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/button_send" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -9,9 +9,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +43,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +53,7 @@ import java.util.Map;
  * Created by 1HE on 2020-02-02.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final static int ID_HOME = 1;
     private final static int ID_EXPERIENCE = 2;
@@ -57,14 +61,26 @@ public class MainActivity extends AppCompatActivity {
     private final static int ID_RESTAURANT = 4;
     private final static int ID_ACCOUNT = 5;
 
+    public String LANGUAGE_En = "English";
+    public String LANGUAGE_Ge = "Deutsch";
+    public String LANGUAGE_Fr = "Français";
+    public String LANGUAGE_Ar = "العربية";
+    public String LANGUAGE_Sp = "Español";
+    public String LANGUAGE_Ja = "日本語";
+    public String LANGUAGE_Po = "Português";
+
     FrameLayout main_frame;
     HorizontalScrollView flags;
 
     public  static  MainActivity self;
-    TextView label_toolbar;
-    Button button_logout;
-    MeowBottomNavigation bottomNavigation;
-    String TAG =  "MainActivity";
+    private TextView label_toolbar;
+    private Button button_logout;
+    private MeowBottomNavigation bottomNavigation;
+    private String TAG =  "MainActivity";
+    private ImageView filter_en,filter_ja, filter_sa, filter_pt, filter_sp, filter_ge, filter_fr;
+    private RelativeLayout selected_en, selected_ja, selected_sa, selected_pt, selected_sp, selected_ge, selected_fr;
+    private boolean en = false, ja = false, sa = false , pt = false, sp = false, ge = false, fr = false;
+    private List<String> filter_list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +103,27 @@ public class MainActivity extends AppCompatActivity {
         button_logout = findViewById(R.id.button_logout);
         flags = findViewById(R.id.flags);
         bottomNavigation = findViewById(R.id.bottomNavigation);
+        selected_en = (RelativeLayout)findViewById(R.id.f_en);
+        selected_fr = (RelativeLayout)findViewById(R.id.f_fr);
+        selected_ge = (RelativeLayout)findViewById(R.id.f_ge);
+        selected_ja = (RelativeLayout)findViewById(R.id.f_ja);
+        selected_pt = (RelativeLayout)findViewById(R.id.f_pt);
+        selected_sa = (RelativeLayout)findViewById(R.id.f_sa);
+        selected_sp = (RelativeLayout)findViewById(R.id.f_sp);
+        filter_en = findViewById(R.id.selected_en);
+        filter_fr = findViewById(R.id.selected_fr);
+        filter_ge = findViewById(R.id.selected_ge);
+        filter_ja = findViewById(R.id.selected_ja);
+        filter_pt = findViewById(R.id.selected_pt);
+        filter_sa = findViewById(R.id.selected_sa);
+        filter_sp = findViewById(R.id.selected_sp);
+        selected_pt.setOnClickListener(this);
+        selected_en.setOnClickListener(this);
+        selected_ja.setOnClickListener(this);
+        selected_fr.setOnClickListener(this);
+        selected_ge.setOnClickListener(this);
+        selected_sa.setOnClickListener(this);
+        selected_sp.setOnClickListener(this);
 
     }
 
@@ -221,4 +258,86 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigation.show(ID_ACCOUNT,true);
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.f_en:
+                en = !en;
+                filter_en.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_En);
+                if(en)
+                {
+                    filter_list.add(LANGUAGE_En);
+                    filter_en.setVisibility(View.VISIBLE);
+                }
+
+                break;
+            case R.id.f_ja:
+                ja = !ja;
+                filter_ja.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Ja);
+                if(ja)
+                {
+                    filter_list.add(LANGUAGE_Ja);
+                    filter_ja.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.f_sa:
+                sa = !sa;
+                filter_sa.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Ar);
+                if(sa)
+                {
+                    filter_list.add(LANGUAGE_Ar);
+                    filter_sa.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.f_fr:
+                fr = !fr;
+                filter_fr.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Fr);
+                if(fr)
+                {
+                    filter_list.add(LANGUAGE_Fr);
+                    filter_fr.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.f_ge:
+                ge = !ge;
+                filter_ge.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Ge);
+                if(ge)
+                {
+                    filter_list.add(LANGUAGE_Ge);
+                    filter_ge.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.f_pt:
+                pt = !pt;
+                filter_pt.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Po);
+                if(pt)
+                {
+                    filter_list.add(LANGUAGE_Po);
+                    filter_pt.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.f_sp:
+                sp = !sp;
+                filter_sp.setVisibility(View.INVISIBLE);
+                filter_list.remove(LANGUAGE_Sp);
+                if(sp)
+                {
+                    filter_list.add(LANGUAGE_Sp);
+                    filter_sp.setVisibility(View.VISIBLE);
+                }
+                break;
+        }
+
+        LivechatFragment.filter_guiders(this,filter_list);
+    }
+
+
 }

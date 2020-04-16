@@ -79,7 +79,7 @@ public class signupFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.Error_Login, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    signup();
+                    signup(edt_email.getText().toString(),edt_password.getText().toString());
                 }
             }
         });
@@ -91,12 +91,10 @@ public class signupFragment extends Fragment {
         });
     }
 
-    private void signup() {
+    public void signup(String email, String password) {
         loading.show();
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String email = edt_email.getText().toString();
-        String password = edt_password.getText().toString();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.getInstance(), new OnCompleteListener<AuthResult>() {
                     @Override

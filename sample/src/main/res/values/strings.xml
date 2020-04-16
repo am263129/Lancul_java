@@ -3,25 +3,26 @@
     <string name="main_page_selected">%s page is selected</string>
     <string name="left">Lancul</string>
     <string name="right">Lancul</string>
-    <string name="forgot_password"><u>Forgot Password?</u></string>
-    <string name="Error_Login">Please input Valid info</string>
-    <string name="to_usermode">Switch to User Mode</string>
-    <string name="to_guidemode">Switch to Guider Mode</string>
+    <string name="forgot_password"><u>هل نسيت كلمة المرور؟</u></string>
+    <string name="Error_Login">يرجى إدخال معلومات صالحة</string>
+    <string name="to_usermode">قم بالتبديل إلى وضع المستخدم</string>
+    <string name="to_guidemode">قم بالتبديل إلى وضع الموجه</string>
+    <string name="toast_unverified_guider">This guider is not verified yet.</string>
 
     <string-array name="time">
-        <item>1 Hour</item>
-        <item>2 Hours</item>
-        <item>3 Hours</item>
-        <item>4 Hours</item>
-        <item>5 Hours</item>
-        <item>6 or More Hours</item>
-        <item>1 day</item>
-        <item>2 days</item>
-        <item>3 days</item>
-        <item>4 days or more</item>
-        <item>A week</item>
-        <item>2 weeks</item>
-        <item>Long Term</item>
+        <item>1 ساعة</item>
+        <item>2 ساعات</item>
+        <item>3 ساعات</item>
+        <item>4 ساعات</item>
+        <item>5 ساعات</item>
+        <item>6 أو المزيد من الساعات</item>
+        <item>1 يوم</item>
+        <item>2 أيام</item>
+        <item>3 أيام</item>
+        <item>4 أيام أو أكثر</item>
+        <item>أسبوع</item>
+        <item>2 أسابيع</item>
+        <item>طويل الأمد</item>
     </string-array>
 
 </resources>

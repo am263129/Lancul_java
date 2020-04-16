@@ -49,15 +49,15 @@
                 android:id="@+id/editText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@id/btn_search"
+                android:layout_marginStart="10dp"
+                android:layout_toStartOf="@id/btn_search"
                 android:background="@drawable/bg_genre"
                 android:ems="10"
                 android:hint="Search"
                 android:inputType="textPersonName"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 android:paddingTop="5dp"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:textColor="@color/design_default_color_primary_variant" />
 
@@ -66,7 +66,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/bg_genre"
                 app:srcCompat="@android:drawable/ic_search_category_default" />
         </RelativeLayout>
@@ -76,8 +76,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:clickable="false"
             android:padding="5dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -90,66 +91,199 @@
                     android:orientation="horizontal"
                     android:weightSum="70">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                    <RelativeLayout
+                        android:id="@+id/f_en"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_america" />
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_japan" />
+                        <ImageView
+                            android:id="@+id/selected_en"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
 
-                    <ImageView
-                        android:id="@+id/imageView13"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_saudi_arabia" />
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:paddingTop="0dp"
+                            android:visibility="visible"
+                            app:srcCompat="@drawable/flag_america" />
+                    </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/imageView14"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                    <RelativeLayout
+                        android:id="@+id/f_ja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_brazil" />
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
 
-                    <ImageView
-                        android:id="@+id/imageView15"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_france" />
+                        <ImageView
+                            android:id="@+id/selected_ja"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
 
-                    <ImageView
-                        android:id="@+id/imageView16"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_spain" />
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_japan" />
 
-                    <ImageView
-                        android:id="@+id/imageView17"
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/f_sa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/flag_germany" />
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <ImageView
+                            android:id="@+id/selected_sa"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_saudi_arabia" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/f_pt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <ImageView
+                            android:id="@+id/selected_pt"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_brazil" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/f_fr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <ImageView
+                            android:id="@+id/selected_fr"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_france" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/f_sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <ImageView
+                            android:id="@+id/selected_sp"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_spain" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/f_ge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <ImageView
+                            android:id="@+id/selected_ge"
+                            android:layout_width="70dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/bg_season_tab" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/flag_germany" />
+                    </RelativeLayout>
+
+
                 </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>

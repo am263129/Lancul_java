@@ -11,15 +11,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="2">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/switch_guider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             app:cardCornerRadius="5dp"
@@ -44,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_toRightOf="@id/switch_guider"
+            android:layout_toEndOf="@id/switch_guider"
             android:text="Switch to Guider Mode"
             android:textColor="@color/pink" />
     </RelativeLayout>
@@ -52,14 +53,16 @@
     <LinearLayout
         android:id="@+id/guider_window"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="70dp"
+        android:layout_weight="8"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="7"
             android:orientation="vertical"
             android:padding="50dp">
 
@@ -71,17 +74,19 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="0dp"
+                    android:layout_weight="7">
 
                     <LinearLayout
                         android:id="@+id/form_signup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/radius_background"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp"
+                        android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         android:paddingBottom="30dp">
 
                         <LinearLayout
@@ -101,7 +106,7 @@
                                 android:id="@+id/guider_email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
@@ -126,7 +131,7 @@
                                 android:id="@+id/guider_password"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
@@ -164,8 +169,9 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:text="@string/forgot_password"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -181,8 +187,9 @@
         <TextView
             android:id="@+id/btn_sign_up_guider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="bottom"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="No account yet, sign up now as Guider"
             android:textColor="@color/white" />
@@ -239,11 +246,12 @@
     <LinearLayout
         android:id="@+id/user_window"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:weightSum="121">
 
 
@@ -252,10 +260,9 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_genre"
-            android:elevation="0dp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:paddingBottom="5dp"
             app:bnc_mode="inside">
 
@@ -263,12 +270,13 @@
                 android:id="@+id/l_item_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textDirection="ltr"
                 app:bt_colorActive="@color/pink"
                 app:bt_colorInactive="@color/orange"
                 app:bt_icon="@drawable/signin"
-                app:bt_iconHeight="20dp"
-                app:bt_iconWidth="20dp"
-                app:bt_title="   Existing   "
+                app:bt_iconHeight="40dp"
+                app:bt_iconWidth="40dp"
+                app:bt_title="Existing"
                 tools:layout_editor_absoluteX="10dp"
                 tools:layout_editor_absoluteY="5dp" />
 
@@ -279,9 +287,9 @@
                 app:bt_colorActive="@color/pink"
                 app:bt_colorInactive="@color/orange"
                 app:bt_icon="@drawable/register"
-                app:bt_iconHeight="20dp"
-                app:bt_iconWidth="20dp"
-                app:bt_title="     New     "
+                app:bt_iconHeight="40dp"
+                app:bt_iconWidth="40dp"
+                app:bt_title="    New   "
                 tools:layout_editor_absoluteX="10dp"
                 tools:layout_editor_absoluteY="5dp" />
 
@@ -340,7 +348,7 @@
                 android:src="@drawable/btn_call" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/btn_signin_google"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -74,18 +74,43 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         Intent intent;
+        Intent viewIntent;
         switch (view.getId()){
+            case R.id.btn_rate_app:
+                rate_app();
+                break;
             case R.id.btn_setting:
                 intent = new Intent(MainActivity.getInstance(), EditProfileActivity.class);
-
+                startActivity(intent);
+                break;
+            case R.id.btn_about_us:
+                viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("http://lancul.net"));
+                startActivity(viewIntent);
+                break;
+            case R.id.btn_privacy_policy:
+                viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("http://lancul.net/privacy-policy"));
+                startActivity(viewIntent);
                 break;
             default:
                 intent =  new Intent(MainActivity.getInstance(), InviteActivity.class);
+                startActivity(intent);
                 break;
 
 
         }
-        startActivity(intent);
+
+    }
+
+    private void rate_app() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.getInstance().getPackageName())));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + MainActivity.getInstance().getPackageName())));
+        }
     }
 
 

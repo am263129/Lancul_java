@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:93384149859:android:c7f3a13a8f985045212156",
+        "android_client_info": {
+          "package_name": "com.arabian.lancul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi4E-nXQAwWh8ewnuV8vIRvBjOi06vlg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "93384149859-bamhf0bnteu9vhag20gl2jifgk9343dc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.languageandculture.lancul"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:93384149859:android:d1a06793e2ecb40e212156",
         "android_client_info": {
           "package_name": "com.etebarian.meowbottomnavigaion.sample"
@@ -66,6 +102,50 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi4E-nXQAwWh8ewnuV8vIRvBjOi06vlg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "93384149859-bamhf0bnteu9vhag20gl2jifgk9343dc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.languageandculture.lancul"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93384149859:android:01bae2e8417e3be7212156",
+        "android_client_info": {
+          "package_name": "com.official.aptoon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93384149859-7eg8c6bm1m1abq3n46h2vo70ud129o9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.official.aptoon",
+            "certificate_hash": "d4b8cb1b62ded96fb46c2627b99942b3f1098211"
+          }
+        },
         {
           "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
           "client_type": 3

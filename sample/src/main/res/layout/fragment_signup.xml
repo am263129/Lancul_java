@@ -8,8 +8,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,9 +46,9 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/radius_background"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp"
+                        android:paddingStart="10dp"
                         android:paddingTop="10dp"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
                         android:paddingBottom="30dp">
 
                         <LinearLayout
@@ -68,7 +68,7 @@
                                 android:id="@+id/edt_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
@@ -94,7 +94,7 @@
                                 android:id="@+id/edt_email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
@@ -121,7 +121,7 @@
                                 android:id="@+id/edt_password"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
@@ -152,7 +152,7 @@
                                 android:id="@+id/edt_confirm_pass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="40dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"

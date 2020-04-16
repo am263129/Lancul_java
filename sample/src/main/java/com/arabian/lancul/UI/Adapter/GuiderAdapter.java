@@ -1,5 +1,6 @@
 package com.arabian.lancul.UI.Adapter;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -61,26 +62,29 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
             @Override
             public void onClick(View view) {
                 boolean already_linked = false;
-                try {
-                    for (int i = 0; i < Global.my_user_data.getLinked_guiders().size(); i++) {
-                        if (Global.my_user_data.getLinked_guiders().get(i).equals(guider.getEmail())) {
-                            already_linked = true;
+                if(!guider.verified){
+                    Toast.makeText(context, MainActivity.getInstance().getString(R.string.toast_unverified_guider),Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    try {
+                        for (int i = 0; i < Global.my_user_data.getLinked_guiders().size(); i++) {
+                            if (Global.my_user_data.getLinked_guiders().get(i).equals(guider.getEmail())) {
+                                already_linked = true;
+                            }
                         }
+                    } catch (Exception E) {
+                        Log.e(TAG, E.toString());
                     }
-                }
-                catch (Exception E){
-                    Log.e(TAG, E.toString());
-                }
-                if (!already_linked) {
-                    Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
-                    Global.chat_guider_name = guider.getName();
-                    intent.putExtra("Index", position);
-                    MainActivity.getInstance().startActivity(intent);
-                }
-                else{
-                    Intent intent =  new Intent(MainActivity.getInstance(), ChatActivity.class);
-                    intent.putExtra("partner_index", position);
-                    MainActivity.getInstance().startActivity(intent);
+                    if (!already_linked) {
+                        Intent intent = new Intent(MainActivity.getInstance(), InviteGuiderActivity.class);
+                        Global.chat_guider_name = guider.getName();
+                        intent.putExtra("Index", position);
+                        MainActivity.getInstance().startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(MainActivity.getInstance(), ChatActivity.class);
+                        intent.putExtra("partner_index", position);
+                        MainActivity.getInstance().startActivity(intent);
+                    }
                 }
             }
 
@@ -122,7 +126,13 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
             name.setText(guider.getName());
             bio.setText(guider.getBio());
             ratingBar.setText(String.valueOf(guider.getRate().toString()));
-            Glide.with(MainActivity.getInstance()).load(guider.getImageURL()).into(guider_photo);
+            if(guider.getImageURL().equals("")){
+                guider_photo.setImageResource(R.drawable.man_guider);
+            }
+            else
+            {
+                Glide.with(MainActivity.getInstance()).load(guider.getImageURL()).into(guider_photo);
+            }
             List<String> languages = guider.getLanguages();
             String language = "[ ";
             for (int i = 0; i < languages.size(); i++) {

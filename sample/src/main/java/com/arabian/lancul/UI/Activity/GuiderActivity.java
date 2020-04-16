@@ -25,6 +25,7 @@ import com.arabian.lancul.UI.Fragment.InviteFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
+import com.arabian.lancul.UI.Fragment.SoonFragment;
 import com.arabian.lancul.UI.Fragment.chatFragment_guider;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
@@ -114,16 +115,19 @@ public class GuiderActivity extends AppCompatActivity {
                     case ID_MY_FEEDBACK:
                         label_toolbar.setText("My Feedback");
                         button_logout.setVisibility(View.GONE);
+                        loadFragment(new SoonFragment());
                         name = "MESSAGE";
                         break;
                     case ID_NEW_FEED:
                         label_toolbar.setText("New Feed");
                         button_logout.setVisibility(View.GONE);
+                        loadFragment(new SoonFragment());
                         name = "NOTIFICATION";
                         break;
                     case ID_PROFILE:
                         label_toolbar.setText("My Profile");
                         button_logout.setVisibility(View.VISIBLE);
+                        loadFragment(new SoonFragment());
                         name = "ACCOUNT";
                         break;
                     default:

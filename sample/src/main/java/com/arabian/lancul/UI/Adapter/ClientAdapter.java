@@ -58,9 +58,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
                 Intent intent = new Intent(GuiderActivity.getInstance(), ChatActivity.class);
                 intent.putExtra("partner_index",position);
                 GuiderActivity.getInstance().startActivity(intent);
-
-                Toast.makeText(GuiderActivity.getInstance(),client.getName().toString(),Toast.LENGTH_SHORT).show();
-            }
+     }
         });
 
     }
@@ -97,7 +95,13 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
         void setDetails(Client client) {
 
             name.setText(client.getName());
-            Glide.with(GuiderActivity.getInstance()).load(client.getPhoto()).into(photo);
+            if(client.getPhoto().equals("")){
+                photo.setImageResource(R.drawable.man_dummy);
+            }
+            else
+            {
+                Glide.with(GuiderActivity.getInstance()).load(client.getPhoto()).into(photo);
+            }
 //            last_message.setText(client.getLastMessage());
 //            if(Integer.parseInt(client.getNumNewMessage()) > 0){
 //                new_message.setVisibility(View.VISIBLE);
