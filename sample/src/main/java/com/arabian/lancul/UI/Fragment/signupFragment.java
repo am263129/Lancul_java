@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.LoginActivity;
+import com.arabian.lancul.UI.Object.Client;
 import com.arabian.lancul.UI.Util.Global;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -108,6 +109,8 @@ public class signupFragment extends Fragment {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Global.my_email = user.getEmail();
                             upload_data();
+                            Client client = new Client(edt_name.getText().toString(),edt_email.getText().toString(),"","",null);
+                            Global.my_user_data = client;
                             Intent intent = new Intent(getContext(), MainActivity.class);
                             startActivity(intent);
                             LoginActivity.getInstance().finish();

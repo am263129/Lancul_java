@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -119,7 +120,13 @@ public class InviteGuiderActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> Invite = new HashMap<>();
-        List<String> linked_guiders = Global.my_user_data.getLinked_guiders();
+        List<String> linked_guiders;
+        if(Global.my_user_data.getLinked_guiders()!=null) {
+            linked_guiders = Global.my_user_data.getLinked_guiders();
+        }
+        else{
+            linked_guiders = new ArrayList<String>();
+        }
         linked_guiders.add(guider_email);
         Invite.put("user_linked_guiders",linked_guiders);
         db.collection("users").document(Global.my_email)

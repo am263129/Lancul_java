@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -19,6 +20,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/partner_photo"
                 android:layout_width="60dp"
@@ -33,6 +35,7 @@
                 android:id="@+id/partner_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_weight="7"
                 android:text="@string/toolbar_label_restaurants"
                 android:textColor="@color/default_inactive_color"

@@ -31,6 +31,7 @@ import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Adapter.ChatAdapter;
 import com.arabian.lancul.UI.Object.Chat;
+import com.arabian.lancul.UI.Object.Feedback;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Invite;
 import com.arabian.lancul.UI.Util.Global;
@@ -52,6 +53,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -84,7 +86,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         init_view();
-        get_rateable();
+
         Intent intent = getIntent();
         try{
             is_pending = intent.getBooleanExtra("pending",false);
@@ -94,6 +96,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         partner_index = intent.getIntExtra("partner_index", 0);
+        get_rateable();
         if(Global.user_mode) {
             chat_document = Global.my_email + ":" + Global.array_guider.get(partner_index).getEmail();
             Global.partner_photo = Global.array_guider.get(partner_index).getImageURL();
@@ -118,7 +121,26 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void get_rateable() {
+        ArrayList<Feedback> feedbacks = new ArrayList<Feedback>();
+        try {
+            feedbacks = Global.array_guider.get(partner_index).getFeedbacks();
+            if (feedbacks != null) {
+                for (int i = 0; i < feedbacks.size(); i++) {
+                    if (feedbacks.get(i).getClient().equals(Global.my_email)) {
+                        disable_rate();
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception E){
+            Log.e(TAG,E.toString());
+        }
+    }
 
+    private void disable_rate() {
+        rate_partner.setImageResource(R.drawable.ico_rate_disable);
+        rate_partner.setEnabled(false);
     }
 
     private void init_chatable() {
@@ -385,7 +407,12 @@ public class ChatActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void upload_feedback(float rating, String toString) {
+    private void upload_feedback(float rating, String feed) {
+        Feedback feedback = new Feedback(Global.my_email,feed,rating,Global.getToday());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("guiders").document(Global.array_guider.get(partner_index).getEmail()).collection("feedback").document(Global.my_email).set(feedback);
+        disable_rate();
     }
 
     private void init_action() {

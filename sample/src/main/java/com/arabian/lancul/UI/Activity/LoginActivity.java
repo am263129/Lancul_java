@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -32,17 +31,16 @@ import com.arabian.lancul.UI.Fragment.signupFragment;
 import com.arabian.lancul.UI.Object.Client;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
+import com.arabian.lancul.UI.Object.Feedback;
 import com.arabian.lancul.UI.Util.Global;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -100,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         get_guider();
         get_user();
         check_mode();
+        get_feedback();
     }
 
 
@@ -333,6 +332,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    public static void get_feedback() {
+        for (int  i = 0; i < Global.array_guider.size(); i ++){
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final int finalI = i;
+            db.collection("guiders").document(Global.array_guider.get(i).getEmail()).collection("feedback")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+
+                                String temp = Global.array_guider.get(finalI).getEmail();
+                                ArrayList<Feedback> feedbacks = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                    try {
+                                        Feedback feedback = document.toObject(Feedback.class);
+                                        feedbacks.add(feedback);
+                                    }
+                                    catch (Exception E){
+                                        Log.e(TAG, E.toString());
+                                    }
+                                }
+
+                                Global.array_guider.get(finalI).setFeedbacks(feedbacks);
+                            } else {
+                                Log.w(TAG, "Error getting documents.", task.getException());
+                            }
+                        }
+                    });
+        }
+    }
     public static void get_chat(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("chats")

@@ -1,14 +1,14 @@
 package com.arabian.lancul.UI.Object;
 
-public class feedback {
+public class Feedback {
     private String client;
     private String feedback;
     private Float rate;
     private String leave_feed_date;
 
-    public feedback(){}
+    public Feedback(){}
 
-    public feedback(String client, String feedback, Float rate, String leave_feed_date){
+    public Feedback(String client, String feedback, Float rate, String leave_feed_date){
         this.client = client;
         this.feedback = feedback;
         this.rate = rate;

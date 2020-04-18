@@ -17,7 +17,7 @@ public class Guider {
     public String address;
     public String birthday;
     public boolean new_guider;
-    public ArrayList<feedback> feedbacks;
+    public ArrayList<Feedback> feedbacks;
 
     public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email,
                   String address, String birthday, String status, boolean new_guider){
@@ -88,7 +88,7 @@ public class Guider {
         return new_guider;
     }
 
-    public ArrayList<feedback> getFeedbacks() {
+    public ArrayList<Feedback> getFeedbacks() {
         return feedbacks;
     }
 
@@ -145,7 +145,7 @@ public class Guider {
         this.new_guider = new_guider;
     }
 
-    public void setFeedbacks(ArrayList<feedback> feedbacks) {
+    public void setFeedbacks(ArrayList<Feedback> feedbacks) {
         this.feedbacks = feedbacks;
     }
 }

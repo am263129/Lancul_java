@@ -23,6 +23,7 @@ import com.arabian.lancul.UI.Fragment.ExperienceFragment;
 import com.arabian.lancul.UI.Fragment.HomeFragment;
 import com.arabian.lancul.UI.Fragment.InviteFragment;
 import com.arabian.lancul.UI.Fragment.LivechatFragment;
+import com.arabian.lancul.UI.Fragment.MyFeedBackFragment;
 import com.arabian.lancul.UI.Fragment.ProfileFragment;
 import com.arabian.lancul.UI.Fragment.RetaurantFragment;
 import com.arabian.lancul.UI.Fragment.SoonFragment;
@@ -115,7 +116,7 @@ public class GuiderActivity extends AppCompatActivity {
                     case ID_MY_FEEDBACK:
                         label_toolbar.setText(getString(R.string.toolbar_label_myfeedback));
                         button_logout.setVisibility(View.GONE);
-                        loadFragment(new SoonFragment());
+                        loadFragment(new MyFeedBackFragment());
                         name = "MESSAGE";
                         break;
                     case ID_NEW_FEED:

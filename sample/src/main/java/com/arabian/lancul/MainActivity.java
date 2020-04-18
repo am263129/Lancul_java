@@ -255,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LoginActivity.get_user();
         LoginActivity.get_guider();
         LoginActivity.get_chat();
+        LoginActivity.get_feedback();
         if(Global.go_profile){
             Global.go_profile = false;
             bottomNavigation.show(ID_ACCOUNT,true);

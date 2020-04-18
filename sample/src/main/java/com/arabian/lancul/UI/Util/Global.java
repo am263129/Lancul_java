@@ -43,4 +43,14 @@ public class Global {
             return left.getChat_id().compareTo(right.getChat_id());
         }
     }
+
+    public static Client get_client_from_email(String email){
+        for (int i = 0; i < array_client.size();i++){
+            if(array_client.get(i).getEmail().equals(email)){
+                return  array_client.get(i);
+            }
+        }
+        return null;
+    }
+
 }
