@@ -69,7 +69,7 @@ public class InviteGuiderActivity extends AppCompatActivity {
         guider_rating.setText(String.valueOf(guider.getRate()));
         send_date.setText(Global.getToday());
         wait = new ProgressDialog(this);
-        wait.setTitle("Sending Invite...");
+        wait.setTitle(getString(R.string.progress_send_invite));
         wait.setCancelable(false);
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override

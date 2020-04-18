@@ -41,16 +41,17 @@
                             android:id="@+id/invite_guider_photo"
                             android:layout_width="200dp"
                             android:layout_height="200dp"
-                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="false"
                             android:layout_centerInParent="true"
                             android:src="@drawable/placeholder_profile"
                             app:civ_border_color="#FF000000"
                             app:civ_border_width="0dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="210dp"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginTop="100dp"
                             android:orientation="vertical"
                             android:padding="10dp">
@@ -125,7 +126,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
                         android:fontFamily="@font/la_belle_aurore"
-                        android:text="Invitation"
+                        android:text="@string/label_invitation"
                         android:textSize="36sp" />
 
                     <LinearLayout
@@ -156,7 +157,7 @@
                                     android:id="@+id/edt_invoice"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="something to guider"
+                                    android:hint="@string/label_something_to_guider"
                                     android:textAlignment="viewStart" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,7 +176,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="How Long I need :" />
+                            android:text="@string/label_request_time" />
 
                         <Spinner
                             android:id="@+id/needed_time"
@@ -203,8 +204,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="20dp"
-                    android:background="@drawable/background_btn_share"
-                    android:text="Send"
+                    android:background="@drawable/gradient_background_button"
+                    android:text="@string/btn_send"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/white"
                     android:textSize="18sp" />

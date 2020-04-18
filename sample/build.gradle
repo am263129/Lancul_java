@@ -60,4 +60,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.3'
     implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
+
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 }

@@ -3,24 +3,38 @@ package com.arabian.lancul.UI.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Adapter.ChatAdapter;
 import com.arabian.lancul.UI.Object.Chat;
 import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Invite;
 import com.arabian.lancul.UI.Util.Global;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -54,6 +68,7 @@ public class ChatActivity extends AppCompatActivity {
     String chat_document = "";
     ProgressDialog loading;
     RelativeLayout peding, chat, content;
+
     boolean is_pending = false;
     private FirebaseFirestore mDb;
     private ListenerRegistration mChatMessageEventListener, mUserListEventListener;
@@ -61,11 +76,15 @@ public class ChatActivity extends AppCompatActivity {
     private Set<String> mMessageIds = new HashSet<>();
     private ArrayList<Chat> mMessages = new ArrayList<>();
     private ListenerRegistration mAcceptEventListener;
+    private ImageView partner_photo,rate_partner;
+    private TextView partner_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         init_view();
+        get_rateable();
         Intent intent = getIntent();
         try{
             is_pending = intent.getBooleanExtra("pending",false);
@@ -79,11 +98,15 @@ public class ChatActivity extends AppCompatActivity {
             chat_document = Global.my_email + ":" + Global.array_guider.get(partner_index).getEmail();
             Global.partner_photo = Global.array_guider.get(partner_index).getImageURL();
             content.setBackgroundResource(R.drawable.gradient_background);
+            Glide.with(ChatActivity.this).load(Global.array_guider.get(partner_index).getImageURL()).into(partner_photo);
+            partner_name.setText(Global.array_guider.get(partner_index).getName());
         }
         else{
             chat_document = Global.my_clients.get(partner_index).getEmail() + ":" + Global.my_email;
             Global.partner_photo = Global.my_clients.get(partner_index).getPhoto();
             content.setBackgroundResource(R.drawable.gradient_background_guider);
+            Glide.with(ChatActivity.this).load(Global.array_client.get(partner_index).getPhoto()).into(partner_photo);
+            partner_name.setText(Global.array_client.get(partner_index).getName());
         }
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         db = FirebaseFirestore.getInstance();
@@ -92,6 +115,10 @@ public class ChatActivity extends AppCompatActivity {
 
         initChatroomRecyclerView();
         init_action();
+    }
+
+    private void get_rateable() {
+
     }
 
     private void init_chatable() {
@@ -137,10 +164,12 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void enable_chat(){
+        getSupportActionBar().show();
         chat.setVisibility(View.VISIBLE);
         peding.setVisibility(View.GONE);
     }
     private void disable_chat(){
+        getSupportActionBar().hide();
         peding.setVisibility(View.VISIBLE);
         chat.setVisibility(View.GONE);
     }
@@ -291,13 +320,20 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void init_view() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_chat);
+        toolbar.setNavigationIcon(null);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         content = findViewById(R.id.content_chat);
         chat_list = findViewById(R.id.chat_list);
         message = findViewById(R.id.chat_text);
         send = findViewById(R.id.btn_send);
         loading = new ProgressDialog(this);
+        partner_photo = findViewById(R.id.partner_photo);
+        partner_name = findViewById(R.id.partner_name);
+        rate_partner = findViewById(R.id.btn_rate);
         loading.setCancelable(false);
-        loading.setTitle("Please wait...");
+        loading.setTitle(getString(R.string.progress_wait));
         peding = findViewById(R.id.pending);
         chat = findViewById(R.id.chat_active);
         mDb = FirebaseFirestore.getInstance();
@@ -306,7 +342,52 @@ public class ChatActivity extends AppCompatActivity {
                 .build();
         mDb.setFirestoreSettings(settings);
 
+
     }
+
+    private void show_accept_dialog() {
+        final Dialog dialog= new Dialog(this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View dialog_view = inflater.inflate(R.layout.dialog_rate_partner, null);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        this.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        wlp.gravity = Gravity.BOTTOM;
+        window.setAttributes(wlp);
+        dialog.setContentView(dialog_view);
+        Rect displayRectangle = new Rect();
+        Window full_window = this.getWindow();
+        full_window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        dialog_view.setMinimumWidth((int)(displayRectangle.width() * 0.9f));
+
+        final RatingBar rating = dialog_view.findViewById(R.id.rating);
+        final EditText feedback = dialog_view.findViewById(R.id.edt_feedback);
+
+
+        Button accept = dialog_view.findViewById(R.id.btn_accept);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upload_feedback(rating.getRating(),feedback.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        Button cancel = dialog_view.findViewById(R.id.btn_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void upload_feedback(float rating, String toString) {
+    }
+
     private void init_action() {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -338,6 +419,13 @@ public class ChatActivity extends AppCompatActivity {
 //                        });
 //
 //                message.setText("");
+            }
+        });
+
+        rate_partner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_accept_dialog();
             }
         });
 

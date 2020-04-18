@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -30,6 +31,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class signinFragment extends Fragment {
 
@@ -40,6 +43,7 @@ public class signinFragment extends Fragment {
     ImageView eye;
     String TAG = "Sign in";
     ProgressDialog loading;
+    TextView btn_forgot_password_user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +63,26 @@ public class signinFragment extends Fragment {
     }
 
     private void init_actions() {
+        btn_forgot_password_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isValidEmail(edt_email.getText().toString())){
+                    Toasty.error(getContext(), R.string.Error_Login, Toasty.LENGTH_LONG).show();
+                }
+                else{
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(edt_email.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toasty.success(getContext(), R.string.toast_send_email, Toasty.LENGTH_LONG).show();
+                                        Log.d(TAG, "Email sent.");
+                                    }
+                                }
+                            });
+                }
+            }
+        });
         eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +93,7 @@ public class signinFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!isValidEmail(edt_email.getText().toString()) || edt_password.getText().toString().equals("")){
-                    Toast.makeText(getContext(), R.string.Error_Login, Toast.LENGTH_LONG).show();
+                    Toasty.error(getContext(), getActivity().getString(R.string.Error_Login), Toasty.LENGTH_LONG).show();
                 }
                 else {
                     login();
@@ -85,7 +109,8 @@ public class signinFragment extends Fragment {
         edt_password = view.findViewById(R.id.edt_password);
         eye = view.findViewById(R.id.btn_show_pass);
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Signing in...");
+        loading.setTitle(LoginActivity.getInstance().getString(R.string.progress_sign_in));
+        btn_forgot_password_user = view.findViewById(R.id.btn_forgot_password_user);
 
     }
 
@@ -130,8 +155,8 @@ public class signinFragment extends Fragment {
                                 // If sign in fails, display a message to the user.
                                 loading.dismiss();
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.getInstance(), "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toasty.error(LoginActivity.getInstance(), "Authentication failed.",
+                                        Toasty.LENGTH_SHORT).show();
                             }
 
                         }

@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
-                android:text="Restaurants"
+                android:text="@string/toolbar_label_restaurants"
                 android:textColor="@color/default_inactive_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />

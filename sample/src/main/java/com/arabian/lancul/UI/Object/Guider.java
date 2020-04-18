@@ -1,5 +1,6 @@
 package com.arabian.lancul.UI.Object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Guider {
@@ -16,6 +17,7 @@ public class Guider {
     public String address;
     public String birthday;
     public boolean new_guider;
+    public ArrayList<feedback> feedbacks;
 
     public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email,
                   String address, String birthday, String status, boolean new_guider){
@@ -86,7 +88,9 @@ public class Guider {
         return new_guider;
     }
 
-
+    public ArrayList<feedback> getFeedbacks() {
+        return feedbacks;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -139,6 +143,10 @@ public class Guider {
 
     public void setNew_guider(boolean new_guider) {
         this.new_guider = new_guider;
+    }
+
+    public void setFeedbacks(ArrayList<feedback> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 }
 

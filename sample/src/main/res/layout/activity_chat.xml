@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_guider"
-    android:padding="10dp"
     tools:context="com.arabian.lancul.UI.Activity.ChatActivity">
 
 
@@ -33,10 +32,15 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
+    <include
+        android:id="@+id/toolbar_chat"
+        layout="@layout/tool_bar_chat"></include>
+
     <RelativeLayout
         android:id="@+id/chat_active"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_chat"
         android:visibility="visible">
 
         <androidx.cardview.widget.CardView

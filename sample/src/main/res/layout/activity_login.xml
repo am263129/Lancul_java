@@ -54,7 +54,6 @@
         android:id="@+id/guider_window"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="70dp"
         android:layout_weight="8"
         android:orientation="vertical"
         android:visibility="gone">
@@ -110,7 +109,7 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Email Address"
+                                android:hint="@string/label_email_address"
                                 android:inputType="textWebEmailAddress"
                                 android:padding="2dp" />
                         </LinearLayout>
@@ -135,9 +134,10 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Password"
+                                android:hint="@string/label_password"
                                 android:inputType="textPersonName|textPassword"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart" />
 
                             <ImageView
                                 android:id="@+id/btn_show_pass"
@@ -160,14 +160,14 @@
                         android:layout_marginTop="-20dp"
                         android:background="@drawable/gradient_background_button_guider"
                         android:fontFamily="@font/archivo_black"
-                        android:text="LOGIN"
+                        android:text="@string/login"
                         android:textColor="@color/default_badge_text_color"
                         android:textSize="24sp" />
 
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/btn_forgot_password_guider"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
@@ -191,7 +191,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="No account yet, sign up now as Guider"
+            android:text="@string/label_sign_up_guider"
             android:textColor="@color/white" />
 
         <LinearLayout
@@ -276,7 +276,7 @@
                 app:bt_icon="@drawable/signin"
                 app:bt_iconHeight="40dp"
                 app:bt_iconWidth="40dp"
-                app:bt_title="Existing"
+                app:bt_title="@string/btn_existing"
                 tools:layout_editor_absoluteX="10dp"
                 tools:layout_editor_absoluteY="5dp" />
 
@@ -289,7 +289,7 @@
                 app:bt_icon="@drawable/register"
                 app:bt_iconHeight="40dp"
                 app:bt_iconWidth="40dp"
-                app:bt_title="    New   "
+                app:bt_title="@string/btn_new"
                 tools:layout_editor_absoluteX="10dp"
                 tools:layout_editor_absoluteY="5dp" />
 
@@ -316,7 +316,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Or"
+                android:text="@string/label_or"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

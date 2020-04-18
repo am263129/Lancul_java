@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:ems="10"
-                        android:hint="Password"
+                        android:hint="@string/label_password"
                         android:inputType="textPassword" />
 
                     <ImageView
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:ems="10"
-                        android:hint="Phone"
+                        android:hint="@string/label_phone"
                         android:inputType="phone" />
 
                 </LinearLayout>

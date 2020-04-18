@@ -101,33 +101,33 @@ public class GuiderActivity extends AppCompatActivity {
                 switch (item.getId()) {
                     case ID_CHAT:
                         name = "HOME";
-                        label_toolbar.setText("Users");
+                        label_toolbar.setText(getString(R.string.toolbar_label_users));
                         button_logout.setVisibility(View.GONE);
                         search_field.setVisibility(View.VISIBLE);
                         loadFragment(new chatFragment_guider());
                         break;
                     case ID_INVITE:
-                        label_toolbar.setText("Invite");
+                        label_toolbar.setText(getString(R.string.toolbar_label_invite));
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new InviteFragment());
                         name = "EXPLORE";
                         break;
                     case ID_MY_FEEDBACK:
-                        label_toolbar.setText("My Feedback");
+                        label_toolbar.setText(getString(R.string.toolbar_label_myfeedback));
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new SoonFragment());
                         name = "MESSAGE";
                         break;
                     case ID_NEW_FEED:
-                        label_toolbar.setText("New Feed");
+                        label_toolbar.setText(getString(R.string.toolbar_label_new_feed));
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new SoonFragment());
                         name = "NOTIFICATION";
                         break;
                     case ID_PROFILE:
-                        label_toolbar.setText("My Profile");
+                        label_toolbar.setText(getString(R.string.toolbar_label_my_profile));
                         button_logout.setVisibility(View.VISIBLE);
-                        loadFragment(new SoonFragment());
+                        loadFragment(new ProfileFragment());
                         name = "ACCOUNT";
                         break;
                     default:

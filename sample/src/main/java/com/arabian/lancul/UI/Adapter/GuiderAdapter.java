@@ -33,6 +33,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHolder> implements Filterable {
 
     private Context context;
@@ -63,7 +65,7 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.PlanetHold
             public void onClick(View view) {
                 boolean already_linked = false;
                 if(!guider.verified){
-                    Toast.makeText(context, MainActivity.getInstance().getString(R.string.toast_unverified_guider),Toast.LENGTH_SHORT).show();
+                    Toasty.info(context, MainActivity.getInstance().getString(R.string.toast_unverified_guider), Toasty.LENGTH_SHORT).show();
                 }
                 else {
                     try {

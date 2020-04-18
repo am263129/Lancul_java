@@ -36,6 +36,7 @@ import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 
 
 /**
@@ -152,31 +154,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch (item.getId()) {
                     case ID_HOME:
                         name = "HOME";
-                        label_toolbar.setText("Saudi Arabia");
+                        label_toolbar.setText(getString(R.string.toolbar_label_saudiarabia));
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new HomeFragment());
                         break;
                     case ID_EXPERIENCE:
-                        label_toolbar.setText("Experiences");
+                        label_toolbar.setText(getString(R.string.toolbar_label_experiences));
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new ExperienceFragment());
                         name = "EXPLORE";
                         break;
                     case ID_MESSAGE:
-                        label_toolbar.setText("Friends");
+                        label_toolbar.setText(getString(R.string.toolbar_label_friends));
                         flags.setVisibility(View.VISIBLE);
                         button_logout.setVisibility(View.GONE);
                         loadFragment(new LivechatFragment());
                         name = "MESSAGE";
                         break;
                     case ID_RESTAURANT:
-                        label_toolbar.setText("Restaurants");
+                        label_toolbar.setText(getString(R.string.toolbar_label_restaurants));
                         button_logout.setVisibility(View.GONE);
                         name = "NOTIFICATION";
                         loadFragment(new RetaurantFragment());
                         break;
                     case ID_ACCOUNT:
-                        label_toolbar.setText("My Profile");
+                        label_toolbar.setText(getString(R.string.toolbar_label_my_profile));
                         button_logout.setVisibility(View.VISIBLE);
                         loadFragment(new ProfileFragment());
                         name = "ACCOUNT";
@@ -257,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Global.go_profile = false;
             bottomNavigation.show(ID_ACCOUNT,true);
         }
+
     }
 
     @Override

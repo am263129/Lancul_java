@@ -57,6 +57,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 import static com.arabian.lancul.UI.Util.Global.array_chat_ids;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener,  GoogleApiClient.OnConnectionFailedListener {
@@ -70,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static LoginActivity self;
     public ImageView btn_guider_mode, btn_signin_google;
     private LinearLayout main_window,user_window, guider_window;
-    private TextView label_mode;
+    private TextView label_mode,btn_forgot_password_guider;
     private Button btn_login;
     private TextView btn_register;
     private ProgressDialog loading;
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
     private Integer RC_SIGN_IN = 9002;
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,12 +90,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         init_view();
         init_action();
         init_data();
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onResume(){
+        super.onResume();
         get_chat();
         get_guider();
         get_user();
         check_mode();
-
     }
+
+
 
     private void init_view() {
         FirebaseApp.initializeApp(this);
@@ -112,9 +121,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         adapter.addFragment(new signinFragment());
         adapter.addFragment(new signupFragment());
         btn_guider_mode = findViewById(R.id.btn_im_guider);
+        btn_forgot_password_guider = findViewById(R.id.btn_forgot_password_guider);
 
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Signing in...");
+        loading.setTitle(LoginActivity.this.getString(R.string.progress_sign_in));
 
         GoogleSignIn();
     }
@@ -153,6 +163,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 login_with_google();
+            }
+        });
+        btn_forgot_password_guider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isValidEmail(guider_email.getText().toString()) || guider_email.getText().toString().equals("")){
+                    Toasty.error(LoginActivity.this, R.string.Error_Login, Toasty.LENGTH_LONG).show();
+                }
+                else{
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(guider_email.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toasty.success(LoginActivity.this, getString(R.string.toast_send_email), Toasty.LENGTH_LONG).show();
+                                        Log.d(TAG, "Email sent.");
+                                    }
+                                }
+                            });
+                }
             }
         });
 
@@ -243,8 +273,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     boolean verified = Boolean.parseBoolean(document.get("guider_verified").toString());
 
                                     List<String> languages = (List<String>) document.get("guider_languages");
-                                    String address = document.get("guider_address").toString();
-                                    String birthday = document.get("guider_birthday").toString();
+
+                                    String address = "";
+                                    String birthday = "";
+                                    try {
+                                        address = document.get("guider_address").toString();
+                                        birthday = document.get("guider_birthday").toString();
+                                    }
+                                    catch (Exception E){
+                                        Log.e(TAG,"No address and birthday");
+                                    }
                                     String status = document.get("guider_status").toString();
 
                                     Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider);
@@ -345,10 +383,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Global.iamguider = true;
                                     Global.my_name = Global.array_guider.get(i).getName();
                                     Global.my_email = Global.array_guider.get(i).getEmail();
+                                    Global.my_guider_data = Global.array_guider.get(i);
                                 }
                             }
                             if (!Global.iamguider){
-                                Toast.makeText(LoginActivity.this,"You are not Guider, Enjoy User Mode",Toast.LENGTH_SHORT).show();
+                                Toasty.info(LoginActivity.this,LoginActivity.this.getString(R.string.toast_enjoy_user),Toasty.LENGTH_SHORT).show();
                                 intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -363,8 +402,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // If sign in fails, display a message to the user.
                             loading.dismiss();
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.getInstance(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toasty.error(LoginActivity.getInstance(), LoginActivity.this.getString(R.string.toast_authentication_failed),
+                                    Toasty.LENGTH_SHORT).show();
                         }
 
                     }
@@ -402,7 +441,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.btn_sign_in_guider:
                 if(!isValidEmail(guider_email.getText().toString()) || guider_password.getText().toString().equals("")){
-                    Toast.makeText(LoginActivity.this, R.string.Error_Login, Toast.LENGTH_LONG).show();
+                    Toasty.error(LoginActivity.this, R.string.Error_Login, Toasty.LENGTH_LONG).show();
                 }
                 else
                     login();
@@ -430,7 +469,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user_window.setVisibility(View.GONE);
             btn_guider_mode.setBackgroundResource(R.drawable.ico_usermode);
             label_mode.setText(getString(R.string.to_usermode));
-            label_mode.setTextColor(getColor(R.color.orange));
+            label_mode.setTextColor(ContextCompat.getColor(this,R.color.orange));
 
 
         }

@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:text="Logout"
+                android:text="@string/label_logout"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Are you sure, you want to logout?"
+                android:text="@string/wanning_are_you_sure_you_want_to_logout"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="Logout"
+                    android:text="@string/label_logout"
                     android:textColor="@color/colorAccent" />
 
                 <Button
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginStart="15dp"
-                    android:text="Cancel"
+                    android:text="@string/btn_cancel"
                     android:textColor="#6EBB2E" />
             </RelativeLayout>
 

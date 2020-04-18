@@ -30,6 +30,7 @@ public class Global {
     public static ArrayList<Client> my_clients = new ArrayList<>();
     public static ArrayList<Chat> array_chat_histroy = new ArrayList<>();
     public static ArrayList<String> array_chat_ids = new ArrayList<>();
+    public static Guider my_guider_data;
 
     public static String getToday() {
         Date currentTime = Calendar.getInstance().getTime();

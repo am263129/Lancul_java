@@ -45,6 +45,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import es.dmoral.toasty.Toasty;
+
 public class GuiderRegisterActivity extends AppCompatActivity implements View.OnClickListener, CheckBox.OnCheckedChangeListener {
 
     private static final String TAG = "GuiderRegister";
@@ -123,7 +125,8 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
         password_switcher.setOnClickListener(this);
         skill_language = new ArrayList<>();
         loading = new ProgressDialog(this);
-        loading.setTitle("Signing up...");
+        loading.setTitle(getString(R.string.progress_sign_up));
+        loading.setCancelable(false);
 
     }
 
@@ -189,11 +192,11 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
         }
         if (skill_language.size() == 0)
         {
-            Toast.makeText(this,"Sorry. You should have at least two language skill to be Guider.",Toast.LENGTH_SHORT).show();
+            Toasty.info(this, GuiderRegisterActivity.this.getString(R.string.toast_issue_1), Toasty.LENGTH_SHORT).show();
             valid = false;
         }
         if(guider_bio.getText().toString().length()<20){
-            Toast.makeText(this,"Please input at least 30 letters for bio", Toast.LENGTH_SHORT).show();
+            Toasty.info(this, GuiderRegisterActivity.this.getString(R.string.toast_issue_2), Toasty.LENGTH_SHORT).show();
             valid = false;
         }
 
@@ -206,7 +209,7 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
         String email = guider_email.getText().toString();
         String password = guider_password.getText().toString();
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.getInstance(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(GuiderRegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -216,14 +219,16 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
                             FirebaseUser user = mAuth.getCurrentUser();
                             Global.my_email = user.getEmail();
                             Global.my_name = guider_firstname + " " + guider_lastname;
+                            loading.setTitle("Uploading..");
+                            loading.show();
                             upload_data();
 
                         } else {
                             loading.dismiss();
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(GuiderRegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toasty.error(GuiderRegisterActivity.this, "Authentication failed.",
+                                    Toasty.LENGTH_SHORT).show();
                         }
 
                     }
@@ -256,12 +261,14 @@ public class GuiderRegisterActivity extends AppCompatActivity implements View.On
                         startActivity(intent);
                         finish();
                         Log.d(TAG, "upload user data:success");
+                        loading.dismiss();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e(TAG,"Failed");
+                        loading.dismiss();
                     }
                 });
 

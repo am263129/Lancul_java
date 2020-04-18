@@ -36,6 +36,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class signupFragment extends Fragment {
 
@@ -69,14 +71,14 @@ public class signupFragment extends Fragment {
         btn_signup = view.findViewById(R.id.btn_signup);
         btn_showpass = view.findViewById(R.id.btn_show_pass);
         loading = new ProgressDialog(LoginActivity.getInstance());
-        loading.setTitle("Signing up...");
+        loading.setTitle(LoginActivity.getInstance().getString(R.string.progress_sign_up));
     }
     private void init_actions() {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isValidEmail(edt_email.getText().toString()) || edt_password.getText().toString().equals("") || !edt_password.getText().toString().equals(edt_confirm.getText().toString())){
-                    Toast.makeText(getContext(), R.string.Error_Login, Toast.LENGTH_LONG).show();
+                    Toasty.error(getContext(), R.string.Error_Login, Toasty.LENGTH_LONG).show();
                 }
                 else {
                     signup(edt_email.getText().toString(),edt_password.getText().toString());
@@ -113,8 +115,8 @@ public class signupFragment extends Fragment {
                             loading.dismiss();
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.getInstance(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toasty.error(LoginActivity.getInstance(), getActivity().getString(R.string.error_authentication),
+                                    Toasty.LENGTH_SHORT).show();
                         }
 
                     }

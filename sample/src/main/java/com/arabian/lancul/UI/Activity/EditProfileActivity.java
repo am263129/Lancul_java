@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,13 +23,19 @@ import android.widget.Toast;
 
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
+import com.arabian.lancul.UI.Fragment.ProfileFragment;
+import com.arabian.lancul.UI.Object.Guider;
 import com.arabian.lancul.UI.Util.Global;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -37,6 +44,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.nio.channels.GatheringByteChannel;
 import java.util.UUID;
+
+import es.dmoral.toasty.Toasty;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -53,6 +62,7 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText user_name, user_password, confirm_password, user_email;
     Button btn_save;
     private String TAG = "Editprofile";
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +70,7 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         init_view();
         init_action();
+
     }
 
     private void init_action() {
@@ -75,11 +86,41 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //validation
                 if(validataion()) {
-                    reset_password(user_password.getText().toString());
+                    if(!user_password.getText().toString().equals(""))
+                    {
+                        reset_password(user_password.getText().toString());
+                    }
                     uploadImage();
+
                 }
             }
         });
+    }
+
+    private void refresh_my_data() {
+        if(Global.iamguider) {
+            for (int i = 0; i < Global.array_guider.size(); i++) {
+                if (Global.array_guider.get(i).getEmail().toString().equals(Global.my_email)) {
+                    Global.my_guider_data = Global.array_guider.get(i);
+                    break;
+                }
+            }
+        }
+        else{
+            for(int i = 0; i < Global.array_client.size(); i++){
+                if(Global.array_client.get(i).getEmail().equals(Global.my_email)){
+                    Global.my_user_data = Global.array_client.get(i);
+                    break;
+                }
+            }
+        }
+        if(Global.iamguider) {
+            if(!Global.my_guider_data.getImageURL().equals(""))
+                Glide.with(context).load(Global.my_guider_data.getImageURL()).into(ProfileFragment.my_photo);
+        }
+        else if(!Global.my_user_data.getPhoto().equals("")){
+            Glide.with(context).load(Global.my_user_data.getPhoto()).into(ProfileFragment.my_photo);
+        }
     }
 
     public boolean isValidEmail(CharSequence target) {
@@ -98,7 +139,7 @@ public class EditProfileActivity extends AppCompatActivity {
             user_email.setError("Please input correct Email Address");
             valid = false;
         }
-        if(user_password.getText().toString().length() < 6)
+        if(user_password.getText().toString().length() < 6 && !user_password.getText().toString().equals(""))
         {
             user_password.setError("Please should be at least 6 letters");
             valid = false;
@@ -112,6 +153,12 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void init_view() {
+        if(Global.iamguider){
+            context = GuiderActivity.getInstance();
+        }
+        else{
+            context = MainActivity.getInstance();
+        }
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         userPhoto = findViewById(R.id.user_photo);
@@ -120,7 +167,15 @@ public class EditProfileActivity extends AppCompatActivity {
         user_password = findViewById(R.id.edt_password);
         user_email = findViewById(R.id.edt_email);
         confirm_password = findViewById(R.id.edt_confim_password);
-
+        user_name.setText(Global.my_name);
+        user_email.setText(Global.my_email);
+        if(Global.iamguider) {
+            if(!Global.my_guider_data.getImageURL().equals(""))
+            Glide.with(EditProfileActivity.this).load(Global.my_guider_data.getImageURL()).into(userPhoto);
+        }
+        else if(!Global.my_user_data.getPhoto().equals("")){
+            Glide.with(EditProfileActivity.this).load(Global.my_user_data.getPhoto()).into(userPhoto);
+        }
     }
 
 
@@ -200,8 +255,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
             // Code for showing progressDialog while uploading
             final ProgressDialog progressDialog
-                    = new ProgressDialog(MainActivity.getInstance());
-            progressDialog.setTitle("Uploading...");
+                    = new ProgressDialog(context);
+            progressDialog.setTitle(context.getString(R.string.progress_uploading));
             progressDialog.show();
 
             // Defining the child of storageReference
@@ -225,13 +280,13 @@ public class EditProfileActivity extends AppCompatActivity {
                                                                                   public void onSuccess(Uri uri) {
                                                                                       Uri downloadUrl = uri;
                                                                                       Log.e("KKK", downloadUrl.toString());
+                                                                                      Upload_data(downloadUrl.toString());
                                                                                   }
                                                                               });
                                     progressDialog.dismiss();
-                                    Toast
-                                            .makeText(MainActivity.getInstance(),
-                                                    "Image Uploaded!!",
-                                                    Toast.LENGTH_SHORT)
+                                    Toasty.success(context,EditProfileActivity.this.
+                                                    getString(R.string.toast_upload_image),
+                                                    Toasty.LENGTH_SHORT)
                                             .show();
 
 
@@ -245,10 +300,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
                             // Error, Image not uploaded
                             progressDialog.dismiss();
-                            Toast
-                                    .makeText(MainActivity.getInstance(),
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
+                            Toasty.error
+                                    (context,EditProfileActivity.this.
+                                            getString(R.string.toast_failed) + e.getMessage(),
+                                            Toasty.LENGTH_SHORT)
                                     .show();
                         }
                     })
@@ -275,6 +330,63 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void Upload_data(String photo) {
+        if (Global.iamguider){
+            FirebaseApp.initializeApp(LoginActivity.getInstance());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference myRef = db.collection("guiders").document(Global.my_email);
+
+            myRef
+                    .update("guider_photo", photo)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Toasty.success(EditProfileActivity.this,"Success in update data",Toasty.LENGTH_LONG).show();
+                            LoginActivity.get_guider();
+                            LoginActivity.get_user();
+                            refresh_my_data();
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                            Toasty.error(EditProfileActivity.this,"Error update data",Toasty.LENGTH_LONG).show();
+                        }
+                    });
+
+        }
+        else{
+            FirebaseApp.initializeApp(LoginActivity.getInstance());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference myRef = db.collection("users").document(Global.my_email);
+
+            myRef
+                    .update("user_photo", photo)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Toasty.success(EditProfileActivity.this,"Success in update data",Toasty.LENGTH_LONG).show();
+                            LoginActivity.get_guider();
+                            LoginActivity.get_user();
+                            refresh_my_data();
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                            Toasty.error(EditProfileActivity.this,"Error update data",Toasty.LENGTH_LONG).show();
+                        }
+                    });
+        }
+
     }
 
     private void reset_password(String newPassword){

@@ -3,26 +3,76 @@
     <string name="main_page_selected">%s page is selected</string>
     <string name="left">Lancul</string>
     <string name="right">Lancul</string>
-    <string name="forgot_password"><u>هل نسيت كلمة المرور؟</u></string>
-    <string name="Error_Login">يرجى إدخال معلومات صالحة</string>
-    <string name="to_usermode">قم بالتبديل إلى وضع المستخدم</string>
-    <string name="to_guidemode">قم بالتبديل إلى وضع الموجه</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="Error_Login">Please input Valid info</string>
+    <string name="to_usermode">Switch to User Mode</string>
+    <string name="to_guidemode">Switch to Guider Mode</string>
     <string name="toast_unverified_guider">This guider is not verified yet.</string>
+    <string name="label_email_address">Email Address</string>
+    <string name="label_password">Password</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="label_name">Name</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_invite_your_friends">Invite Your Friends</string>
+    <string name="label_invitation">Invitation</string>
+    <string name="label_something_to_guider">something to guider</string>
+    <string name="label_require_time">Require Time :</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="wanning_are_you_sure_you_want_to_logout">Are you sure, you want to logout?</string>
+    <string name="toolbar_label_restaurants">Restaurants</string>
+    <string name="toolbar_label_users">Users</string>
+    <string name="toolbar_label_invite">Invite</string>
+    <string name="toolbar_label_myfeedback">My Feedback</string>
+    <string name="toolbar_label_new_feed">New Feed</string>
+    <string name="toolbar_label_my_profile">My Profile</string>
+    <string name="toolbar_label_saudiarabia">Saudi Arabia</string>
+    <string name="toolbar_label_experiences">Experiences</string>
+    <string name="toolbar_label_friends">Friends</string>
+    <string name="label_confirmation">Confirmation</string>
+    <string name="login">LOGIN</string>
+    <string name="btn_existing">Existing</string>
+    <string name="btn_new">New</string>
+    <string name="label_or">Or</string>
+    <string name="btn_favorite">Favorite</string>
+    <string name="btn_help">Help</string>
+    <string name="btn_feedback">Feedback</string>
+    <string name="btn_invite_friend">Invite Friend</string>
+    <string name="btn_rate_the_app">Rate the app</string>
+    <string name="btn_about_us">About Us</string>
+    <string name="btn_privacy_policy">Privacy policy</string>
+    <string name="label_sign_up_guider">No account yet, sign up now as Guider</string>
+    <string name="label_request_time">Request Time:</string>
+    <string name="btn_send">Send</string>
+    <string name="progress_sign_in">Signing in...</string>
+    <string name="progress_uploading">Uploading...</string>
+    <string name="progress_sign_up">Signing up...</string>
+    <string name="progress_send_invite">Sending Invite...</string>
+    <string name="progress_wait">Please wait...</string>
+    <string name="error_authentication">Authentication failed.</string>
+    <string name="toast_enjoy_user">You are not Guider, Enjoy User Mode</string>
+    <string name="toast_authentication_failed">Authentication failed.</string>
+    <string name="toast_upload_image">Image Uploaded!!</string>
+    <string name="toast_failed">Failed</string>
+    <string name="toast_send_email">Email sent to your address successfully</string>
+    <string name="toast_issue_1">Sorry. You should have at least two language skill to be Guider.</string>
+    <string name="toast_issue_2">Please input at least 30 letters for bio</string>
+    <string name="label_logout">Logout</string>
 
     <string-array name="time">
-        <item>1 ساعة</item>
-        <item>2 ساعات</item>
-        <item>3 ساعات</item>
-        <item>4 ساعات</item>
-        <item>5 ساعات</item>
-        <item>6 أو المزيد من الساعات</item>
-        <item>1 يوم</item>
-        <item>2 أيام</item>
-        <item>3 أيام</item>
-        <item>4 أيام أو أكثر</item>
-        <item>أسبوع</item>
-        <item>2 أسابيع</item>
-        <item>طويل الأمد</item>
+        <item>1 Hour</item>
+        <item>2 Hours</item>
+        <item>3 Hours</item>
+        <item>4 Hours</item>
+        <item>5 Hours</item>
+        <item>6 or More Hours</item>
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days or more</item>
+        <item>A week</item>
+        <item>2 weeks</item>
+        <item>Long Term</item>
     </string-array>
 
 </resources>

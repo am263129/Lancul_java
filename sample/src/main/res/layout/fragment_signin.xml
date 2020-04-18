@@ -37,7 +37,7 @@
                         android:layout_marginTop="-20dp"
                         android:background="@drawable/gradient_background_button"
                         android:fontFamily="@font/archivo_black"
-                        android:text="LOGIN"
+                        android:text="@string/login"
                         android:textColor="@color/default_badge_text_color"
                         android:textSize="24sp" />
 
@@ -73,9 +73,10 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Email Address"
+                                android:hint="@string/label_email_address"
                                 android:inputType="textWebEmailAddress"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -98,9 +99,11 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Password"
+                                android:gravity="start"
+                                android:hint="@string/label_password"
                                 android:inputType="textPersonName|textPassword"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
 
                             <ImageView
                                 android:id="@+id/btn_show_pass"
@@ -115,7 +118,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/btn_forgot_password_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

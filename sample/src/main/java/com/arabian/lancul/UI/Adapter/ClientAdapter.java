@@ -75,7 +75,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
 
     class PlanetHolder extends RecyclerView.ViewHolder {
 
-        private TextView name, last_message;
+        private TextView name, client_email;
         private TextView num_message;
         private CardView new_message;
         private ImageView photo;
@@ -86,7 +86,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
             super(itemView);
             mView = itemView;
             name = itemView.findViewById(R.id.client_name);
-            last_message = itemView.findViewById(R.id.last_message);
+            client_email = itemView.findViewById(R.id.client_email);
             num_message = itemView.findViewById(R.id.num_new_message);
             new_message = itemView.findViewById(R.id.new_message);
             photo = itemView.findViewById(R.id.client_photo);
@@ -95,6 +95,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.PlanetHold
         void setDetails(Client client) {
 
             name.setText(client.getName());
+            client_email.setText(client.getEmail());
             if(client.getPhoto().equals("")){
                 photo.setImageResource(R.drawable.man_dummy);
             }

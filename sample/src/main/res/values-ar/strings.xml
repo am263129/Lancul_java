@@ -3,26 +3,77 @@
     <string name="main_page_selected">%s page is selected</string>
     <string name="left">Lancul</string>
     <string name="right">Lancul</string>
-    <string name="forgot_password"><u>Forgot Password?</u></string>
-    <string name="Error_Login">Please input Valid info</string>
-    <string name="to_usermode">Switch to User Mode</string>
-    <string name="to_guidemode">Switch to Guider Mode</string>
+    <string name="forgot_password"><u>هل نسيت كلمة المرور؟</u></string>
+    <string name="Error_Login">يرجى إدخال معلومات صالحة</string>
+    <string name="to_usermode">قم بالتبديل إلى وضع المستخدم</string>
+    <string name="to_guidemode">قم بالتبديل إلى وضع الموجه</string>
     <string name="toast_unverified_guider">This guider is not verified yet.</string>
+    <string name="label_email_address">عنوان البريد الإلكتروني</string>
+    <string name="label_password">كلمه السر</string>
+    <string name="sign_up">تسجيل</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="label_name">اسم</string>
+    <string name="label_phone">هاتف</string>
+    <string name="label_invite_your_friends">اعزم أصحابك</string>
+    <string name="label_invitation">رسالة دعوة</string>
+    <string name="label_something_to_guider">شيء لتوجيهه</string>
+    <string name="label_require_time">تتطلب الوقت:</string>
+    <string name="btn_accept">قبول</string>
+    <string name="btn_cancel">إلغاء</string>
+    <string name="wanning_are_you_sure_you_want_to_logout">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
+    <string name="toolbar_label_restaurants">مطاعم</string>
+    <string name="toolbar_label_users">المستخدمون</string>
+    <string name="toolbar_label_invite">يدعو</string>
+    <string name="toolbar_label_myfeedback">تعليقاتي</string>
+    <string name="toolbar_label_new_feed">تغذية جديدة</string>
+    <string name="toolbar_label_my_profile">ملفي</string>
+    <string name="toolbar_label_saudiarabia">المملكة العربية السعودية</string>
+    <string name="toolbar_label_experiences">خبرة</string>
+    <string name="toolbar_label_friends">اصحاب</string>
+    <string name="label_confirmation">التأكيد</string>
+    <string name="btn_existing">موجود</string>
+    <string name="btn_new">    جديد    </string>
+    <string name="label_or">أو</string>
+    <string name="btn_favorite">مفضل</string>
+    <string name="btn_help">مساعدة</string>
+    <string name="btn_feedback">ردود الفعل</string>
+    <string name="btn_invite_friend">دعوة صديق</string>
+    <string name="btn_rate_the_app">قيم التطبيق</string>
+    <string name="btn_about_us">معلومات عنا</string>
+    <string name="btn_privacy_policy">سياسة خاصة</string>
+    <string name="label_sign_up_guider">لا يوجد حساب حتى الآن ، قم بالتسجيل كمرشد الآن</string>
+    <string name="label_request_time">وقت الطلب:</string>
+    <string name="btn_send">إرسال</string>
+    <string name="progress_sign_in">تسجيل الدخول...</string>
+    <string name="progress_uploading">جارٍ التحميل ...</string>
+    <string name="progress_sign_up">توقيع...</string>
+    <string name="progress_send_invite">إرسال دعوة ...</string>
+    <string name="progress_wait">ارجوك انتظر...</string>
+    <string name="error_authentication">المصادقة فشلت.</string>
+    <string name="toast_enjoy_user">أنت لست مرشدًا ، استمتع بوضع المستخدم</string>
+    <string name="toast_authentication_failed">المصادقة فشلت.</string>
+    <string name="toast_upload_image">تم تحميل الصورة!</string>
+    <string name="toast_failed">فشل</string>
+    <string name="toast_send_email">تم إرسال البريد الإلكتروني إلى عنوانك بنجاح</string>
+    <string name="toast_issue_1">آسف. يجب أن يكون لديك مهارة لغتين على الأقل لتكون مرشدًا.</string>
+    <string name="toast_issue_2">يرجى إدخال 30 حرفًا على الأقل للسيرة الذاتية</string>
+    <string name="label_logout">تسجيل خروج</string>
+
 
     <string-array name="time">
-        <item>1 Hour</item>
-        <item>2 Hours</item>
-        <item>3 Hours</item>
-        <item>4 Hours</item>
-        <item>5 Hours</item>
-        <item>6 or More Hours</item>
-        <item>1 day</item>
-        <item>2 days</item>
-        <item>3 days</item>
-        <item>4 days or more</item>
-        <item>A week</item>
-        <item>2 weeks</item>
-        <item>Long Term</item>
+        <item>1 ساعة</item>
+        <item>2 ساعات</item>
+        <item>3 ساعات</item>
+        <item>4 ساعات</item>
+        <item>5 ساعات</item>
+        <item>6 أو المزيد من الساعات</item>
+        <item>1 يوم</item>
+        <item>2 أيام</item>
+        <item>3 أيام</item>
+        <item>4 أيام أو أكثر</item>
+        <item>أسبوع</item>
+        <item>2 أسابيع</item>
+        <item>طويل الأمد</item>
     </string-array>
 
 </resources>

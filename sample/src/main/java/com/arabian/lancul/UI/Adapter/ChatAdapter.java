@@ -20,6 +20,7 @@ import com.arabian.lancul.UI.Activity.GuiderActivity;
 import com.arabian.lancul.UI.Object.Chat;
 import com.arabian.lancul.UI.Util.Global;
 import com.bumptech.glide.Glide;
+import es.dmoral.toasty.Toasty;
 
 import java.util.ArrayList;
 
@@ -83,6 +84,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.PlanetHolder> 
             guider_chat = itemView.findViewById(R.id.item_guider);
             my_chat = itemView.findViewById(R.id.item_mychat);
             mView = itemView;
+            mView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         }
 

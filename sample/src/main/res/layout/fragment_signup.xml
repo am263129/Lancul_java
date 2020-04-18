@@ -36,7 +36,7 @@
                         android:layout_marginTop="-20dp"
                         android:background="@drawable/gradient_background_button"
                         android:fontFamily="@font/archivo_black"
-                        android:text="SIGN UP"
+                        android:text="@string/sign_up"
                         android:textColor="@color/default_badge_text_color"
                         android:textSize="24sp" />
 
@@ -72,9 +72,10 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Name"
+                                android:hint="@string/label_name"
                                 android:inputType="textPersonName"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -98,9 +99,10 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Email Address"
+                                android:hint="@string/label_email_address"
                                 android:inputType="textPersonName"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -125,9 +127,11 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Password"
+                                android:gravity="start"
+                                android:hint="@string/label_password"
                                 android:inputType="textPassword"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
 
                             <ImageView
                                 android:id="@+id/btn_show_pass"
@@ -156,9 +160,10 @@
                                 android:layout_weight="9"
                                 android:background="@android:color/white"
                                 android:ems="10"
-                                android:hint="Confirmation"
+                                android:hint="@string/label_confirmation"
                                 android:inputType="textPassword"
-                                android:padding="2dp" />
+                                android:padding="2dp"
+                                android:textAlignment="viewStart"/>
 
                             <ImageView
                                 android:id="@+id/btn_show_confirm"

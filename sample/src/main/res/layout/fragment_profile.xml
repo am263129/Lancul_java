@@ -163,7 +163,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:padding="10dp"
-                    android:text="Area of focus"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -195,7 +194,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Favorite"
+                            android:text="@string/btn_favorite"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -219,7 +218,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Help"
+                            android:text="@string/btn_help"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -243,7 +242,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Feedback"
+                            android:text="@string/btn_feedback"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -267,7 +266,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Invite Friend"
+                            android:text="@string/btn_invite_friend"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -291,7 +290,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Rate the app"
+                            android:text="@string/btn_rate_the_app"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -315,7 +314,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="About Us"
+                            android:text="@string/btn_about_us"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -339,7 +338,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="Privacy policy"
+                            android:text="@string/btn_privacy_policy"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
