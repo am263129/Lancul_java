@@ -13,10 +13,7 @@
         android:id="@+id/area_photo"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-<<<<<<< Updated upstream
         android:layout_alignParentTop="true"
-=======
->>>>>>> Stashed changes
         android:layout_marginTop="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -30,70 +27,94 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/user_info"
         android:layout_width="match_parent"
-<<<<<<< Updated upstream
-        android:layout_height="match_parent"
-        android:layout_below="@id/area_photo"
-        android:paddingBottom="30dp">
-=======
         android:layout_height="wrap_content"
+        android:layout_below="@id/area_photo"
         android:orientation="vertical"
         android:padding="20dp">
 
-        <EditText
-            android:id="@+id/edt_username"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_white"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="false"
-            android:hint="User Name"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_round_white"
-            android:editable="false"
-            android:ems="10"
-            android:enabled="false"
-            android:hint="E-mail"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_white"
+                android:editable="false"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="User Name"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
-        <EditText
-            android:id="@+id/edt_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_round_white"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_round_white"
+                android:editable="false"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="E-mail"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
-        <EditText
-            android:id="@+id/edt_confim_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_round_white"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_round_white"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/edt_confim_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_round_white"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <LinearLayout
+                android:id="@+id/area_btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_background_button"
+                    android:text="Save"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/user_info"
         android:visibility="invisible">
->>>>>>> Stashed changes
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,60 +122,6 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <EditText
-                    android:id="@+id/edt_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_round_white"
-                    android:editable="false"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="User Name"
-                    android:inputType="textPersonName"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/edt_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/bg_round_white"
-                    android:editable="false"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:hint="E-mail"
-                    android:inputType="textPersonName"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/edt_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/bg_round_white"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/edt_confim_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/bg_round_white"
-                    android:ems="10"
-                    android:hint="Confirm Password"
-                    android:inputType="textPassword"
-                    android:padding="10dp" />
-
-            </LinearLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -281,45 +248,8 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <LinearLayout
-                android:id="@+id/area_btn_save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="20dp">
-
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_background_button"
-                    android:text="Save"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
         </LinearLayout>
-<<<<<<< Updated upstream
-    </ScrollView>
-
-</RelativeLayout>
-=======
     </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/gradient_background_button"
-        android:text="Save"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+</RelativeLayout>
 
-</LinearLayout>
->>>>>>> Stashed changes

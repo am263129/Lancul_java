@@ -6,51 +6,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background">
+
         <ImageView
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/bg_slide_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_alignParentBottom="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_slide_3" />
+
         <RelativeLayout
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:padding="20dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:layout_marginBottom="50dp"
+                    android:padding="20dp"
+                    android:text="@string/title_slide_3"
                     android:textAlignment="center"
                     android:textColor="@color/white_text"
-                    android:text="@string/title_slide_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/slide_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp" />
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/slide_3" />
+
                 <TextView
-                    android:padding="20dp"
-                    android:layout_marginBottom="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:text="@string/description_slide_3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="50dp"
+                    android:padding="20dp"
+                    android:text="@string/description_slide_3"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
