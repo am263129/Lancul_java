@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
     private Set<String> mMessageIds = new HashSet<>();
     private ArrayList<Chat> mMessages = new ArrayList<>();
     private ListenerRegistration mAcceptEventListener;
-    private ImageView partner_photo,rate_partner;
+    private ImageView partner_photo,rate_partner,view_partner_location;
     private TextView partner_name;
 
     @Override
@@ -354,6 +354,7 @@ public class ChatActivity extends AppCompatActivity {
         partner_photo = findViewById(R.id.partner_photo);
         partner_name = findViewById(R.id.partner_name);
         rate_partner = findViewById(R.id.btn_rate);
+        view_partner_location = findViewById(R.id.btn_map);
         loading.setCancelable(false);
         loading.setTitle(getString(R.string.progress_wait));
         peding = findViewById(R.id.pending);
@@ -453,6 +454,16 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 show_accept_dialog();
+            }
+        });
+
+        view_partner_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, MapActivity.class);
+                intent.putExtra("Mode",1);
+                Global.partner_location = Global.array_guider.get(partner_index).getLocation();
+                startActivity(intent);
             }
         });
 

@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.arabian.lancul.MainActivity;
 import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.LoginActivity;
+import com.arabian.lancul.UI.Activity.PrivacyActivity;
 import com.arabian.lancul.UI.Object.Client;
 import com.arabian.lancul.UI.Util.Global;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -95,6 +96,13 @@ public class signupFragment extends Fragment {
     }
 
     public void signup(String email, String password) {
+
+        Intent intent = new Intent(getActivity(), PrivacyActivity.class);
+        intent.putExtra("email",email);
+        intent.putExtra("password", password);
+        intent.putExtra("name", edt_name.getText().toString());
+        startActivity(intent);
+        /*
         loading.show();
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -125,34 +133,10 @@ public class signupFragment extends Fragment {
                     }
                 });
 
+
+         */
     }
 
-    private void upload_data() {
-        FirebaseApp.initializeApp(LoginActivity.getInstance());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        HashMap<String, Object> user = new HashMap<>();
-        user.put("user_email", edt_email.getText().toString());
-        user.put("user_name", edt_name.getText().toString());
-        user.put("user_photo", "");
-        user.put("user_status", "online");
-        user.put("user_type", "client");
-        ArrayList<String> linked_gudider = new ArrayList<>();
-        user.put("user_linked_guiders", linked_gudider);
-        db.collection("users").document(edt_email.getText().toString())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "upload user data:success");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG,"Failed");
-                    }
-                });
-    }
 
     public boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();

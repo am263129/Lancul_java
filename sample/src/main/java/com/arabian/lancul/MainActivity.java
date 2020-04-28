@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +38,10 @@ import com.arabian.lancul.UI.Object.Res_Exp;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout selected_en, selected_ja, selected_sa, selected_pt, selected_sp, selected_ge, selected_fr;
     private boolean en = false, ja = false, sa = false , pt = false, sp = false, ge = false, fr = false;
     private List<String> filter_list = new ArrayList<>();
+    private FusedLocationProviderClient fusedLocationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +95,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         self = this;
         init_view();
         init_action();
+        get_current_location();
 
+
+
+    }
+
+    private void get_current_location() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                           Upload_my_location(location);
+                        }
+                    }
+                });
+    }
+
+    private void Upload_my_location(Location location) {
+        Double lat = location.getLatitude();
+        Double lon = location.getLongitude();
+
+        List<Double> my_location = new ArrayList<>();
+        my_location.add(lat);
+        my_location.add(lon);
 
 
     }
@@ -126,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         selected_ge.setOnClickListener(this);
         selected_sa.setOnClickListener(this);
         selected_sp.setOnClickListener(this);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
     }
 

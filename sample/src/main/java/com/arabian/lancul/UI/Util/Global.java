@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 public class Global {
 
@@ -31,6 +32,7 @@ public class Global {
     public static ArrayList<Chat> array_chat_histroy = new ArrayList<>();
     public static ArrayList<String> array_chat_ids = new ArrayList<>();
     public static Guider my_guider_data;
+    public static List<Double> partner_location = new ArrayList<>();
 
     public static String getToday() {
         Date currentTime = Calendar.getInstance().getTime();

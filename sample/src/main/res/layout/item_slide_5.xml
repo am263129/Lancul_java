@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="50dp"
                     android:padding="20dp"
                     android:text="@string/title_slide_5"
@@ -45,6 +46,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/img"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_below="@id/title"
@@ -55,6 +57,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/img"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="50dp"
                     android:padding="20dp"

@@ -41,6 +41,12 @@
                 android:textColor="@color/default_inactive_color"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/btn_map"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="3"
+                app:srcCompat="@drawable/icon_map" />
 
             <ImageView
                 android:id="@+id/btn_rate"

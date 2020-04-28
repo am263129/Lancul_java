@@ -1,5 +1,7 @@
 package com.arabian.lancul.UI.Object;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,10 @@ public class Guider {
     public String birthday;
     public boolean new_guider;
     public ArrayList<Feedback> feedbacks;
+    public List<Double> location;
 
     public Guider(String bio, String imageURL, String name, Float rate, boolean available, boolean verified, List<String> languages,String phone,String  email,
-                  String address, String birthday, String status, boolean new_guider){
+                  String address, String birthday, String status, boolean new_guider, List<Double> location){
         this.bio = bio;
         this.imageURL = imageURL;
         this.name = name;
@@ -34,6 +37,7 @@ public class Guider {
         this.birthday = birthday;
         this.status = status;
         this.new_guider = new_guider;
+        this.location = location;
     }
 
     public String getName() {
@@ -92,6 +96,10 @@ public class Guider {
         return feedbacks;
     }
 
+    public List<Double> getLocation() {
+        return location;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -147,6 +155,10 @@ public class Guider {
 
     public void setFeedbacks(ArrayList<Feedback> feedbacks) {
         this.feedbacks = feedbacks;
+    }
+
+    public void setLocation(List<Double> location) {
+        this.location = location;
     }
 }
 

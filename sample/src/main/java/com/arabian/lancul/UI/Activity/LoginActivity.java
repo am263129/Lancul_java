@@ -272,7 +272,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     boolean verified = Boolean.parseBoolean(document.get("guider_verified").toString());
 
                                     List<String> languages = (List<String>) document.get("guider_languages");
-
+                                    List<Double> location = new ArrayList<>();
+                                    try {
+                                        location = (List<Double>) document.get("guider_location");
+                                    }
+                                    catch (Exception E){
+                                        Log.e(TAG, E.toString());
+                                    }
                                     String address = "";
                                     String birthday = "";
                                     try {
@@ -284,7 +290,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     String status = document.get("guider_status").toString();
 
-                                    Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider);
+                                    Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider,location);
                                     Global.array_guider.add(guider);
                                 }
                                 catch (Exception E){

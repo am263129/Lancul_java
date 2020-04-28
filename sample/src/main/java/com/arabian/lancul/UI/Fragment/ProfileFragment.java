@@ -24,6 +24,7 @@ import com.arabian.lancul.R;
 import com.arabian.lancul.UI.Activity.EditProfileActivity;
 import com.arabian.lancul.UI.Activity.GuiderActivity;
 import com.arabian.lancul.UI.Activity.InviteActivity;
+import com.arabian.lancul.UI.Activity.MapActivity;
 import com.arabian.lancul.UI.Util.Global;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -114,6 +115,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                 Uri.parse("http://lancul.net/privacy-policy"));
                 startActivity(viewIntent);
                 break;
+            case R.id.btn_help:
+                intent = new Intent(getActivity(), MapActivity.class);
+                startActivity(intent);
+                break;
+
             default:
                 intent =  new Intent(context, InviteActivity.class);
                 startActivity(intent);

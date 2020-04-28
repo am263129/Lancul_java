@@ -212,13 +212,13 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            app:srcCompat="@drawable/icon_help" />
+                            app:srcCompat="@drawable/ico_map" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="9"
-                            android:text="@string/btn_help"
+                            android:text="@string/btn_map"
                             android:textColor="@color/default_badge_background_color"
                             android:textSize="18sp" />
                     </LinearLayout>
