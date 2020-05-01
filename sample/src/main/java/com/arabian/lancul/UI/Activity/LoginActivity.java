@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private static String TAG = "Login Activity";
     public static LoginActivity self;
-    public ImageView btn_guider_mode, btn_signin_google;
+    public ImageView btn_guider_mode, btn_signin_google, btn_signin_phone;
     private LinearLayout main_window,user_window, guider_window;
     private TextView label_mode,btn_forgot_password_guider;
     private Button btn_login;
@@ -87,18 +87,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         self = this;
         init_view();
         init_action();
-        init_data();
+
 
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume(){
         super.onResume();
-        get_chat();
-        get_guider();
-        get_user();
         check_mode();
-        get_feedback();
     }
 
 
@@ -116,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         guider_email = findViewById(R.id.guider_email);
         guider_password = findViewById(R.id.guider_password);
         btn_signin_google = findViewById(R.id.btn_signin_google);
+        btn_signin_phone = findViewById(R.id.btn_sign_phone);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new signinFragment());
         adapter.addFragment(new signupFragment());
@@ -131,6 +128,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_guider_mode.setOnClickListener(this);
         btn_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
+        btn_signin_phone.setOnClickListener(this);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
         final BubbleNavigationConstraintView bubbleNavigationLinearView = findViewById(R.id.top_navigation_constraint);
@@ -186,215 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
     }
-    private void init_data() {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("experiences")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_experience.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("name").toString();
-                                String location = document.get("location").toString();
-                                String photo = document.get("imageUrl").toString();
-                                Float rating = Float.parseFloat(document.get("rating").toString());
-
-                                Res_Exp experience = new Res_Exp(name,location,photo,rating);
-                                Global.array_experience.add(experience);
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-        //get Restaurant data
-        db.collection("restaurants")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_restaurant.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("name").toString();
-                                String location = document.get("location").toString();
-                                String photo = document.get("imageUrl").toString();
-                                Float rating = Float.parseFloat(document.get("rating").toString());
-
-                                Res_Exp restaurant = new Res_Exp(name,location,photo,rating);
-                                Global.array_restaurant.add(restaurant);
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-
-    }
-
-    public static void get_guider(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("guiders")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_guider.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                try {
-                                    String bio = document.get("guider_bio").toString();
-                                    String imageUrl = document.get("guider_photo").toString();
-                                    String phone = document.get("guider_phone").toString();
-                                    String email = document.get("guider_email").toString();
-                                    boolean is_available = Boolean.parseBoolean(document.get("guider_available").toString());
-                                    String name = document.get("guider_firstname").toString() + " " + document.get("guider_lastname").toString();
-                                    Float rating = 0f;
-                                    boolean new_guider = false;
-                                    if (document.get("guider_rating").toString().equals("New")) {
-                                        new_guider = true;
-                                    } else {
-                                        rating = Float.parseFloat(document.get("guider_rating").toString());
-                                    }
-                                    boolean verified = Boolean.parseBoolean(document.get("guider_verified").toString());
-
-                                    List<String> languages = (List<String>) document.get("guider_languages");
-                                    List<Double> location = new ArrayList<>();
-                                    try {
-                                        location = (List<Double>) document.get("guider_location");
-                                    }
-                                    catch (Exception E){
-                                        Log.e(TAG, E.toString());
-                                    }
-                                    String address = "";
-                                    String birthday = "";
-                                    try {
-                                        address = document.get("guider_address").toString();
-                                        birthday = document.get("guider_birthday").toString();
-                                    }
-                                    catch (Exception E){
-                                        Log.e(TAG,"No address and birthday");
-                                    }
-                                    String status = document.get("guider_status").toString();
-
-                                    Guider guider = new Guider(bio, imageUrl, name, rating, is_available, verified, languages, phone, email, address, birthday, status, new_guider,location);
-                                    Global.array_guider.add(guider);
-                                }
-                                catch (Exception E){
-                                    Log.e(TAG, E.toString());
-                                }
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
-
-    public static void get_user(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            Global.array_client.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("user_name").toString();
-                                String email = document.get("user_email").toString();
-                                String pole = document.get("user_type").toString();
-                                String status = document.get("user_status").toString();
-                                String photo = document.get("user_photo").toString();
-                                List<String> linked_guiders = (List<String>) document.get("user_linked_guiders");
-                                if(pole.equals("client")){
-                                    Client client = new Client(name, email, status, photo, linked_guiders);
-                                    Global.array_client.add(client);
-                                }
-
-
-
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
-
-    public static void get_feedback() {
-        for (int  i = 0; i < Global.array_guider.size(); i ++){
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            final int finalI = i;
-            db.collection("guiders").document(Global.array_guider.get(i).getEmail()).collection("feedback")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-
-                                String temp = Global.array_guider.get(finalI).getEmail();
-                                ArrayList<Feedback> feedbacks = new ArrayList<>();
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.d(TAG, document.getId() + " => " + document.getData());
-                                    try {
-                                        Feedback feedback = document.toObject(Feedback.class);
-                                        feedbacks.add(feedback);
-                                    }
-                                    catch (Exception E){
-                                        Log.e(TAG, E.toString());
-                                    }
-                                }
-
-                                Global.array_guider.get(finalI).setFeedbacks(feedbacks);
-                            } else {
-                                Log.w(TAG, "Error getting documents.", task.getException());
-                            }
-                        }
-                    });
-        }
-    }
-    public static void get_chat(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("chats")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            array_chat_ids.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                array_chat_ids.add(document.getId());
-                            }
-//                            for (int i = 0; i< array_chat_ids.size(); i++){
-//                                if(array_chat_ids.get(i).toLowerCase().contains(Global.my_name)){
-//
-//                                }
-//                            }
-
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
 
     private void login() {
 
@@ -459,7 +249,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void GoogleSignIn(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
-                .requestIdToken("AIzaSyBi4E-nXQAwWh8ewnuV8vIRvBjOi06vlg8")
+                .requestIdToken("93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com")
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -475,6 +265,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()){
             case R.id.btn_sign_in_guider:
                 if(!isValidEmail(guider_email.getText().toString()) || guider_password.getText().toString().equals("")){
@@ -484,10 +275,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     login();
                 break;
             case R.id.btn_sign_up_guider:
-
-                Intent intent = new Intent(this,GuiderRegisterActivity.class);
+                intent = new Intent(this,GuiderRegisterActivity.class);
                 startActivity(intent);
-
+                break;
+            case R.id.btn_sign_phone:
+                intent = new Intent(this,PhoneVerifyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_im_guider:
                 Global.user_mode = !Global.user_mode;
@@ -495,6 +288,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -561,7 +356,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             signupFragment signupFragment = new signupFragment();
-            signupFragment.signup(acct.getId().toString(),acct.getId());
+            signupFragment.signup(acct.getEmail().toString(),acct.getId());
             Auth.GoogleSignInApi.signOut(mGoogleApiClient);
         }
         else {

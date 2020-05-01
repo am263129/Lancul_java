@@ -131,10 +131,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void rate_app() {
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.getInstance().getPackageName())));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + MainActivity.getInstance().getPackageName())));
+        if(Global.user_mode) {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.getInstance().getPackageName())));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + MainActivity.getInstance().getPackageName())));
+            }
+        }
+        else{
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + GuiderActivity.getInstance().getPackageName())));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + GuiderActivity.getInstance().getPackageName())));
+            }
         }
     }
 

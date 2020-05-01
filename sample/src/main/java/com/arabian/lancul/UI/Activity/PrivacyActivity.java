@@ -79,7 +79,7 @@ public class PrivacyActivity extends AppCompatActivity {
         password = intent.getStringExtra("password");
         name = intent.getStringExtra("name");
         loading = new ProgressDialog(PrivacyActivity.this);
-        loading.setTitle(LoginActivity.getInstance().getString(R.string.progress_sign_up));
+        loading.setTitle(getString(R.string.progress_sign_up));
         //view_pager_slide.setPageTransformer(false, new CarouselEffectTransformer(IntroActivity.this)); // Set transformer
 
 
@@ -90,7 +90,6 @@ public class PrivacyActivity extends AppCompatActivity {
                     view_pager_slide.setCurrentItem(position+1);
                 }else{
                     sign_up();
-                    finish();
                 }
             }
         });
@@ -100,7 +99,6 @@ public class PrivacyActivity extends AppCompatActivity {
                 if (text_view_next_done.getText().equals("DONE")){
 
                     sign_up();
-                    finish();
                 }
                 if ( view_pager_slide.getCurrentItem() < slideList.size()) {
                     view_pager_slide.setCurrentItem(view_pager_slide.getCurrentItem() + 1);
@@ -132,10 +130,8 @@ public class PrivacyActivity extends AppCompatActivity {
         this.linear_layout_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PrivacyActivity.this,LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();
+                sign_up();
+
             }
         });
         this.view_pager_slide.setClipToPadding(false);
@@ -145,10 +141,10 @@ public class PrivacyActivity extends AppCompatActivity {
 
     private void sign_up() {
         loading.show();
-        FirebaseApp.initializeApp(LoginActivity.getInstance());
+        FirebaseApp.initializeApp(this);
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.getInstance(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -158,12 +154,12 @@ public class PrivacyActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Global.my_email = user.getEmail();
                             upload_data();
-                            Client client = new Client(name,email,"","",null);
+                            Client client = new Client(name,email,"","",null, new ArrayList<Double>());
                             Global.my_user_data = client;
                             Intent intent = new Intent(PrivacyActivity.this, MainActivity.class);
                             startActivity(intent);
-                            overridePendingTransition(R.anim.enter, R.anim.exit);
-                            LoginActivity.getInstance().finish();
+//                            overridePendingTransition(R.anim.enter, R.anim.exit);
+                            finish();
                         } else {
                             loading.dismiss();
                             // If sign in fails, display a message to the user.
@@ -178,7 +174,7 @@ public class PrivacyActivity extends AppCompatActivity {
 
 
     private void upload_data() {
-        FirebaseApp.initializeApp(LoginActivity.getInstance());
+        FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> user = new HashMap<>();
         user.put("user_email", email);

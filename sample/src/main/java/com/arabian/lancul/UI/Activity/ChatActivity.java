@@ -108,8 +108,8 @@ public class ChatActivity extends AppCompatActivity {
             chat_document = Global.my_clients.get(partner_index).getEmail() + ":" + Global.my_email;
             Global.partner_photo = Global.my_clients.get(partner_index).getPhoto();
             content.setBackgroundResource(R.drawable.gradient_background_guider);
-            Glide.with(ChatActivity.this).load(Global.array_client.get(partner_index).getPhoto()).into(partner_photo);
-            partner_name.setText(Global.array_client.get(partner_index).getName());
+            Glide.with(ChatActivity.this).load(Global.my_clients.get(partner_index).getPhoto()).into(partner_photo);
+            partner_name.setText(Global.my_clients.get(partner_index).getName());
         }
         FirebaseApp.initializeApp(LoginActivity.getInstance());
         db = FirebaseFirestore.getInstance();
@@ -461,9 +461,18 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChatActivity.this, MapActivity.class);
-                intent.putExtra("Mode",1);
-                Global.partner_location = Global.array_guider.get(partner_index).getLocation();
-                startActivity(intent);
+                if(Global.user_mode){
+                    intent.putExtra("Mode",1);
+                    Global.partner_location = Global.array_guider.get(partner_index).getLocation();
+                    startActivity(intent);
+                }
+                else{
+                    intent.putExtra("Mode",1);
+                    Global.partner_location = Global.my_clients.get(partner_index).getLocation();
+                    intent.putExtra("Partner_name",Global.my_clients.get(partner_index).getName());
+                    startActivity(intent);
+
+                }
             }
         });
 

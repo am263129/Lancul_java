@@ -9,12 +9,14 @@ public class Client {
     public String email;
     public String photo;
     public List<String> linked_guiders;
-    public Client(String name, String email, String status,String photo, List<String> linked_guiders) {
+    public List<Double> location;
+    public Client(String name, String email, String status,String photo, List<String> linked_guiders, List<Double> location) {
         this.status = status;
         this.name = name;
         this.email = email;
         this.photo = photo;
         this.linked_guiders = linked_guiders;
+        this.location = location;
     }
 
     public String getName() {
@@ -37,6 +39,12 @@ public class Client {
         return linked_guiders;
     }
 
+
+    public List<Double> getLocation() {
+        return location;
+    }
+
+
     public void setName(String name) {
         this.name = name;
     }
@@ -56,4 +64,9 @@ public class Client {
     public void setLinked_guiders(List<String> linked_guiders) {
         this.linked_guiders = linked_guiders;
     }
+
+    public void setLocation(List<Double> location) {
+        this.location = location;
+    }
+
 }

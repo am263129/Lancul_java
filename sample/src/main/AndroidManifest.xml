@@ -17,7 +17,15 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.Activity.MapActivity"></activity>
+        <activity android:name=".UI.Activity.PhoneVerifyActivity"></activity>
+        <activity android:name=".UI.Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UI.Activity.MapActivity" />
         <activity android:name=".UI.Activity.GuiderRegisterActivity" />
         <activity android:name=".UI.Activity.GuiderActivity" />
         <activity android:name=".UI.Activity.PrivacyActivity" />
@@ -28,13 +36,7 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/edit_profile" />
         <activity android:name=".UI.Activity.InviteActivity" />
-        <activity android:name=".UI.Activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".UI.Activity.LoginActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

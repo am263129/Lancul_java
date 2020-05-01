@@ -255,12 +255,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
             // Code for showing progressDialog while uploading
             final ProgressDialog progressDialog
-                    = new ProgressDialog(context);
-            progressDialog.setTitle(context.getString(R.string.progress_uploading));
+                    = new ProgressDialog(this);
+            progressDialog.setTitle(getString(R.string.progress_uploading));
             progressDialog.show();
 
             // Defining the child of storageReference
-            final String path = "images/myprofile.png";
+            final String path = "images/" + Global.my_email + "_profile_.jpg";
             final StorageReference ref = storageReference.child(path);
             // adding listeners on upload
             // or failure of image
@@ -345,8 +345,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully updated!");
                             Toasty.success(EditProfileActivity.this,"Success in update data",Toasty.LENGTH_LONG).show();
-                            LoginActivity.get_guider();
-                            LoginActivity.get_user();
+//                            LoginActivity.get_guider();
+//                            LoginActivity.get_user();
                             refresh_my_data();
                             finish();
                         }
@@ -372,8 +372,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully updated!");
                             Toasty.success(EditProfileActivity.this,"Success in update data",Toasty.LENGTH_LONG).show();
-                            LoginActivity.get_guider();
-                            LoginActivity.get_user();
+//                            LoginActivity.get_guider();
+//                            LoginActivity.get_user();
                             refresh_my_data();
                             finish();
                         }

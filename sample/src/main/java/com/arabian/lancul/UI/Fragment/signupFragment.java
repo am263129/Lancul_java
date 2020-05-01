@@ -102,6 +102,7 @@ public class signupFragment extends Fragment {
         intent.putExtra("password", password);
         intent.putExtra("name", edt_name.getText().toString());
         startActivity(intent);
+        getActivity().finish();
         /*
         loading.show();
         FirebaseApp.initializeApp(LoginActivity.getInstance());

@@ -56,6 +56,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public final Integer MY_LOCATION = 0;
     final Integer GUIDER_LOCATION = 1;
     Integer MODE;
+    private String partner_name= "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +66,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // when the map is ready to be used.
         Intent intent = getIntent();
         MODE = intent.getIntExtra("Mode",MY_LOCATION);
-
+        partner_name = intent.getStringExtra("Partner_name");
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
 
 
     }
@@ -221,7 +223,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 latLng = new LatLng(Global.partner_location.get(0), Global.partner_location.get(1));
                 Log.e("Latlan",String.valueOf(location.getLatitude())+ ":" + String.valueOf(location.getLongitude()));
                 markerOptions.position(latLng);
+                if(Global.user_mode)
                 markerOptions.title(Global.chat_guider_name);
+                else
+                    markerOptions.title(partner_name);
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
@@ -247,7 +252,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            try {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
+            catch (Exception e){
+                buildGoogleApiClient();
+            }
         }
     }
 

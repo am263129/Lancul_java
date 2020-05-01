@@ -69,6 +69,7 @@
     <string name="title_slide_5">Inquire What Data We Have</string>
     <string name="description_slide_5">Evolo Landing Page uses tracking technology on the landing page, in the Applications, and in the Platforms, including mobile application identifiers and a unique Evolo user ID to help us recognize you across different Services, to monitor usage and web traffic routing for the Services, and to customize and improve the Services.  By visiting Evolo or using the Services you agree to the use of cookies in your browser and HTML-based emails. Cookies are small text files placed on your device when you visit a Cookies are small text files placed on your device when you visit a Cookies are small text files placed on your device when web site in order to track.</string>
     <string name="btn_map">My Location</string>
+    <string name="label_loading">Loading...</string>
 
 
     <string-array name="time">

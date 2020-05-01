@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "93384149859-6k5lfiqfgjde3udlti4l9k38jh38ge7c.apps.googleusercontent.com",
+          "client_id": "93384149859-83qdhv9gfn1fa49pkpvu7kn79l97ebvm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.arabian.lancul",
-            "certificate_hash": "d4b8cb1b62ded96fb46c2627b99942b3f1098211"
+            "certificate_hash": "01da71619e4ff7436f5cc9ec4ca3f265c8282ffa"
           }
         },
         {

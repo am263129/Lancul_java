@@ -1,5 +1,6 @@
 package com.arabian.lancul.UI.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -30,6 +33,17 @@ import com.arabian.lancul.UI.Fragment.SoonFragment;
 import com.arabian.lancul.UI.Fragment.chatFragment_guider;
 import com.arabian.lancul.UI.Util.Global;
 import com.arabian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GuiderActivity extends AppCompatActivity {
 
@@ -49,7 +63,7 @@ public class GuiderActivity extends AppCompatActivity {
     RelativeLayout search_field;
     MeowBottomNavigation bottomNavigation;
     String TAG =  "GuiderActivity";
-
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +72,47 @@ public class GuiderActivity extends AppCompatActivity {
         self = this;
         init_view();
         init_action();
+        get_current_location();
+    }
+
+    private void get_current_location() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            Upload_my_location(location);
+                        }
+                    }
+                });
+    }
+
+    private void Upload_my_location(Location location) {
+            Double lat = location.getLatitude();
+            Double lon = location.getLongitude();
+
+            List<Double> my_location = new ArrayList<>();
+            my_location.add(lat);
+            my_location.add(lon);
+
+            FirebaseApp.initializeApp(LoginActivity.getInstance());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            Map<String, Object> status = new HashMap<>();
+            status.put("guider_location", my_location);
+            db.collection("guiders").document(Global.my_email).update(status)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "upload user data:success");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e(TAG, "Failed");
+                        }
+                    });
     }
 
 
@@ -73,6 +128,7 @@ public class GuiderActivity extends AppCompatActivity {
         flags = findViewById(R.id.flags);
         search_field = findViewById(R.id.search_field);
         bottomNavigation = findViewById(R.id.bottomNavigation_guider);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
     }
 

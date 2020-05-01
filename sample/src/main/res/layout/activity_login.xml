@@ -341,7 +341,7 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/btn_sign_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

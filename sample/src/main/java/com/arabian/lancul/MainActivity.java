@@ -41,14 +41,17 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -117,11 +120,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void Upload_my_location(Location location) {
         Double lat = location.getLatitude();
         Double lon = location.getLongitude();
-
         List<Double> my_location = new ArrayList<>();
+        my_location.clear();
         my_location.add(lat);
         my_location.add(lon);
-
+        FirebaseApp.initializeApp(LoginActivity.getInstance());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> status = new HashMap<>();
+        status.put("user_location", my_location);
+        db.collection("users").document(Global.my_email).update(status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "upload user data:success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Failed");
+                    }
+                });
 
     }
 
@@ -284,10 +303,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResume(){
         super.onResume();
-        LoginActivity.get_user();
-        LoginActivity.get_guider();
-        LoginActivity.get_chat();
-        LoginActivity.get_feedback();
+//        LoginActivity.get_user();
+//        LoginActivity.get_guider();
+//        LoginActivity.get_chat();
+//        LoginActivity.get_feedback();
         if(Global.go_profile){
             Global.go_profile = false;
             bottomNavigation.show(ID_ACCOUNT,true);

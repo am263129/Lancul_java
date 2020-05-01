@@ -19,6 +19,7 @@ public class Global {
 
     public static boolean user_mode = true;
     public static boolean iamguider = false;
+    public static boolean first_boot = true;
     public static String my_name = "";
     public static String my_email = "";
     public static String chat_guider_name = "";
