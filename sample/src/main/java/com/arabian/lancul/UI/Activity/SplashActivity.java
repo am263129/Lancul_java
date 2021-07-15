@@ -201,13 +201,16 @@ public class SplashActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
 
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                String name = document.get("user_name").toString();
-                                String email = document.get("user_email").toString();
-                                String pole = document.get("user_type").toString();
-                                String status = document.get("user_status").toString();
-                                String photo = document.get("user_photo").toString();
+                                String name = "",email = "",pole = "",status = "",photo = "";
+                                if(document.get("user_name") == null) continue;
+                                name = document.get("user_name").toString();
+                                email = document.get("user_email").toString();
+                                pole = document.get("user_type").toString();
+                                status = document.get("user_status").toString();
+                                photo = document.get("user_photo").toString();
                                 List<String> linked_guiders = (List<String>) document.get("user_linked_guiders");
                                 List<Double> location = new ArrayList<>();
+                                Log.e("name",name+":"+email);
                                 try{
                                     location = (List<Double>) document.get("user_location");
                                 }
