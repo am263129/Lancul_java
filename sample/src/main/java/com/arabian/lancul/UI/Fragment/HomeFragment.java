@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         Uri vidUri = Uri.parse(VIDEO_URL);
         mVideoView = (VideoView) view.findViewById(R.id.myVideo);
 //        mMediaController = (MediaController) view.findViewById(R.id.media_controller);
-//        mVideoView.setMediaController(mMediaController);
+        mVideoView.setMediaController(mMediaController);
         mVideoView.setVideoURI(vidUri);
         mVideoView.start();
         return view;

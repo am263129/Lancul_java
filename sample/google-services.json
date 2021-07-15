@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "93384149859-83qdhv9gfn1fa49pkpvu7kn79l97ebvm.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.arabian.lancul",
@@ -23,7 +23,7 @@
           }
         },
         {
-          "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 3
         }
       ],
@@ -36,11 +36,11 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 3
             },
             {
-              "client_id": "93384149859-bamhf0bnteu9vhag20gl2jifgk9343dc.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.languageandculture.lancul"
@@ -59,7 +59,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "93384149859-m4f8ju8t75e4gontvc12jqinfrsfrbnl.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.etebarian.meowbottomnavigaion.sample",
@@ -67,7 +67,7 @@
           }
         },
         {
-          "client_id": "93384149859-vu6lidt7nu446mpj3rbkugshpjotkbb3.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.etebarian.meowbottomnavigaion.sample",
@@ -75,7 +75,7 @@
           }
         },
         {
-          "client_id": "93384149859-dpcarb5144ibq7bnoi3k4be98ljbutsa.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.etebarian.meowbottomnavigaion.sample",
@@ -83,7 +83,7 @@
           }
         },
         {
-          "client_id": "93384149859-ehq7bbjktbc8m7gvtqa4tmnavddgo203.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 1,
           "android_info": {
             "package_name": "com.etebarian.meowbottomnavigaion.sample",
@@ -91,7 +91,7 @@
           }
         },
         {
-          "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 3
         }
       ],
@@ -104,11 +104,11 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "93384149859-0vdtm9stgts0bv45av849roi4eb12hva.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 3
             },
             {
-              "client_id": "93384149859-bamhf0bnteu9vhag20gl2jifgk9343dc.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.languageandculture.lancul"
